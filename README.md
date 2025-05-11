@@ -3,6 +3,7 @@
 - [Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK](#day-1---inception-of-open-source-eda-openlane-and-sky130-pdk)
   - [How to talk to computers](#How-to-talk-to-computers)
     - [Introduction to QFN-48 Package, chip, pads, core, die and IPs](#Introduction-to-QFN-48-Package,-chip,-pads,-core,-die-and-IPs)
+    - [Introduction to RISCV](#Introduction-to-RISCV)
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
@@ -96,7 +97,7 @@ These are called **Macros** because they are **pre-built, reusable modules**, of
 Here's a clear and slightly expanded version of your explanation, with technical details filled in and arranged in logical order. This can serve as part of documentation, a presentation, or a tutorial step-by-step:
 
 ---
-
+# Introduction to RISCV
 ##  Running a C Program on Custom Silicon (Using Qflow + PicoRV32)
 
 To execute a **C program on custom hardware** (fabricated or simulated as a layout), we follow a structured flow from **high-level software** to **low-level hardware implementation**:
