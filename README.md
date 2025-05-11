@@ -10,7 +10,7 @@
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
-### Introduction to QFN-48 Package, chip, pads, core, die and IPs
+# Introduction to QFN-48 Package, chip, pads, core, die and IPs
 Absolutely — here’s a more detailed version of your outline, while still keeping it clear and concise. This version can fit well in a presentation, document, or technical write-up.
 
 ---
@@ -170,7 +170,7 @@ To execute a **C program on custom hardware** (fabricated or simulated as a layo
 
 ---
 
-## How Applications Run Inside Hardware (Laptop/Chip Level)
+# How Applications Run Inside Hardware (Laptop/Chip Level)
 
 Applications that run on a computer or embedded system go through several transformation layers—from high-level code to machine-executable binaries—all the way to physical hardware built from logic gates.
 
