@@ -159,6 +159,7 @@ To execute a **C program on custom hardware** (fabricated or simulated as a layo
     ↓
 [Final Chip Layout (GDSII)]
 ```
+![Screenshot 2025-05-11 140918](https://github.com/user-attachments/assets/0f1d675b-e9d9-4e9b-b292-10da2483ab57)
 
 ---
 
