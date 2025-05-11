@@ -93,8 +93,74 @@ These are called **Macros** because they are **pre-built, reusable modules**, of
 | Customization    | Minimal (standard blocks)               | High (often tailored to the application)    |
 | Integration Type | Built into the flow at transistor level | Integrated as black boxes (hardened blocks) |
 
+Here's a clear and slightly expanded version of your explanation, with technical details filled in and arranged in logical order. This can serve as part of documentation, a presentation, or a tutorial step-by-step:
+
 ---
 
-Would you like a diagram or visual layout to go along with this explanation?
+##  Running a C Program on Custom Silicon (Using Qflow + PicoRV32)
+
+To execute a **C program on custom hardware** (fabricated or simulated as a layout), we follow a structured flow from **high-level software** to **low-level hardware implementation**:
+
+---
+
+###  1. C Program Compilation Flow
+
+* The process begins with writing a **C program**.
+* This program is compiled into **RISC-V assembly code** using a **RISC-V GCC compiler**.
+* The assembly is then **assembled into binary (machine code)** — a set of instructions the processor understands.
+
+  >  This binary will eventually be **loaded into instruction memory** during hardware simulation or execution.
+
+---
+
+###  2. Executing the Binary on a Layout
+
+* The goal is to **run this binary on a custom hardware layout**, which includes a **RISC-V CPU implemented on silicon**.
+* Since the layout is built using digital logic, we need a **hardware description (RTL)** of a CPU that understands RISC-V instructions.
+
+---
+
+###  3. Interface Between Software and Hardware (CPU RTL)
+
+* To bridge the software (binary) and hardware (layout), we need a **RISC-V compliant CPU core in RTL** form.
+* We use **PicoRV32**, a lightweight and open-source RISC-V CPU core written in **Verilog**.
+* PicoRV32 **implements the RISC-V ISA specifications**, acting as the interpreter of the compiled binary.
+
+---
+
+###  4. RTL to GDSII Flow (RTL2GDS2)
+
+* The Verilog RTL (PicoRV32) is taken through the **RTL-to-GDSII flow** using a toolchain like **Qflow** or **OpenLANE**.
+* This flow includes:
+
+  1. **Synthesis** – Convert RTL to gate-level netlist.
+  2. **Floorplanning** – Define chip layout regions.
+  3. **Placement and Routing** – Place cells and wire them.
+  4. **Layout (GDSII)** – Generate the physical design file.
+* The final **GDSII file** represents the chip layout that can be fabricated or simulated.
+
+---
+
+###  Summary of Flow
+
+```plaintext
+[C Program]
+    ↓
+[RISC-V Assembly]
+    ↓
+[Machine Code (Binary)]
+    ↓
+[Loaded into Instruction Memory]
+    ↓
+[PicoRV32 RTL (Implements RISC-V ISA)]
+    ↓
+[RTL to GDSII Flow (Qflow/OpenLANE)]
+    ↓
+[Final Chip Layout (GDSII)]
+```
+
+---
+
+
 
 
