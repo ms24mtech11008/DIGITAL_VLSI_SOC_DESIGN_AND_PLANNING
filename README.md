@@ -7,6 +7,7 @@
     - [How Applications Run Inside Hardware (Laptop/Chip Level)](#How-Applications-Run-Inside-Hardware-(Laptop/Chip-Level))
   - [Soc design and OpenLANE](#Soc-design-and-OpenLANE)
     - [Introduction to all components of open-source digital asic design](#Introduction-to-all-components-of-open-source-digital-asic-design)
+    - [Simplified RTL2GDS flow](#Simplified-RTL2GDS-flow)
   
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
@@ -330,7 +331,7 @@ A PDK contains all technology-specific files needed for fabrication: design rule
 ![Screenshot 2025-05-11 181703](https://github.com/user-attachments/assets/36acebb7-658c-4eb3-b73f-38c721ba1320)
 
 ---
-
+## Simplified RTL2GDS flow
 
 
 
