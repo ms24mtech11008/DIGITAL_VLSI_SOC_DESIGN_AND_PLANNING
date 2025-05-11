@@ -41,7 +41,7 @@ Zooming into the processor block:
 
 ---
 
-### 🔍 3. Die-Level View: Inside the Chip
+###  3. Die-Level View: Inside the Chip
 
 Within the package, the actual **chip** contains multiple layers of metal and silicon. Key physical elements include:
 
@@ -54,14 +54,14 @@ Within the package, the actual **chip** contains multiple layers of metal and si
 
 ---
 
-### 🧩 4. Core Components Breakdown
+###  4. Core Components Breakdown
 
 The **core** of the chip includes several important blocks:
 
 ![Screenshot 2025-05-11 133639](https://github.com/user-attachments/assets/0fb5ae39-8c58-4b48-8c23-e7b02da5bbdf)
 
 
-#### 🔸 Foundry IPs – Standard, Silicon-Proven Blocks
+####  Foundry IPs – Standard, Silicon-Proven Blocks
 
 These are **pre-designed, validated modules provided by the foundry** (e.g., SkyWater):
 
@@ -72,7 +72,7 @@ These are **pre-designed, validated modules provided by the foundry** (e.g., Sky
 
 These blocks are known as **Foundry IPs** because they are created and maintained by the foundry for general use in chip designs.
 
-#### 🔹 Macros – Custom, Higher-Level Functional Blocks
+####  Macros – Custom, Higher-Level Functional Blocks
 
 These are **larger, more complex blocks**, typically developed by the chip design team or third-party IP providers:
 
@@ -83,7 +83,7 @@ These are called **Macros** because they are **pre-built, reusable modules**, of
 
 ---
 
-### 🧠 5. Foundry IPs vs. Macros: What's the Difference?
+###  5. Foundry IPs vs. Macros: What's the Difference?
 
 | Aspect           | Foundry IPs                             | Macros                                      |
 | ---------------- | --------------------------------------- | ------------------------------------------- |
