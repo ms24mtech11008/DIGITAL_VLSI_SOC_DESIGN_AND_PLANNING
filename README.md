@@ -13,9 +13,10 @@ Absolutely — here’s a more detailed version of your outline, while still kee
 
 ## 🔧 Example: Dissecting the ARDUINO Chip — From Board to Silicon
 
-### 🧱 1. System-Level View: Arduino Board
+###  1. System-Level View: Arduino Board
 
 We start by examining the **Arduino board** using a **block diagram**, where different functional components are shown, and the **main processor** (microcontroller) is highlighted. This processor is the heart of the system and handles the core logic and control tasks.
+![Screenshot 2025-05-11 131627](https://github.com/user-attachments/assets/c1bc1d66-616d-4a6e-a3b4-feaec29c949c)
 
 
 ---
