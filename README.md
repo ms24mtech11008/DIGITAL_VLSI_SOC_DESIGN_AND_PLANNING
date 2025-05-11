@@ -333,6 +333,112 @@ A PDK contains all technology-specific files needed for fabrication: design rule
 ---
 ## Simplified RTL2GDS flow
 
+##  Simplified RTL to GDSII (GDS2) Flow
+
+The **RTL to GDSII flow** converts a high-level hardware description (RTL) into a **physical layout** (GDSII format) ready for chip fabrication. Here's a step-by-step summary of this process:
+
+![Screenshot 2025-05-11 181841](https://github.com/user-attachments/assets/b2503984-052f-47a3-9c6a-2e00de1d3a49)
+
+---
+
+###  Synthesis
+
+* **Goal**: Convert RTL (Verilog/VHDL) into a gate-level **netlist** using Standard Cell Libraries (SCL).
+* **Standard Cells**:
+
+  * Have **fixed height**, and width is an **integer multiple of site width**.
+
+    ![Screenshot 2025-05-11 183704](https://github.com/user-attachments/assets/764e2e1b-b221-4d99-86cc-ef83cff0e866)
+
+  * Each cell has multiple "views":
+
+    * **HDL (behavioral)**
+    * **SPICE (electrical)**
+    * **Layout**: abstract + detailed
+* Output: Netlist with basic logic gates and interconnections.
+
+![Screenshot 2025-05-11 183123](https://github.com/user-attachments/assets/9d33ce20-81c1-48c3-b0f3-a49a664ee41a)
+
+---
+
+###  Floorplanning
+
+![Screenshot 2025-05-11 183844](https://github.com/user-attachments/assets/44d44035-e97d-4d27-a8ae-45a940093765)
+
+
+* **Chip Floorplanning**:
+
+  * Divide the chip die into blocks.
+  * Place **I/O pads** around the die.
+* **Macro Floorplanning**:
+
+  * Define **macro dimensions** and **pin locations**.
+  * Specify **placement rows** for standard cells.
+    
+![Screenshot 2025-05-11 183925](https://github.com/user-attachments/assets/7c478108-b643-4e75-999b-9ad180d14484)
+
+![Screenshot 2025-05-11 183942](https://github.com/user-attachments/assets/7fa3be31-5ab7-46f4-a206-bcc81298e6ae)
+
+---
+
+###  Placement
+
+![Screenshot 2025-05-11 184056](https://github.com/user-attachments/assets/cadd9ba5-858e-4cbf-843a-001fb2702c74)
+
+* Place standard cells within the defined rows.
+* Align cells to the **site grid** for manufacturability.
+* Two steps:
+
+  * **Global Placement**: Coarse placement to minimize wirelength.
+  * **Detailed Placement**: Refines positions for legal and optimal cell placement.
+
+![Screenshot 2025-05-11 184129](https://github.com/user-attachments/assets/109ee283-1439-4861-a823-37d7a1e8b199)
+
+---
+
+###  Clock Tree Synthesis (CTS)
+
+* Create a **clock distribution network** to deliver the clock signal:
+
+  * To **all sequential elements** (like flip-flops).
+  * With **minimum skew** (zero skew is ideal but hard).
+* Common clock tree shapes: **H-tree**, **X-tree**, or custom structures.
+
+![Screenshot 2025-05-11 184203](https://github.com/user-attachments/assets/a1ee3ebb-409a-464e-9096-c61e5fd8378a)
+
+---
+
+###  Routing
+
+* Connect all placed cells using **metal interconnects**:
+
+  * **Routing grid** is based on available metal layers and track pitches.
+* Two phases:
+
+  * **Global Routing**: Plan the path, generate routing guides.
+  * **Detailed Routing**: Final wiring based on routing guides.
+
+![Screenshot 2025-05-11 184259](https://github.com/user-attachments/assets/dccae6d3-ae51-4d70-8fb2-f56abbe48307)
+
+---
+
+###  Physical Verification
+
+Ensure the layout meets manufacturing and functional specifications.
+
+* **Design Rule Checking (DRC)**: Checks layout against foundry rules.
+* **Layout vs. Schematic (LVS)**: Verifies layout matches original netlist.
+* **Static Timing Analysis (STA)**: Ensures timing constraints are met.
+
+---
+
+### Final Output
+
+* A **GDSII file** — the complete physical layout ready for chip fabrication.
+
+---
+
+
 
 
 
