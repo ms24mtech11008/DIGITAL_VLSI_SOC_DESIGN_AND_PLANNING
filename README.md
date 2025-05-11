@@ -4,6 +4,7 @@
   - [How to talk to computers](#How-to-talk-to-computers)
     - [Introduction to QFN-48 Package, chip, pads, core, die and IPs](#Introduction-to-QFN-48-Package,-chip,-pads,-core,-die-and-IPs)
     - [Introduction to RISCV](#Introduction-to-RISCV)
+    - [How Applications Run Inside Hardware (Laptop/Chip Level)](#How-Applications-Run-Inside-Hardware-(Laptop/Chip-Level))
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
@@ -162,6 +163,117 @@ To execute a **C program on custom hardware** (fabricated or simulated as a layo
 ![Screenshot 2025-05-11 140918](https://github.com/user-attachments/assets/0f1d675b-e9d9-4e9b-b292-10da2483ab57)
 
 ---
+
+
+
+---
+
+##  How Applications Run Inside Hardware (Laptop/Chip Level)
+
+Applications that run on a computer or embedded system go through several transformation layers—from high-level code to machine-executable binaries—all the way to physical hardware built from logic gates.
+
+---
+
+###  1. Three Core Components
+
+1. **Application Software**
+
+   * High-level programs written by users (e.g., in C, C++, Java, Python).
+   * Examples: web browsers, calculators, games.
+
+2. **System Software**
+
+   * Acts as a bridge between applications and hardware.
+   * Includes the **Operating System**, **Compiler**, and **Assembler**.
+
+3. **Hardware (Chip)**
+
+   * The silicon device (e.g., RISC-V processor) that executes the binary instructions.
+
+---
+
+###  2. Role of System Software
+
+System software performs multiple stages of translation to bridge human logic and silicon behavior.
+
+####  Layers of System Software
+
+* **Operating System (OS)**
+
+  * Manages memory, scheduling, input/output, and system-level resources.
+  * Coordinates execution but does **not directly convert code** to binary.
+
+* **Compiler**
+
+  * Converts high-level language (C/C++/Java) into **assembly code** specific to a hardware's **Instruction Set Architecture (ISA)**.
+  * Output: `.exe`, `.s`, or `.asm` file.
+
+* **Assembler**
+
+  * Translates ISA-level assembly code into **binary machine code**.
+  * Output: `.bin`, `.hex`, or `.elf` (Executable and Linkable Format).
+
+---
+
+###  3. Instruction Set Architecture (ISA): The Abstract Interface
+
+* The **ISA** defines how the processor should behave — a contract between **software and hardware**.
+* It includes the instruction formats, data types, addressing modes, registers, etc.
+* Example: RISC-V, x86, ARM.
+
+> ISA is **not hardware**, but it defines the rules that **hardware must follow** to execute software correctly.
+
+---
+
+###  4. RTL Implementation of the ISA
+
+* To execute instructions defined by the ISA, we need a **hardware implementation** of it.
+* This is done by designing a **Register Transfer Level (RTL)** model (e.g., **PicoRV32**, **Rocket Chip**).
+
+  * RTL is written in **HDL** languages like Verilog or VHDL.
+  * It **implements the ISA’s behavior using digital logic (flip-flops, ALUs, control units)**.
+
+---
+
+###  5. From RTL to Physical Chip
+
+Once we have RTL:
+
+1. **Synthesis**
+
+   * RTL is converted into a **gate-level netlist** (logic gates + connections) using tools like Yosys or Synopsys Design Compiler.
+
+2. **Physical Design (PD)**
+
+   * The netlist is used in **floorplanning, placement, and routing** stages to design the chip layout.
+   * Tools like OpenLANE or Cadence Innovus are used.
+   * Output: **GDSII file** – the final chip design ready for fabrication.
+
+---
+
+###  Final Summary Flow
+
+```plaintext
+[Application Software]
+    ↓ (written in C/C++/Java)
+[Compiler]
+    ↓ (ISA-specific code, e.g., for RISC-V)
+[Assembler]
+    ↓ (Binary Machine Code)
+[Instruction Set Architecture (ISA)]
+    ↓ (Abstract interface for hardware)
+[RTL Implementation of ISA (e.g., PicoRV32)]
+    ↓
+[Synthesis → Gate-Level Netlist]
+    ↓
+[Physical Design (PD)]
+    ↓
+[Chip Layout (GDSII)]
+```
+
+---
+
+
 
 
 
