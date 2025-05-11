@@ -170,7 +170,7 @@ To execute a **C program on custom hardware** (fabricated or simulated as a layo
 
 ---
 
-##  How Applications Run Inside Hardware (Laptop/Chip Level)
+## How Applications Run Inside Hardware (Laptop/Chip Level)
 
 Applications that run on a computer or embedded system go through several transformation layers—from high-level code to machine-executable binaries—all the way to physical hardware built from logic gates.
 
