@@ -5,7 +5,8 @@
     - [Introduction to QFN-48 Package, chip, pads, core, die and IPs](#Introduction-to-QFN-48-Package,-chip,-pads,-core,-die-and-IPs)
     - [Introduction to RISCV](#Introduction-to-RISCV)
     - [How Applications Run Inside Hardware (Laptop/Chip Level)](#How-Applications-Run-Inside-Hardware-(Laptop/Chip-Level))
-  - [Soc design and OpenLANE](#Soc-design-and-OpenLANE) 
+  - [Soc design and OpenLANE](#Soc-design-and-OpenLANE)
+    - [Introduction to all components of open-source digital asic design](#Introduction-to-all-components-of-open-source-digital-asic-design)
   
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
@@ -279,6 +280,59 @@ Once we have RTL:
 
 ---
 ## Soc design and OpenLANE
+### Introduction to all components of open-source digital asic design
+
+---
+
+##  Essential Elements to Implement an ASIC
+
+To build an **ASIC (Application-Specific Integrated Circuit)**, the following three components are required:
+
+---
+
+### 1.  **RTL IPs (Register Transfer Level Intellectual Property)**
+
+RTL IPs define the **functional blocks** of your chip, written in HDL languages like Verilog or VHDL. These include processors, memory interfaces, controllers, and more.
+
+####  Open-Source Sources:
+
+* [**librecores.org**](https://librecores.org)
+* [**opencores.org**](https://opencores.org)
+* [**github.com**](https://github.com) (search for “Verilog” or “RTL IP” repositories)
+
+---
+
+### 2.  **EDA Tools (Electronic Design Automation)**
+
+These tools automate the process of converting your RTL into a physical layout. They handle synthesis, placement, routing, and verification.
+
+####  Open-Source Tools:
+
+* **Qflow** – A complete RTL-to-GDSII flow using open tools
+* **OpenROAD** – A fully automated digital layout backend
+* **OpenLANE** – A digital ASIC design flow built on top of OpenROAD, Magic, and others
+
+---
+
+### 3.  **PDK Data (Process Design Kit)**
+
+A PDK contains all technology-specific files needed for fabrication: design rules, SPICE models, standard cell libraries, etc.
+
+####  Open-Source PDK:
+
+* **Google + SkyWater SKY130 PDK**
+
+  * The first open-source 130nm PDK
+  * Developed by SkyWater in collaboration with Google
+  * Hosted and maintained by [Google/SkyWater project on GitHub](https://github.com/google/skywater-pdk)
+
+---
+![Screenshot 2025-05-11 181703](https://github.com/user-attachments/assets/36acebb7-658c-4eb3-b73f-38c721ba1320)
+
+---
+
+
+
 
 
 
