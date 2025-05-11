@@ -213,6 +213,8 @@ System software performs multiple stages of translation to bridge human logic an
   * Translates ISA-level assembly code into **binary machine code**.
   * Output: `.bin`, `.hex`, or `.elf` (Executable and Linkable Format).
 
+![Screenshot 2025-05-11 145243](https://github.com/user-attachments/assets/37cee062-b35f-4599-840c-3f20eb64f7da)
+
 ---
 
 ###  3. Instruction Set Architecture (ISA): The Abstract Interface
@@ -248,6 +250,8 @@ Once we have RTL:
    * The netlist is used in **floorplanning, placement, and routing** stages to design the chip layout.
    * Tools like OpenLANE or Cadence Innovus are used.
    * Output: **GDSII file** – the final chip design ready for fabrication.
+
+![Screenshot 2025-05-11 145445](https://github.com/user-attachments/assets/c14f0e62-e5ca-4774-923c-ceee85f04111)
 
 ---
 
