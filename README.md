@@ -9,6 +9,7 @@
     - [Introduction to all components of open-source digital asic design](#Introduction-to-all-components-of-open-source-digital-asic-design)
     - [Simplified RTL2GDS flow](#Simplified-RTL2GDS-flow)
     - [Introduction to OpenLANE and Strive chipsets](#Introduction-to-OpenLANE-and-Strive-chipsets)
+    - [Introduction to OpenLANE detailed ASIC design flow](#Introduction-to-OpenLANE-detailed-ASIC-design-flow)
   
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
@@ -486,6 +487,150 @@ Produce a **clean GDSII** layout with:
 - Designed to help **find the best flow configuration** for different designs
 - Includes **43 open-source designs** with optimized configurations
 -  More designs will be added regularly
+
+---
+
+
+## Introduction to OpenLANE detailed ASIC design flow
+
+**OpenLANE** is a fully open-source flow for digital ASIC design. It automates the transformation of a hardware design (described in Verilog RTL) into a **GDSII layout**, which can be sent for chip fabrication. The flow includes synthesis, floorplanning, placement, routing, DFT, and final verification—all integrated from multiple open tools.
+
+![Screenshot 2025-05-12 125303](https://github.com/user-attachments/assets/06a71c18-c52d-46d9-b8a4-67859a62aad2)
+
+---
+
+### 1.  RTL Synthesis
+
+* The design starts in **Verilog RTL**.
+* OpenLANE uses **Yosys** for synthesis. It takes in the RTL and constraints and translates it into a **gate-level netlist**.
+* Then, the **ABC** tool maps this netlist to actual **standard cells** using guidance from **ABC scripts**, which define **synthesis strategies**.
+
+#### Synthesis Strategies:
+
+* Aim to optimize for:
+
+  * **Least area**
+  * **Best timing**
+* OpenLANE provides a **Synthesis Exploration Utility** that tests multiple strategies on a design and reports how area and delay are affected.
+* Based on this data, the **best-performing strategy** is selected.
+
+![Screenshot 2025-05-12 130901](https://github.com/user-attachments/assets/2784665a-68b0-481a-8d60-d73d5b657e6d)
+
+---
+
+### 2.  Design Exploration & Regression Testing
+
+* The **Design Exploration Utility** sweeps design configurations to help optimize results.
+* It also supports **Continuous Integration (CI)** by running regression tests on \~70+ open designs, comparing results with the best known configurations.
+
+![Screenshot 2025-05-12 131018](https://github.com/user-attachments/assets/f628cc0f-beef-45a3-9be7-bb104122ad1f)
+
+---
+
+### 3.  Design for Testability (DFT)
+
+After synthesis, OpenLANE optionally performs **Design for Testability** using the open-source project **Fault**:
+
+![Screenshot 2025-05-12 131442](https://github.com/user-attachments/assets/6595dac7-d38e-4d00-9424-3897bc6db3b2)
+
+* **Scan Chain Insertion**: Adds logic that makes internal flip-flops observable/testable.
+* **ATPG (Automatic Test Pattern Generation)**: Creates test vectors for manufacturing tests.
+* **Fault Simulation and Coverage Analysis**
+* Adds support logic like a **JTAG Controller** for boundary scan.
+
+---
+
+### 4.  Physical Implementation (PnR) with OpenROAD
+
+OpenROAD automates **Place and Route**, performing the following steps:
+
+####  Floorplanning & Power Planning
+
+* Assign die area, place I/O pads, and macros.
+* Insert **endcaps**, **tap cells**, and **decoupling capacitors**.
+* Establish **power and ground grid**.
+
+####  Placement
+
+* Global and detailed placement of standard cells in rows.
+
+####  Post-Placement Optimization
+
+* Improve performance and reduce congestion.
+
+####  Clock Tree Synthesis (CTS)
+
+* Builds a distribution tree (H-tree, X-tree) to deliver clock signal to all flip-flops with **minimal skew**.
+* Modifies the netlist, so **logic verification** is required afterward.
+
+####  Routing
+
+* Global routing determines approximate paths.
+* Detailed routing finalizes wire connections on metal layers.
+
+---
+
+### 5.  Netlist Verification: Logic Equivalence Checking (LEC)
+
+As physical implementation **modifies the netlist** (via CTS, optimization, etc.), it must be re-verified for correctness.
+
+* **Yosys** is used to compare:
+
+  * Synthesized gate-level netlist
+  * Post-layout netlist
+* Ensures functional equivalence: the logic **has not changed**.
+
+---
+
+### 6.  Antenna Rule Fixes
+
+During fabrication, long metal wires can accumulate charge (like an antenna) and **damage transistor gates**. To address this:
+
+![Screenshot 2025-05-12 132500](https://github.com/user-attachments/assets/042a234e-0a8c-4fc2-9562-974196a2bff0)
+
+* OpenLANE takes a **preventive approach**:
+
+![Screenshot 2025-05-12 132641](https://github.com/user-attachments/assets/4e681067-d681-4fef-a5ea-6b6433e2489f)
+
+  * Inserts a **Fake Antenna Diode** next to every cell input after placement.
+  * Runs **Magic’s Antenna Checker** on the routed layout.
+  * If any violations are found, **replaces the fake diode** with a **real diode** from the standard cell library.
+
+![Screenshot 2025-05-12 132748](https://github.com/user-attachments/assets/433117c8-e820-4219-9a4a-cac785acdac2)
+
+---
+
+### 7.  Sign-off Checks
+
+Before final GDSII output, the design must pass several critical checks:
+
+####  Static Timing Analysis (STA)
+
+* RC data is extracted via **DEF2SPEF**.
+* Timing is verified using **OpenSTA**.
+
+####  Design Rule Checking (DRC)
+
+* Verifies that the layout complies with manufacturing rules using **Magic**.
+
+####  Layout vs. Schematic (LVS)
+
+* Compares the final routed layout to the logical netlist.
+* Tools used:
+
+  * **Magic**: Extracts SPICE netlist from layout.
+  * **Netgen**: Compares SPICE with synthesized Verilog netlist.
+
+![Screenshot 2025-05-12 133126](https://github.com/user-attachments/assets/46b80c17-7ea3-4134-85c8-7762a16386e6)
+
+---
+
+### 8.  Final Output
+
+The result of the full OpenLANE flow is a **GDSII file**:
+
+* Fully verified for logic, timing, design rules, and manufacturability.
+* Can be sent to a foundry for **chip fabrication**.
 
 ---
 
