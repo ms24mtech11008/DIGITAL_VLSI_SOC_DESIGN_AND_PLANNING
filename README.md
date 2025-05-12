@@ -8,6 +8,7 @@
   - [Soc design and OpenLANE](#Soc-design-and-OpenLANE)
     - [Introduction to all components of open-source digital asic design](#Introduction-to-all-components-of-open-source-digital-asic-design)
     - [Simplified RTL2GDS flow](#Simplified-RTL2GDS-flow)
+    - [Introduction to OpenLANE and Strive chipsets](#Introduction-to-OpenLANE-and-Strive-chipsets)
   
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
@@ -435,6 +436,56 @@ Ensure the layout meets manufacturing and functional specifications.
 ### Final Output
 
 * A **GDSII file** — the complete physical layout ready for chip fabrication.
+
+---
+
+#  Introduction to OpenLANE and Strive chipsets
+
+##  What is OpenLane?
+
+**OpenLane** is an open-source digital ASIC design flow developed as part of a true open-source tape-out experiment. Its mission is to enable **fully automated RTL-to-GDSII synthesis** — requiring **no human intervention**.
+
+##  What is Strive?
+
+**Strive** is a family of "**Open Everything**" System-on-Chips (SoCs) built entirely using:
+-  **Open RTL** – open-source logic designs
+-  **Open EDA Tools** – like OpenLane, Qflow, OpenROAD
+-  **Open PDKs** – such as SkyWater 130nm
+
+![Screenshot 2025-05-12 123007](https://github.com/user-attachments/assets/ea236fab-f1a2-402c-a59f-62cc370f3851)
+
+![Screenshot 2025-05-12 123151](https://github.com/user-attachments/assets/02e267b5-ce46-4957-b270-ede0c49bf3cc)
+
+##  OpenLane's Main Goal
+
+Produce a **clean GDSII** layout with:
+-  No **LVS violations** (Layout vs. Schematic)
+-  No **DRC violations** (Design Rule Check)
+-  **Timing violations**: still **Work In Progress (WIP)**
+
+###  Fabrication Support
+- Tuned for **SkyWater 130nm Open PDK**
+- Also supports:
+  - **XFAB180**
+  - **GlobalFoundries GF130G**
+
+##  Key Features
+
+-  **Containerized**: Easy to run with Docker
+-  **Functional Out-of-the-Box**
+-  Native build/run instructions (in development)
+-  Use for both **Macro hardening** and **full chip design**
+
+##  Modes of Operation
+
+-  **Autonomous Mode** – Fully automated RTL-to-GDSII
+-  **Interactive Mode** – Manual control for debugging & tweaking
+
+##  Design Space Exploration
+
+- Designed to help **find the best flow configuration** for different designs
+- Includes **43 open-source designs** with optimized configurations
+-  More designs will be added regularly
 
 ---
 
