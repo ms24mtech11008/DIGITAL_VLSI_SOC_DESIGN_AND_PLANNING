@@ -10,6 +10,8 @@
     - [Simplified RTL2GDS flow](#Simplified-RTL2GDS-flow)
     - [Introduction to OpenLANE and Strive chipsets](#Introduction-to-OpenLANE-and-Strive-chipsets)
     - [Introduction to OpenLANE detailed ASIC design flow](#Introduction-to-OpenLANE-detailed-ASIC-design-flow)
+  - [Get familiar to open-source EDA tools](#Get-familiar-to-open-source-EDA-tools)
+    - [OpenLANE Directory structure in detail](#OpenLANE-Directory-structure-in-detail)
   
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
@@ -634,7 +636,11 @@ The result of the full OpenLANE flow is a **GDSII file**:
 
 ---
 
-
+## Get familiar to open-source EDA tools
+---
+###  OpenLANE Directory structure in detai
+---
+pdk - Process design kit ( we are using Skywate 130nm pdk)
 
 
 
