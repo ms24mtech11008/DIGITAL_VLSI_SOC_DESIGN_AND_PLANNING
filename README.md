@@ -812,6 +812,44 @@ These settings guide the entire flow—from synthesis to routing.
 
 ---
 
+---
+
+In OpenLANE, multiple configuration files contribute to setting environment variables like the clock period. One of those variables is `CLOCK_PERIOD`, which is used during synthesis, placement, and timing analysis to define how fast the design should run.
+
+In OpenLANE, environment variables like `CLOCK_PERIOD` are set from different configuration files, and the **last loaded value takes precedence**. This variable is essential, as it defines the target clock frequency for synthesis and timing closure.
+
+In your **design-specific `config.tcl`** (for example, in `picorv32a`), the clock period is set as:
+
+```tcl
+set ::env(CLOCK_PERIOD) 5.0
+```
+![Screenshot 2025-05-14 150936](https://github.com/user-attachments/assets/976e1687-047d-447d-8207-271cd2635c88)
+
+This value will override OpenLANE’s internal default settings. However, the platform-specific configuration file:
+
+```
+sky130A_sky130_fd_sc_hd_config.tcl
+```
+
+also sets a clock period, for example:
+
+```tcl
+set ::env(CLOCK_PERIOD) 24.73
+```
+![Screenshot 2025-05-14 151019](https://github.com/user-attachments/assets/782acb60-95ab-4beb-b697-edcb07429432)
+
+Since this file is sourced **after** your design’s config file during the flow setup, its value (24.73 ns) takes **higher priority**, and **overrides your 5.0 ns setting**.
+
+---
+
+### Result:
+
+Even though the design sets `CLOCK_PERIOD` to 5 ns, OpenLANE ends up using **24.73 ns** from the platform config file, because it’s assigned later in the flow.
+
+---
+
+
+
 
 
 
