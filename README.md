@@ -12,6 +12,8 @@
     - [Introduction to OpenLANE detailed ASIC design flow](#Introduction-to-OpenLANE-detailed-ASIC-design-flow)
   - [Get familiar to open-source EDA tools](#Get-familiar-to-open-source-EDA-tools)
     - [OpenLANE Directory structure in detail](#OpenLANE-Directory-structure-in-detail)
+    - [Design Preparation Step](#Design-Preparation-Step)
+    - 
   
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
@@ -750,6 +752,7 @@ This library is essential for:
 ![Screenshot 2025-05-14 134235](https://github.com/user-attachments/assets/02d99f54-a9f4-4298-89ec-81cdd3ffd42a)
 
 ---
+## Design Preparation Step
 
 Invoking OpenLANE 
 
