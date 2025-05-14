@@ -875,7 +875,7 @@ NOTE: mergeLef.py is merging the two LEFs ie .lib and tech.lib
 The runs directory has been created in picorv32a along with the date as shown below. All the folder structures inside the runs directory which is required by the openlane is also shown.
 inside the tmp we find the merged.lef folder which was created earlier. This file includes all the layer levels, vias and cells information.
 
-![image](https://github.com/user-attachments/assets/802026ff-425b-4896-8397-80820ba1aeff)
+![Screenshot 2025-05-14 154231](https://github.com/user-attachments/assets/a180963f-e6f0-4dab-8ade-ab1c30db7283)
 
 
 
