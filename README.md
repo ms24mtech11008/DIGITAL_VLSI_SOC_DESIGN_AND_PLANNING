@@ -877,8 +877,11 @@ inside the tmp we find the merged.lef folder which was created earlier. This fil
 
 ![Screenshot 2025-05-14 154231](https://github.com/user-attachments/assets/a180963f-e6f0-4dab-8ade-ab1c30db7283)
 
+Below is the snap showing the contains of runs
+![Screenshot 2025-05-14 161709](https://github.com/user-attachments/assets/d11330ba-a189-4a5c-94aa-c61889623f29)
 
-
+The config.tcl present inside the **'runs'** directory basically shows the default parameters is being taken by the run.
+![Screenshot 2025-05-14 162240](https://github.com/user-attachments/assets/8dec90f6-19d5-4892-aa3c-90d1a80c8dc6)
 
 
 
