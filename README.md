@@ -640,7 +640,117 @@ The result of the full OpenLANE flow is a **GDSII file**:
 ---
 ###  OpenLANE Directory structure in detai
 ---
-pdk - Process design kit ( we are using Skywate 130nm pdk)
+
+##  PDKs and Open Source Compatibility
+
+###  What is a PDK?
+
+A **Process Design Kit (PDK)** is a collection of files provided by a semiconductor foundry. It includes everything needed to design integrated circuits for a specific fabrication process node—like **SkyWater 130nm (sky130)**.
+
+These files define:
+
+* Transistor models
+* Design rules
+* Standard cell libraries
+* Layout layers
+* Parasitics
+* DRC/LVS rules
+
+---
+
+###  Challenge with Foundry PDKs
+
+Most **foundry PDKs** are designed to work with **commercial EDA tools** (like Cadence, Synopsys, Mentor). They are often closed-source and tailored for proprietary formats.
+
+But open-source tools such as:
+
+* **Magic** (Layout & DRC)
+* **Netgen** (LVS)
+* **OpenROAD** (PnR)
+* **Yosys** (Synthesis)
+
+…require **different formats and configurations**.
+
+---
+
+###  Solution: `open_pdks`
+
+To bridge this gap, the **`open_pdks`** project was created. It contains **scripts and build systems** that:
+
+* Convert **foundry-compatible PDKs** into formats usable by open-source EDA tools.
+* Structure and install libraries in a standard layout recognized by tools like **Magic**, **Netgen**, and **KLayout**.
+* Handle **naming conventions**, **file generation**, and **tool-specific settings**.
+
+---
+
+###  SkyWater’s Open Source PDK: `sky130A`
+
+SkyWater, in partnership with Google, released the **sky130** process node as an open-source PDK.
+
+Within it, the **`sky130A`** variant has been fully adapted using `open_pdks` to work with open-source tools.
+
+The directory is structured into two major parts:
+
+#### 1. `libs.ref/`
+
+* Contains **technology/process-specific files**.
+* These are neutral and not tool-specific.
+* Includes:
+
+  * Spice models
+  * Liberty timing files
+  * Cell definitions
+  * GDS layouts
+
+#### 2. `libs.tech/`
+
+* Contains **tool-specific configurations** and files.
+* Tailored for tools like Magic, Netgen, and KLayout.
+* Includes:
+
+  * DRC rules for Magic
+  * Extraction rules
+  * Tool setup files
+
+---
+
+###  The Library We Use: `sky130_fd_sc_hd`
+
+For most digital designs, we use the **sky130\_fd\_sc\_hd** library, where:
+
+* `fd` stands for **Foundry**
+* `sc` stands for **Standard Cells**
+* `hd` means **High Density**
+
+This library includes:
+
+* Logic gates like NAND, NOR, Flip-Flops, etc.
+* Timing and power models
+* Layout views and abstract LEF views
+* DRC and LVS-compatible layout data
+
+This library is essential for:
+
+* **Synthesis**: Mapping RTL to standard cells
+* **Place & Route**: Using LEF and GDS
+* **Verification**: Using extraction rules and simulation models
+
+---
+
+###  Summary
+
+| Component         | Description                                                              |
+| ----------------- | ------------------------------------------------------------------------ |
+| `open_pdks`       | Converts foundry PDKs for use with open-source tools                     |
+| `sky130A`         | SkyWater's open-source 130nm process node adapted for open tools         |
+| `libs.ref/`       | Tool-agnostic, process-specific data                                     |
+| `libs.tech/`      | Tool-specific data for Magic, Netgen, etc.                               |
+| `sky130_fd_sc_hd` | High-density standard cell library used in OpenLANE and other open flows |
+
+---
+
+
+
 
 
 
