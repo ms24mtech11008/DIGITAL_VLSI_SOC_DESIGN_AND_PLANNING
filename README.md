@@ -13,7 +13,8 @@
   - [Get familiar to open-source EDA tools](#Get-familiar-to-open-source-EDA-tools)
     - [OpenLANE Directory structure in detail](#OpenLANE-Directory-structure-in-detail)
     - [Design Preparation Step](#Design-Preparation-Step)
-    - 
+    - [Review files after design prep and run synthesis](#Review-files-after-design-prep-and-run-synthesis)
+    - [OpenLANE Project Git Link Description](#OpenLANE-Project-Git-Link-Description)
   
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
@@ -761,7 +762,6 @@ Invoking OpenLANE
 With OpenLANE invoked and the environment initialized, the next step is to load the necessary packages required for running the flow. This begins with the Tcl command: %package require openlane 0.9. At this point, the design flow is ready for execution.
 ![Screenshot 2025-05-14 142500](https://github.com/user-attachments/assets/153bfa36-69da-4f29-be91-cb1dc12beaa7)
 
-Certainly! Here’s a clear and technical explanation of the structure and purpose of the `picorv32a` design in the OpenLANE flow:
 
 ---
 
@@ -848,6 +848,7 @@ Even though the design sets `CLOCK_PERIOD` to 5 ns, OpenLANE ends up using **24.
 
 ---
 
+## Review files after design prep and run synthesis
 
 ###  Starting the OpenLANE Flow: Design Preparation
 
@@ -887,6 +888,8 @@ Coming back to openLANE prompt, the next step is **"Synthesis"**
 **run_synthesis**
 ![Screenshot 2025-05-14 164547](https://github.com/user-attachments/assets/4d74a75b-4435-43f6-a1ff-2f32d976d514)
 
+---
+## OpenLANE Project Git Link Description
 
 
 
