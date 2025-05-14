@@ -758,6 +758,63 @@ Invoking OpenLANE
 
 ![Screenshot 2025-05-14 141223](https://github.com/user-attachments/assets/3409996a-2763-4dc7-8ab8-a2acfa297240)
 
+With OpenLANE invoked and the environment initialized, the next step is to load the necessary packages required for running the flow. This begins with the Tcl command: %package require openlane 0.9. At this point, the design flow is ready for execution.
+![Screenshot 2025-05-14 142500](https://github.com/user-attachments/assets/153bfa36-69da-4f29-be91-cb1dc12beaa7)
+
+Certainly! Here’s a clear and technical explanation of the structure and purpose of the `picorv32a` design in the OpenLANE flow:
+
+---
+
+###  `picorv32a` Design Directory Structure
+
+When using OpenLANE, each design (like `picorv32a`) follows a specific directory structure. The most important components are:
+
+---
+
+### 1. **`src/` Directory**
+
+* **Purpose:** Contains the **RTL source files** for the design.
+* **Typical contents:** `.v` (Verilog) files.
+
+For `picorv32a`, this includes:
+
+* The top-level module (e.g., `picorv32.v`)
+* Any submodules used in the design
+
+ These files are used during the **synthesis phase**, where the RTL is converted into a gate-level netlist.
+
+---
+
+### 2. **`config.tcl` File**
+
+* **Purpose:** Defines the **design-specific configuration** for OpenLANE to run the flow.
+* **Location:** Typically in the root of the design directory.
+
+ It contains key settings such as:
+
+* Design name and top module
+* Clock port and clock period
+* Synthesis and placement constraints
+* Macro placement, if any
+* I/O configurations
+* Flow-specific overrides or tool tuning parameters
+
+Example content from `config.tcl`:
+
+```tcl
+set ::env(DESIGN_NAME) picorv32a
+set ::env(CLOCK_PORT) clk
+set ::env(CLOCK_PERIOD) 10.0
+```
+
+These settings guide the entire flow—from synthesis to routing.
+![Screenshot 2025-05-14 143715](https://github.com/user-attachments/assets/fa76111a-8cc2-4446-b5ff-457fd7fc3151)
+
+---
+
+
+
+
 
 
 
