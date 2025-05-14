@@ -849,6 +849,28 @@ Even though the design sets `CLOCK_PERIOD` to 5 ns, OpenLANE ends up using **24.
 ---
 
 
+###  Starting the OpenLANE Flow: Design Preparation
+
+Before beginning synthesis in the OpenLANE ASIC flow, the **design environment must be initialized**. This is known as the **design setup stage**, where OpenLANE prepares all necessary files and directory structures specific to your design.
+
+To do this, we use the following command inside the OpenLANE interactive shell:
+
+```tcl
+% prep -design picorv32a
+```
+
+###  What This Command Does:
+
+* **Creates a run directory** for the design (e.g., `runs/picorv32a/`).
+* **Copies the RTL files** from `designs/picorv32a/src/` into the run workspace.
+* **Loads `config.tcl`**, which contains your design constraints, such as clock period, I/O specs, and tool-specific overrides.
+* **Applies technology and platform-specific settings**, such as standard cell libraries and PDK configurations.
+* **Initializes OpenLANE environment variables** for your design.
+
+Once this setup is complete, the flow is ready to begin the actual RTL-to-GDSII process, starting with **synthesis**.
+
+![Screenshot 2025-05-14 152733](https://github.com/user-attachments/assets/c03a2e9b-c52f-4e99-8904-fe70042fac3a)
+
 
 
 
