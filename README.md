@@ -747,6 +747,8 @@ This library is essential for:
 | `libs.tech/`      | Tool-specific data for Magic, Netgen, etc.                               |
 | `sky130_fd_sc_hd` | High-density standard cell library used in OpenLANE and other open flows |
 
+![Screenshot 2025-05-14 134235](https://github.com/user-attachments/assets/02d99f54-a9f4-4298-89ec-81cdd3ffd42a)
+
 ---
 
 
