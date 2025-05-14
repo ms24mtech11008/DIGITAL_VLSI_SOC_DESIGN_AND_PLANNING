@@ -871,9 +871,11 @@ Once this setup is complete, the flow is ready to begin the actual RTL-to-GDSII 
 
 ![Screenshot 2025-05-14 152733](https://github.com/user-attachments/assets/c03a2e9b-c52f-4e99-8904-fe70042fac3a)
 
+NOTE: mergeLef.py is merging the two LEFs ie .lib and tech.lib 
+The runs directory has been created in picorv32a along with the date as shown below. All the folder structures inside the runs directory which is required by the openlane is also shown.
+inside the tmp we find the merged.lef folder which was created earlier. This file includes all the layer levels, vias and cells information.
 
-
-
+![image](https://github.com/user-attachments/assets/802026ff-425b-4896-8397-80820ba1aeff)
 
 
 
