@@ -883,6 +883,10 @@ Below is the snap showing the contains of runs
 The config.tcl present inside the **'runs'** directory basically shows the default parameters is being taken by the run.
 ![Screenshot 2025-05-14 162240](https://github.com/user-attachments/assets/8dec90f6-19d5-4892-aa3c-90d1a80c8dc6)
 
+Coming back to openLANE prompt, the next step is **"Synthesis"**
+**run_synthesis**
+![Screenshot 2025-05-14 164547](https://github.com/user-attachments/assets/4d74a75b-4435-43f6-a1ff-2f32d976d514)
+
 
 
 
