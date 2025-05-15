@@ -16,7 +16,10 @@
     - [Review files after design prep and run synthesis](#Review-files-after-design-prep-and-run-synthesis)
     - [OpenLANE Project Git Link Description](#OpenLANE-Project-Git-Link-Description)
     - [Steps to characterize synthesis results](#Steps-to-characterize-synthesis-results)
-  
+- [Day 2 - Good floor planning considerations](#Day-2---Good-floor-planning-considerations)
+  - [Chip Floor planning consideration](#Chip-Floor-planning-consideration)
+    - [Utilization factor and aspect ratio](#Utilization-factor-and-aspect-ratio)
+    - 
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
@@ -925,6 +928,158 @@ The **flip-flop ratio** is typically calculated as the ratio of the number of fl
 **Flip-Flop Ratio** ≈ `0.089` or **8.94%**
 
 >  **Interpretation**: Approximately **8.94%** of the standard cells in the design are D flip-flops, indicating the proportion of sequential logic.
+
+---
+# Day 2 - Good floor planning considerations
+---
+## Chip Floor planning consideration
+---
+### Utilization factor and aspect ratio
+---
+##  **Step 1: Define Width and Height of Core and Die**
+
+Physical Design begins with **floorplanning**, where we define the **dimensions of the chip**, i.e., the **core** and the **die**.
+
+---
+
+###  What is a Netlist?
+
+A **netlist** is a textual representation of a digital circuit. It lists all the components (like **standard cells** and **flip-flops**) and the **connections (nets)** between them.
+
+In simple terms:
+
+* Think of the netlist as the blueprint or connectivity list of the design.
+* It tells which gates are used and how they’re connected.
+
+![Screenshot 2025-05-15 140941](https://github.com/user-attachments/assets/0c590691-fddc-47c2-bdfc-e9530e21c05c)
+
+---
+
+###  Understanding Logic Elements:
+
+* **Standard Cells**: These are predefined logic gates like AND, OR, NOT, NAND, etc. They are used to build combinational logic.
+* **Flip-Flops (FFs)**: These are **registers** used for storing state. They are sequential elements.
+
+So:
+
+*  AND, OR, NAND → **Standard Cells**
+*  D Flip-Flop → **Register (Sequential Element)**
+
+---
+
+###  Starting the Area Estimation:
+
+Assume:
+
+* Each **standard cell** and **flip-flop** occupies **1 square unit** of area.
+
+![Screenshot 2025-05-15 141201](https://github.com/user-attachments/assets/12ae41f2-fb28-4d76-a8d6-59fe94cc1be6)
+
+We have:
+
+* **2 standard cells**
+* **2 flip-flops**
+
+So, total area occupied by the netlist =
+ **2 (std cells) + 2 (FFs) = 4 square units**
+
+This is the **minimum area** that the logic can occupy **without considering spacing, power straps, buffers, etc.**
+
+![Screenshot 2025-05-15 141525](https://github.com/user-attachments/assets/7feefae6-18fb-429e-86d8-b07d7ff0ac43)
+
+---
+
+###  What is Die?
+
+The **die** is the physical piece of silicon on which the entire chip is implemented. It is cut from a **silicon wafer** during manufacturing.
+
+###  What is Core?
+
+The **core** is the inner portion of the die where **logic cells (gates and FFs)** are placed.
+
+* Logic is **placed inside the core**.
+* The core is surrounded by other regions (e.g., IO pads, power rings).
+
+![Screenshot 2025-05-15 141821](https://github.com/user-attachments/assets/f3f76aac-ec77-43b0-ba09-b8a4a6eec569)
+
+---
+
+###  What is Utilization Factor?
+
+**Utilization Factor** is defined as:
+
+$$
+\text{Utilization Factor} = \frac{\text{Area occupied by standard cells and FFs}}{\text{Total core area}}
+$$
+
+It tells us how much of the **core area** is filled with actual logic.
+
+![Screenshot 2025-05-15 141941](https://github.com/user-attachments/assets/755b2a46-6c70-4aa5-901b-625b0c97956f)
+
+---
+
+###  Example Calculation:
+
+Assume the **core area = 4 square units**
+Area of all std cells and FFs = 4 square units
+
+So,
+
+$$
+\text{Utilization Factor} = \frac{4}{4} = 1 \quad \text{(or 100%)}
+$$
+
+This is **utilization factor = 1**.
+
+![Screenshot 2025-05-15 142023](https://github.com/user-attachments/assets/5695b756-6b89-4ed5-b161-4621ea3a34df)
+
+![Screenshot 2025-05-15 142037](https://github.com/user-attachments/assets/7381f19c-d39c-457f-832f-90ce57fa8dd3)
+
+---
+
+###  But Practically?
+
+We **never use 100% utilization** because:
+
+* We need space for **routing**, **buffers**, **clock tree**, **spare cells**, etc.
+
+So **practical utilization** is:
+
+* **60% to 80%** in most designs.
+* Sometimes up to 85%, depending on design complexity and routing congestion.
+
+---
+
+###  What is Aspect Ratio?
+
+**Aspect Ratio** is:
+
+$$
+\text{Aspect Ratio} = \frac{\text{Height of Core}}{\text{Width of Core}}
+$$
+
+It defines the **shape** of the core.
+
+---
+
+###  Aspect Ratio for Our Case:
+
+Assume:
+
+* Height = 2 units
+* Width = 2 units
+
+So,
+
+$$
+\text{Aspect Ratio} = \frac{2}{2} = 1
+$$
+
+This is a **square-shaped** core.
+An **aspect ratio of 1** is preferred because:
+
+* It makes **routing easier**
+* Reduces wirelength and congestion
 
 ---
 
