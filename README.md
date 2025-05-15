@@ -912,19 +912,17 @@ The **flip-flop ratio** is typically calculated as the ratio of the number of fl
 - **Total Number of Cells**: `18036`
 
 ### Formula:
-\[
-\text{Flip-Flop Ratio} = \frac{\text{Number of Flip-Flops}}{\text{Total Number of Cells}}
-\]
+{Flip-Flop Ratio} = {Number of Flip-Flops}/{Total Number of Cells}
+
 
 ### Calculation:
-\[
-\text{Flip-Flop Ratio} = \frac{1613}{18036} \approx 0.0894
-\]
+{Flip-Flop Ratio} = {1613}/{18036} =0.0894
+
 
 ### Result:
 **Flip-Flop Ratio** ≈ `0.089` or **8.94%**
 
-> 📌 **Interpretation**: Approximately **8.94%** of the standard cells in the design are D flip-flops, indicating the proportion of sequential logic.
+>  **Interpretation**: Approximately **8.94%** of the standard cells in the design are D flip-flops, indicating the proportion of sequential logic.
 
 ---
 
