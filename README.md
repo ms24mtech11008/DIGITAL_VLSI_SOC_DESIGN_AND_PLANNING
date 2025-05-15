@@ -15,6 +15,7 @@
     - [Design Preparation Step](#Design-Preparation-Step)
     - [Review files after design prep and run synthesis](#Review-files-after-design-prep-and-run-synthesis)
     - [OpenLANE Project Git Link Description](#OpenLANE-Project-Git-Link-Description)
+    - [Steps to characterize synthesis results](#Steps-to-characterize-synthesis-results)
   
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
@@ -887,10 +888,13 @@ The config.tcl present inside the **'runs'** directory basically shows the defau
 Coming back to openLANE prompt, the next step is **"Synthesis"**
 **run_synthesis**
 ![Screenshot 2025-05-14 164547](https://github.com/user-attachments/assets/4d74a75b-4435-43f6-a1ff-2f32d976d514)
-
+As seen, the WNS = -24ns so the slack is not met (we will fix it post route)
 ---
 ## OpenLANE Project Git Link Description
-
+In this lecture Kunal Sir has explained us how to access the information related to OpenLANE and study full potential of this specific tool.
+---
+## Steps to characterize synthesis results
+---
 
 
 
