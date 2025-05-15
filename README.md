@@ -905,28 +905,27 @@ Note: The reports are always generated in a chronological order so the last repo
 ![Screenshot 2025-05-15 132917](https://github.com/user-attachments/assets/48af9129-22d5-4f87-9ae6-f00bb071ef47)
 The **flip-flop ratio** is typically calculated as the ratio of the number of flip-flops to the total number of standard cells in a digital design. It's a useful metric for estimating how much of a digital design is sequential (flip-flops) versus combinational logic.
 
-### Given:
+## Flip-Flop Ratio Calculation
 
-* Number of D flip-flops (D FFs) = **1613**
-* Total number of cells = **18036**
+### Given:
+- **Number of D Flip-Flops (D FFs)**: `1613`
+- **Total Number of Cells**: `18036`
 
 ### Formula:
+\[
+\text{Flip-Flop Ratio} = \frac{\text{Number of Flip-Flops}}{\text{Total Number of Cells}}
+\]
 
-$$
-\text{Flip-flop ratio} = \frac{\text{Number of flip-flops}}{\text{Total number of cells}}
-$$
-
-$$
-\text{Flip-flop ratio} = \frac{1613}{18036} \approx 0.0894
-$$
+### Calculation:
+\[
+\text{Flip-Flop Ratio} = \frac{1613}{18036} \approx 0.0894
+\]
 
 ### Result:
+**Flip-Flop Ratio** ≈ `0.089` or **8.94%**
 
-$$
-\boxed{\text{Flip-flop ratio} \approx 0.089 \text{ or } 8.94\%}
-$$
+> 📌 **Interpretation**: Approximately **8.94%** of the standard cells in the design are D flip-flops, indicating the proportion of sequential logic.
 
-So, about **8.94%** of the cells in your design are flip-flops.
 ---
 
 
