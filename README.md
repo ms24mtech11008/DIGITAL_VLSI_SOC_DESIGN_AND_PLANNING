@@ -887,7 +887,9 @@ The config.tcl present inside the **'runs'** directory basically shows the defau
 
 Coming back to openLANE prompt, the next step is **"Synthesis"**
 **run_synthesis**
+
 ![Screenshot 2025-05-14 164547](https://github.com/user-attachments/assets/4d74a75b-4435-43f6-a1ff-2f32d976d514)
+
 As seen, the WNS = -24ns so the slack is not met (we will fix it post route)
 ---
 ## OpenLANE Project Git Link Description
