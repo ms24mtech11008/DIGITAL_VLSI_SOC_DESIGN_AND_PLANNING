@@ -20,6 +20,12 @@
   - [Chip Floor planning consideration](#Chip-Floor-planning-consideration)
     - [Utilization factor and aspect ratio](#Utilization-factor-and-aspect-ratio)
     - [Concept of pre-placed cells](#Concept-of-pre-placed-cells)
+    - [De-coupling capacitors](#De-coupling-capacitors)
+    - [Power planning](#Power-planning)
+    - [Pin placement and logical cell placement blockage](#Pin-placement-and-logical-cell-placement-blockage)
+    - [Steps to run floorplan using OpenLANE](#Steps-to-run-floorplan-using-OpenLANE)
+    - [Review floorplan files and steps to view floorplan](#Review-floorplan-files-and-steps-to-view-floorplan)
+    - [Review floorplan layout in Magic](#Review-floorplan-layout-in-Magic)
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
@@ -1163,6 +1169,8 @@ They are called **pre-placed** because:
 
 Pre-placed cells are a critical component of floorplanning. They serve as **anchor points** around which the rest of the placement and routing is organized.
 
+---
+## De-coupling capacitors
 ---
 
 
