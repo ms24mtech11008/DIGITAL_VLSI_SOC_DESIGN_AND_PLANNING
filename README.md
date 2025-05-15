@@ -19,7 +19,7 @@
 - [Day 2 - Good floor planning considerations](#Day-2---Good-floor-planning-considerations)
   - [Chip Floor planning consideration](#Chip-Floor-planning-consideration)
     - [Utilization factor and aspect ratio](#Utilization-factor-and-aspect-ratio)
-    - 
+    - [Concept of pre-placed cells](#Concept-of-pre-placed-cells)
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
@@ -1082,5 +1082,88 @@ An **aspect ratio of 1** is preferred because:
 * Reduces wirelength and congestion
 
 ---
+
+## Concept of pre-placed cells
+---
+
+### **Next Step in Floorplanning: Defining the Location of Pre-placed Cells**
+
+The next major step in floorplanning is to **define the location of pre-placed cells**, which must be positioned **prior to automated placement and routing**.
+
+---
+
+### **What Are Pre-placed Cells?**
+
+**Pre-placed cells** refer to blocks or macros whose placement is **manually specified** before the automated place-and-route (PnR) flow begins. These typically include large functional units or IPs that are either reused or require specific physical constraints for performance, area, or integration reasons.
+
+---
+
+### **Example: Reused Combinational Logic**
+
+Consider a large **combinational logic block**, such as a **multiplier** or a **MUX-based selector**, that implements a specific function and occupies around **50K–100K gates**. If this logic is instantiated **multiple times** within the top-level design, instead of re-synthesizing and re-placing it repeatedly, a more efficient approach is adopted:
+
+![Screenshot 2025-05-15 150448](https://github.com/user-attachments/assets/1730545f-63a5-448d-a5cb-cfe8eac86bcf)
+
+1. **Modularization**: The combinational logic is isolated from the main RTL and synthesized independently.
+2. **Partitioning**: If needed, the logic is partitioned into smaller sub-blocks (e.g., two independent modules).
+
+    ![Screenshot 2025-05-15 150614](https://github.com/user-attachments/assets/81bb177a-09a5-4849-9aeb-0176919096cc)
+
+3. **I/O Extension**: Each sub-block is equipped with defined I/O pins to interface with the top-level.
+4. **Hardening**: These sub-blocks are implemented and verified separately.
+5. **Black-boxing**: At the top level, these modules are instantiated as **black boxes** with known dimensions and pin locations.
+
+6. ![Screenshot 2025-05-15 150727](https://github.com/user-attachments/assets/430ece16-5c14-4073-bf9e-e447639608d7)
+
+9. **Reuse**: These blocks can now be **replicated** multiple times in the design without redoing implementation, allowing **resource and area reuse**.
+
+7. ![Screenshot 2025-05-15 150743](https://github.com/user-attachments/assets/618f4e79-59a5-497f-a5b0-babaee6d8bb2)
+
+---
+
+### **Advantages of Pre-placed Cells (Hard Macros)**
+
+* **IP Reusability**: Once implemented, a block can be reused across the same design or different designs.
+* **Design Scalability**: Reduces implementation effort for large, repeated structures.
+* **Predictable Physical Characteristics**: Timing, power, and area of these cells are known beforehand.
+* **Controlled Placement**: Helps in managing congestion and timing near critical paths.
+
+---
+
+### **Common Examples of Pre-placed Cells**
+
+* **Memory macros** (SRAM, ROM)
+* **Clock-gating cells**
+* **Analog/RF blocks**
+* **Multipliers, comparators, or MUX logic (as reused IP)**
+* **Third-party hard IPs (e.g., PLL, SerDes)**
+
+![Screenshot 2025-05-15 151125](https://github.com/user-attachments/assets/909c176c-f356-4f6a-b3c2-4e07196c5f60)
+
+---
+
+### **Why Are They Called Pre-placed Cells?**
+
+They are called **pre-placed** because:
+
+* Their **locations are fixed during the floorplanning phase**, before standard cell placement.
+* Their **physical properties are rigid** (pre-characterized height/width and pin locations).
+* They must be strategically placed to ensure **power delivery**, **clock connectivity**, and **timing closure** without causing **routing blockages** or **congestion hotspots**.
+
+---
+
+### **What is Floorplanning?**
+
+**Floorplanning** is the process of defining the physical organization of the chip before placement and routing. This includes:
+
+* Defining **core and die area**
+* Specifying **placement regions** for major blocks
+* Placing **pre-placed cells/macros**
+* Planning **power grids**, **clock distribution**, and **I/O pad locations**
+
+Pre-placed cells are a critical component of floorplanning. They serve as **anchor points** around which the rest of the placement and routing is organized.
+
+---
+
 
 
