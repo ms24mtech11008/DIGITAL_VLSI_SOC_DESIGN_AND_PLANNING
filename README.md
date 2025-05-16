@@ -1670,3 +1670,17 @@ inside this config.tcl you can re check the **set ::env(FP_IO_VMETAL)** and **se
 ![Screenshot 2025-05-16 224134](https://github.com/user-attachments/assets/a83fb032-ed5b-47b6-932f-54b967ea0ecb)
 ![Screenshot 2025-05-16 230317](https://github.com/user-attachments/assets/7fb2b564-be9e-4777-8fd0-b1714cadf026)
 
+VERY IMPORTANT POINT:
+
+
+| File Path                                                | Priority (Low to High) | Purpose                      |
+| -------------------------------------------------------- | ---------------------- | ---------------------------- |
+| `openlane/configuration/floorplan.tcl`                   | Lowest                 | Default floorplan script     |
+| `openlane/designs/picorv32a/config.tcl`                  | Medium                 | Design-specific overrides    |
+| `openlane/designs/picorv32a/sky130A_fd_sc_hd_config.tcl` | Highest                | Technology-specific settings |
+
+in openlane/configuration/floorplan.tcl the variables set were 
+**set ::env(CORE_UTILIZATION) 50
+  set ::env(FP_IO_VMETAL) 3
+  set ::env(FP_IO_HMETAL) 4**
+and the above variables were not set in **openlane/designs/picorv32a/config.tcl** and **openlane/designs/picorv32a/sky130A_fd_sc_hd_config.tcl**. Hence the flow tool the values from floorplan.tcl but if the variables were defined in **openlane/designs/picorv32a/sky130A_fd_sc_hd_config.tcl** then these values would have been considered as this is given highest priority.
