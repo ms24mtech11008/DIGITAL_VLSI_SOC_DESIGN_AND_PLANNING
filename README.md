@@ -1369,7 +1369,131 @@ With proper power planning:
 
 ---
 
+# Pin placement and logical cell placement blockage
+---
 
+### **Understanding the Concept of Pin Placement in Floorplanning**
+
+To understand pin placement, let’s consider an example design involving flip-flops, combinational logic, and pre-placed cells.
+
+---
+
+### **Example Circuit Description**
+
+#### **1. Basic Flip-Flop Driven Logic:**
+
+* **FF1** has input **Din1** and clock **Clk1**.
+* **FF2** has output **Dout1** and is also clocked by **Clk1**.
+* Between FF1 and FF2, some **combinational logic** exists.
+
+#### **2. Replicated Logic Circuit:**
+
+* A similar circuit with:
+
+  * Input **Din2**
+  * Output **Dout2**
+  * Clock **Clk2**
+
+#### **3. Pre-placed Cells:**
+
+* **Block A** receives **Din1** and **Din2** as inputs.
+* **Block B** takes **Clk1** and **Clk2** as inputs and generates a **clock output ClkOut**.
+
+![Screenshot 2025-05-16 144621](https://github.com/user-attachments/assets/f2284d5c-b166-4d9f-b646-426805f68b89)
+
+---
+
+### **3. Additional Timing Scenario — Inter-clock Domain**
+
+Now consider a design section that demonstrates **cross-clock domain interaction:**
+
+#### **Circuit 1:**
+
+* **FF1** takes **Din3** and is clocked by **Clk1**.
+* **FF2** produces **Dout3** and is clocked by **Clk2**.
+
+#### **Circuit 2:**
+
+* **FF1** receives **Din4** and **Clk2**.
+* **FF2** generates **Dout4** and is clocked by **Clk1**.
+
+This setup is useful for studying **inter-clock timing interactions**, often critical in real SoCs with multiple clock domains.
+
+---
+
+### **Pre-placed Cell (Block C):**
+
+* **Block C** takes **Din3** and **Din4** as inputs.
+* The output of Block C is connected to downstream **combinational logic**.
+
+![Screenshot 2025-05-16 145644](https://github.com/user-attachments/assets/f5d3cf93-860f-470a-bafd-4f046167615e)
+
+---
+
+### **Summary of All I/O Ports in the Design:**
+
+| **Port Type**    | **Ports**                  |
+| ---------------- | -------------------------- |
+| **Input Data**   | Din1, Din2, Din3, Din4     |
+| **Clock Inputs** | Clk1, Clk2                 |
+| **Output Data**  | Dout1, Dout2, Dout3, Dout4 |
+| **Clock Output** | ClkOut                     |
+
+![Screenshot 2025-05-16 145803](https://github.com/user-attachments/assets/895e71f0-cc54-40b2-8521-c08dd11ee16d)
+
+---
+
+### **Pin Placement in Floorplanning**
+
+In the **physical design (PD)** flow, these ports are mapped to physical **pins** located in the area **between the core and the die boundary** (known as the *I/O ring*).
+
+#### **General Placement Trend:**
+
+* **Input pins** are usually placed on the **left side** of the chip.
+* **Output pins** are placed on the **right side**.
+* This convention helps with **signal flow** and **timing optimization** but is **not mandatory** — pin placement is influenced by the **location of the connected blocks** within the core.
+
+#### **Clock Ports:**
+
+* Clock ports like **Clk1** and **Clk2** are generally **larger than data pins**.
+* This is because:
+
+  * Clock nets have **higher fan-out** (they drive many sequential elements).
+  * They need **stronger drivers** and **lower skew**, requiring **more robust routing** and **more metal layers**.
+  * Wider pins help **minimize resistance**, **IR drop**, and **electromagnetic noise**.
+
+![Screenshot 2025-05-16 150354](https://github.com/user-attachments/assets/105c2abe-3539-4bf0-b4ef-105a58925262)
+
+---
+
+### **Netlist Representation**
+
+* The entire **connectivity between gates and blocks** (including FFs, combinational logic, and macros) is described using **HDL languages** like **Verilog or VHDL**.
+* The compiled result is called a **netlist**, which serves as the basis for physical design.
+
+---
+
+### **Placement Blockages and Design Rule Considerations**
+
+* The region between the **core and die** must **not contain any standard cells**.
+* This region is reserved for **pads, pins, power straps, ESD structures**, and routing tracks.
+* To enforce this, **placement blockages** are defined — these are **logical constraints** that prevent the automated placement and routing tool from placing cells in that area.
+
+![Screenshot 2025-05-16 150835](https://github.com/user-attachments/assets/1d102194-7883-4fcc-8245-2bd1b9c6c2e7)
+
+---
+
+### **Outcome**
+
+Once all:
+
+* Pre-placed cells are located,
+* Pins are placed based on connectivity and clock/data separation,
+* Blockages are applied,
+
+The **floorplan is complete**, and the design is now ready for the **placement and routing** stage.
+
+---
 
 
 
