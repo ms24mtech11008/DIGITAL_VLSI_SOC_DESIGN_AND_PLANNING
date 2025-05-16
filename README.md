@@ -1494,6 +1494,169 @@ Once all:
 The **floorplan is complete**, and the design is now ready for the **placement and routing** stage.
 
 ---
+# Steps to run floorplan using OpenLANE
+---
+Certainly! Here's your updated and technically polished explanation without emojis, and with the correct path for `floorplan.tcl`:
 
+---
+### Variables used in OpenLANE during physical design
+---
+![Screenshot 2025-05-16 200627](https://github.com/user-attachments/assets/b4441017-b176-48eb-906e-2ed6b0f4cebc)
+![Screenshot 2025-05-16 200659](https://github.com/user-attachments/assets/8a54a19d-3dfa-4236-8af5-481f30100195)
+![Screenshot 2025-05-16 200738](https://github.com/user-attachments/assets/34650727-df7d-4366-9fa0-3433e7312703)
+![Screenshot 2025-05-16 200759](https://github.com/user-attachments/assets/8e45473a-7538-4a2c-b26a-d539342fd168)
+![Screenshot 2025-05-16 200825](https://github.com/user-attachments/assets/d9fb0532-bf6d-438b-a57c-9f8ae266a00e)
+![Screenshot 2025-05-16 200856](https://github.com/user-attachments/assets/71d95f72-3483-4bd2-8c3e-25190251a99d)
+![Screenshot 2025-05-16 200937](https://github.com/user-attachments/assets/ad6d5e5f-ee9f-4540-85e4-c4d207a9abed)
+![Screenshot 2025-05-16 201005](https://github.com/user-attachments/assets/88036aa8-13eb-47dc-a93a-65114cb39e8c)
+![Screenshot 2025-05-16 201032](https://github.com/user-attachments/assets/db70cdaa-2c85-4396-8503-e8173edbcff0)
+![Screenshot 2025-05-16 201051](https://github.com/user-attachments/assets/dfe16e1c-a648-4c69-b22e-2ab6ab4be391)
+
+### **What Happens in Floorplanning?**
+
+The **floorplanning stage** is a key step in the digital physical design (PD) flow. It defines the spatial organization of a chip before standard cell placement and routing begins.
+
+---
+
+### **Key Tasks in Floorplanning:**
+
+1. **Define Die Area**
+
+   * The complete area of the chip, including core, I/O ring, and pad frame.
+
+2. **Define Core Area**
+
+   * The internal area of the chip where standard cells are placed.
+   * This area is inset from the die boundary by a defined core margin.
+
+3. **Set Aspect Ratio**
+
+   * The ratio of **width to height** of the core (`aspect ratio = width / height`).
+
+4. **Set Core Utilization Factor**
+
+   * The percentage of the core area to be filled with standard cells.
+   * For example, a utilization factor of 0.65 means 65% cell area, 35% left for routing, buffers, and congestion management.
+
+5. **Pin (Input/Output) Placement**
+
+   * I/O ports are placed on the periphery of the core.
+   * While the default trend is to place inputs on the left and outputs on the right, pin placement is ideally based on the logical connectivity and location of blocks in the core.
+
+6. **Power Distribution Network (PDN) Planning**
+
+   * Specification of metal layers, tracks, and straps for distributing VDD and VSS across the core.
+
+7. **Macro Placement**
+
+   * Placement of large, pre-designed blocks like SRAMs, PLLs, or other IP blocks.
+   * These are usually manually placed early in the flow and are referred to as *preplaced cells*.
+
+---
+
+### **OpenLane Floorplanning Configuration**
+
+In OpenLane, floorplanning behavior is controlled by environment variables defined in TCL configuration files. These variables can be set or overridden at multiple levels.
+
+#### **Floorplanning Variables File:**
+
+* Path: `openlane/configuration/floorplan.tcl`
+* This file contains the default floorplan configuration switches.
+
+![Screenshot 2025-05-16 201540](https://github.com/user-attachments/assets/484287e3-d0e8-471e-9ee8-8ac1200b5ba4)
+
+##### Example:
+
+```tcl
+set ::env(FP_IO_MODE) 1 ; # 0 = matching mode, 1 = random equidistant
+```
+Here's the updated section of your explanation with the `FP_IO_MODE` command included along with a clear explanation of what it does:
+
+---
+
+### **Example Floorplanning Configuration: `FP_IO_MODE`**
+
+In the `floorplan.tcl` file located at `openlane/configuration/floorplan.tcl`, various switches control how the floorplan is generated. One such switch is:
+
+```tcl
+set ::env(FP_IO_MODE) 1 ; # 0 = matching mode, 1 = random equidistant
+```
+
+#### **Explanation of `FP_IO_MODE`**
+
+This variable defines how the I/O pins are placed on the core periphery during floorplanning.
+
+* `FP_IO_MODE = 0` → **Matching Mode**
+  In this mode, the tool attempts to place input/output pins **based on logical grouping and connectivity**.
+  For example, related pins (like a bus or interface signals) are grouped and placed adjacent to each other to maintain signal locality and reduce wirelength.
+
+* `FP_IO_MODE = 1` → **Random Equidistant Mode**
+  In this mode, the I/O pins are placed **evenly spaced** along the periphery of the core, but their order is randomized.
+  This is a simpler scheme that can be useful when there is no initial information about signal grouping or during early prototyping.
+
+#### **Usage Recommendation:**
+
+* Use `mode 0` if you want to optimize for **wirelength and logical proximity**.
+* Use `mode 1` for a **uniform, evenly spaced pin layout**, especially in early or exploratory stages of the design.
+
+---
+
+### **Configuration File Priority in OpenLane**
+
+When working on a design such as `picorv32a`, you will find the following files in `openlane/designs/picorv32a/`:
+
+![Screenshot 2025-05-16 201703](https://github.com/user-attachments/assets/69c40f2e-ed86-47e9-86bb-29c54cafa6b9)
+![Screenshot 2025-05-16 201638](https://github.com/user-attachments/assets/e00f3cff-0a43-4ad0-96a9-c35e26b1370b)
+
+| File Path                               | Priority (Low to High) | Purpose                      |
+| --------------------------------------- | ---------------------- | ---------------------------- |
+| `openlane/configuration/floorplan.tcl`  | Lowest                 | Default floorplan script     |
+| `openlane/designs/picorv32a/config.tcl` | Medium                 | Design-specific overrides    |
+| `sky130A_fd_sc_hd_config.tcl`           | Highest                | Technology-specific settings |
+
+---
+
+### **Example Configuration Values:**
+
+#### From `config.tcl`:
+
+```tcl
+set ::env(CORE_UTILIZATION) 65
+set ::env(FP_IO_VMETAL) 4
+set ::env(FP_IO_HMETAL) 3
+```
+
+Note: OpenLane internally uses **one metal layer above** the value specified.
+So `FP_IO_VMETAL 4` means **vertical pins will be routed on Metal5**.
+
+#### From `floorplan.tcl` (default):
+
+![Screenshot 2025-05-16 201540](https://github.com/user-attachments/assets/484287e3-d0e8-471e-9ee8-8ac1200b5ba4)
+
+```tcl
+set ::env(CORE_UTILIZATION) 50
+set ::env(FP_IO_VMETAL) 3
+set ::env(FP_IO_HMETAL) 4
+```
+
+---
+
+### **Running the Floorplan Step**
+
+After defining or adjusting the configuration variables, the floorplan can be generated using:
+
+```bash
+run_floorplan
+```
+
+This will:
+
+* Initialize the die and core boundaries.
+* Place pins along the I/O ring.
+* Insert macros in pre-specified locations.
+* Create blockages and define regions for standard cell placement.
+* Lay the groundwork for the power network and subsequent routing.
+
+---
 
 
