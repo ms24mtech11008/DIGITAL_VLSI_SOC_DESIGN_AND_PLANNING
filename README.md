@@ -1668,4 +1668,5 @@ After **run_floorplan** go to openlane/design/picorv32a/runs and go into your la
 inside this config.tcl you can re check the **set ::env(FP_IO_VMETAL)** and **set ::env(FP_IO_HMETAL)** which will match with the content present in floorplan.tcl.
 
 ![Screenshot 2025-05-16 224134](https://github.com/user-attachments/assets/a83fb032-ed5b-47b6-932f-54b967ea0ecb)
-![Screenshot 2025-05-16 224228](https://github.com/user-attachments/assets/e3749371-e700-4608-9cdf-7b397d739b26)
+![Screenshot 2025-05-16 230317](https://github.com/user-attachments/assets/7fb2b564-be9e-4777-8fd0-b1714cadf026)
+
