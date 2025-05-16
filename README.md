@@ -1684,3 +1684,15 @@ in openlane/configuration/floorplan.tcl the variables set were
   set ::env(FP_IO_VMETAL) 3
   set ::env(FP_IO_HMETAL) 4**
 and the above variables were not set in **openlane/designs/picorv32a/config.tcl** and **openlane/designs/picorv32a/sky130A_fd_sc_hd_config.tcl**. Hence the flow tool the values from floorplan.tcl but if the variables were defined in **openlane/designs/picorv32a/sky130A_fd_sc_hd_config.tcl** then these values would have been considered as this is given highest priority.
+For example in **/openlane/configurations/floorplan.tcl** **set ::env(FP_CORE_UTIL) is 50** 
+
+![Screenshot 2025-05-16 231940](https://github.com/user-attachments/assets/5eb4068e-ed28-4332-bdce-338255a4d31d)
+
+and in **openlane/designs/picorv32a/runs/sky130A_fd_sc_hd_config.tcl **set ::env(FP_CORE_UTIL) is 35**
+
+![Screenshot 2025-05-16 232538](https://github.com/user-attachments/assets/2ef3d080-2b1a-4486-9459-ec27a44bbae9)
+
+and highest priority is given to the later.
+Now finally after floorplanning **set ::env(FP_CORE_UTIL) is 35** ( check in openlane/design/picorv32a/runs/16-06_16-47/config.tcl)
+
+![Screenshot 2025-05-16 233221](https://github.com/user-attachments/assets/9c2d546c-b08c-46d5-bc91-54c42a8d3d36)
