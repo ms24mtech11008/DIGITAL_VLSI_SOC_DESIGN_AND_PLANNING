@@ -1173,5 +1173,106 @@ Pre-placed cells are a critical component of floorplanning. They serve as **anch
 ## De-coupling capacitors
 ---
 
+### **Defining the Location of Pre-placed Cells**
+
+In floorplanning, after determining the dimensions of the die and the core, the **next critical step** is to define the **location of pre-placed cells**.
+
+---
+
+### **What are Pre-placed Cells?**
+
+**Pre-placed cells** (also known as **hard macros**) are blocks whose:
+
+* **Functionality** is pre-designed,
+* **Physical layout** is fixed (including size and I/O pin locations),
+* **Placement** is manually defined **before automated placement** of standard cells.
+
+These are typically **IP blocks**, **memories**, **large combinational or sequential logic blocks**, or **reused modules**.
+
+---
+
+### **Example: Blocks A, B, and C**
+
+Assume **Block A**, **Block B**, and **Block C** are pre-placed cells in a given SoC or ASIC design.
+
+* Each of these blocks is **implemented once**, meaning their layout and implementation are finalized.
+* They are **instantiated multiple times** in the main design wherever needed — a concept known as **module reuse** or **macro replication**.
+
+---
+
+### **Placement Strategy: Proximity to I/O Pins**
+
+Assume the design contains a background **core area** surrounded by **I/O pads**.
+
+If:
+
+* Blocks A, B, and C **communicate frequently with input pins**, then it is optimal to **place them closer to the input side of the chip**.
+* This reduces **wirelength**, **signal propagation delay**, and **loading**, and improves **timing closure**.
+
+![Screenshot 2025-05-16 123943](https://github.com/user-attachments/assets/e07a815d-208d-4dc5-aed9-9d90b8f51700)
+
+---
+
+### **Immutability of Pre-placed Cells**
+
+Once pre-placed cells are positioned in the floorplan:
+
+* Their locations become **fixed and unmovable** for the rest of the design cycle.
+* Any change in their position may require **re-floorplanning** or **re-implementation**, affecting the entire layout and timing.
+
+This is because these blocks:
+
+* Have fixed **physical characteristics**
+* Influence **power, clock, and signal distribution**
+
+---
+
+### **Decoupling Capacitors Around Pre-placed Cells**
+
+After placing pre-placed cells, it's essential to **surround them with decoupling capacitors (decaps).**
+
+![Screenshot 2025-05-16 133546](https://github.com/user-attachments/assets/4084c7c3-0945-4b53-b477-6fc28636713f)
+
+---
+
+### **Why Do We Need Decoupling Capacitors?**
+
+**Decoupling capacitors** act as **local charge reservoirs** that:
+
+* **Stabilize the power supply** to nearby logic.
+* Provide **instantaneous current** during fast switching.
+* Reduce **IR drop** and **ground bounce**.
+
+---
+
+### **Relation to Noise Margin**
+
+In digital circuits, the **noise margin** defines how much noise a logic signal can tolerate before it is misinterpreted.
+
+If the power supply experiences:
+
+* **Voltage fluctuations** (due to sudden switching of pre-placed cells),
+* It causes **variation in threshold voltages** and may push logic levels outside valid high/low ranges.
+
+This results in:
+
+* **Reduced noise margin**
+* **Increased susceptibility to errors**
+* **Timing violations or glitches**
+
+**Decoupling capacitors** help to:
+
+* Minimize these power supply fluctuations
+* Maintain stable voltage levels
+* **Preserve noise margins** and ensure signal integrity
+
+![Screenshot 2025-05-16 132839](https://github.com/user-attachments/assets/39187cc6-0996-4f7e-ade5-15d43378a29a)
+![Screenshot 2025-05-16 133105](https://github.com/user-attachments/assets/e6806a29-cf04-4cca-b41b-b740dd9abe7e)
+![Screenshot 2025-05-16 133144](https://github.com/user-attachments/assets/b49187fd-f9cc-43d0-9345-9733954685e4)
+![Screenshot 2025-05-16 133333](https://github.com/user-attachments/assets/80a8bafd-410c-4c63-80f4-c8c395ce087b)
+
+---
+
+
 
 
