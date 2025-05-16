@@ -1272,6 +1272,103 @@ This results in:
 ![Screenshot 2025-05-16 133333](https://github.com/user-attachments/assets/80a8bafd-410c-4c63-80f4-c8c395ce087b)
 
 ---
+# Power planning
+---
+
+### **Role of Decoupling Capacitors and the Need for Power Planning**
+
+Once a **decoupling capacitor** is placed near a specific block (or macro), it acts as a **local charge reservoir** for that circuit. Let’s explore how this plays out when the macro is reused multiple times and how it relates to **power integrity** and **power planning**.
+
+---
+
+### **Scenario: Repeated Macro Instances**
+
+Assume a macro is instantiated **four times** across the chip. Each instance:
+
+![Screenshot 2025-05-16 140059](https://github.com/user-attachments/assets/7b69d49d-0030-47b8-ba27-ecb3e8023a0b)
+
+* Performs the same logic
+* Has its own dedicated **decoupling capacitors**
+* Is powered by a common VDD and VSS supply network
+
+Now, consider a **driver** in one macro instance sending a signal to a **load** in another macro instance. This signal traverses across a **16-bit bus**.
+
+To ensure **signal integrity**, the load must receive the **correct signal shape** — matching the driver's output levels — which requires a **stable local power supply**.
+
+---
+
+### **Problem: Inadequate Local Power Near the Interconnect**
+
+Even though each macro has local decaps, the **interconnect region (bus area)** might be far from any VDD/VSS taps or decoupling capacitors.
+
+![Screenshot 2025-05-16 140201](https://github.com/user-attachments/assets/ed6711d6-6b82-4273-bfea-f444f892bf0c)
+
+In this case:
+
+* The **signal integrity** degrades due to **voltage fluctuations**.
+* The bus may **not receive full VDD**, especially when many lines switch simultaneously.
+* The power supply has to source current over a long distance, introducing **IR drop** and **timing issues**.
+
+---
+
+### **Detailed Analysis: Ground Bounce and IR Drop**
+
+Let’s assume the initial state of the 16-bit bus is:
+`1110010111000110`
+
+![Screenshot 2025-05-16 140713](https://github.com/user-attachments/assets/a97da371-3682-431b-9412-40bf73ee0748)
+
+This signal is passed through an **inverter** in the load macro.
+
+**What happens next?**
+
+1. **Discharging High Bits:**
+
+   * Bits at logic '1' must discharge to '0' through **ground (VSS)**.
+   * All these transitions discharge through a **single ground tap**.
+   * This causes a **current spike**, creating a **temporary rise in ground voltage**, known as **ground bounce**.
+   * If this bounce exceeds the **noise margin**, the logic level at the receiver becomes **undefined**.
+
+![Screenshot 2025-05-16 140811](https://github.com/user-attachments/assets/c60e802f-2828-478c-a95d-9f19bed22f17)
+
+2. **Charging Low Bits:**
+
+   * Bits at logic '0' must charge to '1' through **VDD**.
+   * All of them charge through a **single VDD tap**.
+   * This causes a **voltage drop** at the VDD tap due to sudden current draw, known as **IR drop** or **voltage droop**.
+   * This too affects signal integrity, potentially leading to logic errors.
+
+![Screenshot 2025-05-16 141355](https://github.com/user-attachments/assets/088483e5-0dbc-43be-8958-540a008b0c3a)
+
+---
+
+### **Root Cause**
+
+These issues arise because the **power supply is accessed only from a single point**, and the switching current must traverse long resistive/inductive paths in the metal layers.
+
+---
+
+### **Solution: Power Planning**
+
+To mitigate these problems, **robust power planning** is essential. This involves:
+
+* **Distributing power supply taps (VDD/VSS)** throughout the chip
+* Ensuring all regions, including interconnect-heavy areas, have **nearby access to power**
+* Using **power grids and straps** on higher metal layers to lower resistance
+* Strategically placing **decoupling capacitors** near both **macros and routing channels**
+
+![Screenshot 2025-05-16 141606](https://github.com/user-attachments/assets/b57a954b-7fb7-433b-b65e-732bdf9f6ab0)
+
+With proper power planning:
+
+* The 16-bit bus can **draw power locally**, reducing IR drop
+* Switching noise is **minimized**, and
+* **Noise margins are preserved**, maintaining reliable operation
+
+![Screenshot 2025-05-16 141743](https://github.com/user-attachments/assets/3ec0b739-9561-4d3a-b945-3f4ad9c6de8e)
+
+---
+
 
 
 
