@@ -1657,6 +1657,15 @@ This will:
 * Create blockages and define regions for standard cell placement.
 * Lay the groundwork for the power network and subsequent routing.
 
+![Screenshot 2025-05-16 222040](https://github.com/user-attachments/assets/54326547-24a2-478a-b9b8-8d12ea5d0454)
+
+---
+# Review floorplan files and steps to view floorplan
 ---
 
+After **run_floorplan** go to openlane/design/picorv32a/runs and go into your latest runs. You will find config.tcl file here which will tells us all the configurations taken by the flow.
+![Screenshot 2025-05-16 224923](https://github.com/user-attachments/assets/cdb23741-c787-4a86-841a-6e4e00060f40)
+inside this config.tcl you can re check the **set ::env(FP_IO_VMETAL)** and **set ::env(FP_IO_HMETAL)** which will match with the content present in floorplan.tcl.
 
+![Screenshot 2025-05-16 224134](https://github.com/user-attachments/assets/a83fb032-ed5b-47b6-932f-54b967ea0ecb)
+![Screenshot 2025-05-16 224228](https://github.com/user-attachments/assets/e3749371-e700-4608-9cdf-7b397d739b26)
