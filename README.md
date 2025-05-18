@@ -1908,3 +1908,78 @@ This command will output detailed information about the selected object, such as
 * Location coordinates
 
 ---
+Studying the details of the layout:
+![Screenshot 2025-05-18 175905](https://github.com/user-attachments/assets/0bbfea65-c0f5-4e58-85aa-08440504ae75)
+
+The IO Pins are placed equdistant because we had set the it earlier in mode 1 in floorpla.tcl
+`FP_IO_MODE = 1` → **Random Equidistant Mode**
+  In this mode, the I/O pins are placed **evenly spaced** along the periphery of the core, but their order is randomized.
+  This is a simpler scheme that can be useful when there is no initial information about signal grouping or during early prototyping.
+
+---
+
+### **1. Decap Cells (Decoupling Capacitor Cells)**
+
+**Decap cells** are special standard cells that consist primarily of large capacitive structures (typically connected between VDD and GND) and are used to:
+
+![Screenshot 2025-05-18 174245](https://github.com/user-attachments/assets/9fad6408-1cce-42e3-8502-922c1282f7a3)
+
+* Provide **local charge storage**.
+* **Stabilize power supply** fluctuations due to dynamic switching.
+* **Reduce IR drop** and **suppress ground/VDD noise** (e.g., voltage droop, ground bounce).
+
+They do **not perform any logical function**, but act like **local reservoirs of charge** during sudden switching activity (transients).
+
+---
+
+### **2. Tap Cells**
+
+**Tap cells** are special cells used to ensure proper connection of **n-well** or **p-substrate** to the **power supply (VDD/VSS)**.
+
+In bulk CMOS:
+
+* **N-well** regions need to be connected to **VDD**.
+* **P-substrate** needs to be connected to **GND**.
+
+If this is not done at regular intervals:
+
+* **Latch-up** can occur.
+* Devices may **float** and behave unpredictably.
+
+Tap cells provide these substrate/well contacts and are inserted periodically.
+
+![Screenshot 2025-05-18 174535](https://github.com/user-attachments/assets/5d8cbb68-94c4-4b1d-b3d5-70b08e614ae9)
+
+---
+
+### **3. Why Are Tap Cells Placed Diagonally and Equidistantly?**
+
+* Tap cells are typically placed **diagonally or in a grid**, ensuring **equidistant coverage** across the chip.
+* This uniform distribution guarantees that **every region** of the layout is close enough to a substrate/well connection.
+* The spacing is controlled to meet **DRC** and **reliability constraints** (e.g., minimum distance between substrate contacts).
+* The placement strategy is usually set automatically by the **floorplanning or placement tool**.
+
+---
+
+### **4. Floorplan and Standard Cells**
+
+* **Floorplanning** defines:
+
+  * **Core and die area**
+  * **IO placement**
+  * **Macro placement**
+  * **Power planning**
+  * **Blockages**
+  * But **not the placement of standard cells**
+
+* Standard cells are placed later in the **placement** step.
+
+However:
+
+* In tools like **OpenLane**, before placement begins, some standard cells may appear in the **lower-left corner** of the core area.
+  This is the **default location** where the tool initially dumps unplaced cells.
+
+![Screenshot 2025-05-18 175236](https://github.com/user-attachments/assets/1e0c9cbb-c2f3-4d9f-aad5-b2e35047e9dc)
+
+This is not their final location and will be resolved in the **automated placement** step.
+---
