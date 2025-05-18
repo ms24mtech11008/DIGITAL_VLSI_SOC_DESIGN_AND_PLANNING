@@ -1989,3 +1989,7 @@ However:
 
 * This is not their final location and will be resolved in the **automated placement** step.
 ---
+
+# Library building and Placement
+---
+## Netlist binding and initial place design
