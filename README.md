@@ -1952,7 +1952,7 @@ If this is not done at regular intervals:
 * **Latch-up** can occur.
 * Devices may **float** and behave unpredictably.
 
-Tap cells provide these substrate/well contacts and are inserted periodically.
+* Tap cells provide these substrate/well contacts and are inserted periodically.
 
 ![Screenshot 2025-05-18 174535](https://github.com/user-attachments/assets/5d8cbb68-94c4-4b1d-b3d5-70b08e614ae9)
 
@@ -1987,5 +1987,5 @@ However:
 
 ![Screenshot 2025-05-18 175236](https://github.com/user-attachments/assets/1e0c9cbb-c2f3-4d9f-aad5-b2e35047e9dc)
 
-This is not their final location and will be resolved in the **automated placement** step.
+* This is not their final location and will be resolved in the **automated placement** step.
 ---
