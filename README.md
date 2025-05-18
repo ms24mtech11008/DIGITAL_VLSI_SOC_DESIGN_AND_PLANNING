@@ -1744,7 +1744,7 @@ This means:
 * To convert from DBU to microns:
 
   $$
-  \text{microns} = \frac{\text{DBU}}{1000}
+  {microns} = {DBU}/{1000}
   $$
 
 ---
@@ -1770,6 +1770,141 @@ $$
 * **Chip Width**: 660.685 μm
 * **Chip Height**: 671.405 μm
 * **Chip Area**: 443,554.61 μm² (approximate)
+---
+---
 
+### **Viewing Floorplan in Magic**
 
+To view the floorplan in **Magic VLSI layout tool**, follow the steps below using the appropriate paths from your setup.
 
+---
+![Screenshot 2025-05-18 121428](https://github.com/user-attachments/assets/d39275f4-4675-4b30-92ea-a6662032ee19)
+
+### **1. Launch Magic with the Technology File**
+
+Start Magic by explicitly specifying the Sky130A technology file path:
+
+```bash
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech &
+```
+
+This loads the Sky130A technology rules required for rendering and design-rule enforcement.
+
+---
+
+### **2. Read the Merged LEF File**
+
+Once Magic launches, in the Magic console, load the **merged LEF** file, which contains macro and standard cell abstracts:
+
+```tcl
+lef read ./../tmp/merged.lef
+```
+
+Make sure you run this from the correct working directory where the `tmp` folder is accessible using this relative path.
+
+---
+
+### **3. Read the DEF File**
+
+Next, read the floorplan DEF file:
+
+```tcl
+def read picorv32a.floorplan.def
+```
+
+This will load the complete physical design including standard cell rows, block placements, I/O pin positions, and more.
+
+---
+
+### **4. Final Layout View**
+
+Once the DEF is read, Magic will render the floorplan layout. You can now:
+
+* Zoom in/out using mouse scroll or `:` + `zoom`
+* Select layers, cells, or macros for inspection
+* Toggle layers or check routing overlays
+
+![Screenshot 2025-05-18 134631](https://github.com/user-attachments/assets/43c00c23-9b5b-4219-8293-3851e8596b1f)
+
+---
+# Review floorplan layout in Magic
+---
+Now we can see our layout.
+Note: To select layout : press s
+      To fit layout on screen : press v
+---
+
+### **Interacting with the Floorplan in Magic**
+
+After successfully loading the LEF and DEF files in Magic, you can interact with the layout using the following features:
+
+---
+
+### **1. Zoom In the Layout**
+
+To zoom into the layout:
+
+* Simply press **`z`** on your keyboard while in the layout window.
+
+This allows you to get a closer view of specific layout features like pins, cells, or block boundaries.
+
+---
+
+### **2. Visualizing Pin Placement Mode**
+
+Earlier, we set the input-output pin placement mode in the `floorplan.tcl` file as:
+
+```tcl
+set ::env(FP_IO_MODE) 1  ; # 1 = random equidistant mode
+```
+![Screenshot 2025-05-18 135747](https://github.com/user-attachments/assets/1f686a5e-b24e-481b-8ce3-48043215d947)
+
+This means:
+
+* The input/output pins will be **evenly spaced randomly** around the core boundary.
+* You can visualize this distribution directly in the Magic floorplan layout.
+
+---
+
+### **3. Selecting Objects in the Layout**
+
+To select an object (e.g., an input pin):
+
+* Move your **cursor over the object** and press **`s`** (select).
+* The selected object will be highlighted in the layout.
+Here i have selected a Horizontal input pin
+![Screenshot 2025-05-18 140028](https://github.com/user-attachments/assets/256cc6fa-1c7d-4b3a-a4df-de5e20eacd74)
+
+---
+### **4. Getting Object Information**
+
+Once an object is selected:
+
+* Go to the **`tkcon` window** (Magic’s console).
+* Type:
+
+```tcl
+what
+```
+![Screenshot 2025-05-18 140253](https://github.com/user-attachments/assets/28aab061-4ac7-41f8-9097-a67528fbd2e8)
+As set in floorpln.tcl set ::env(FP_IO_HMETAL) 4
+
+Similarly selecting an horizontal pin 
+![Screenshot 2025-05-18 141926](https://github.com/user-attachments/assets/6bf82d81-fc22-45bd-b404-dabf9a496a5a)
+* Go to the **`tkcon` window** (Magic’s console).
+* Type:
+
+```tcl
+what
+```
+![Screenshot 2025-05-18 141952](https://github.com/user-attachments/assets/7bfff745-2596-48e8-8093-e6eac208e7c4)
+As set in floorpln.tcl set ::env(FP_IO_VMETAL) 3
+
+This command will output detailed information about the selected object, such as:
+
+* Pin name
+* Type (input/output/clock)
+* Layer information
+* Location coordinates
+
+---
