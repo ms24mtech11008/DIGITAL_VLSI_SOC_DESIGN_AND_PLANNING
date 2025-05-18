@@ -1696,3 +1696,80 @@ and highest priority is given to the later.
 Now finally after floorplanning **set ::env(FP_CORE_UTIL) is 35** ( check in openlane/design/picorv32a/runs/16-06_16-47/config.tcl)
 
 ![Screenshot 2025-05-16 233221](https://github.com/user-attachments/assets/9c2d546c-b08c-46d5-bc91-54c42a8d3d36)
+---
+Now, our floorplan stage is complete and we would like to view our floorplan, for that go to openlane/designs/picorv32a/runs/16-06_16-47/results/floorplan. We will find a .def file (Design exchange format)
+![Screenshot 2025-05-18 113606](https://github.com/user-attachments/assets/8ca5e0d7-7d09-4a8a-bac9-f75a7680d778)
+
+Contents of the picorv32a.floorplan.def
+![Screenshot 2025-05-18 114333](https://github.com/user-attachments/assets/ee20752f-6ad2-4388-8d20-222db853de53)
+
+### **Understanding `DIEAREA` in DEF File**
+
+In a DEF (Design Exchange Format) file, the `DIEAREA` statement defines the **physical boundary of the die**—i.e., the total rectangular area available on the silicon for placement of all components.
+
+#### **Syntax:**
+
+```
+DIEAREA (x1 y1) (x2 y2);
+```
+
+* `(x1, y1)` – Coordinates of the **lower-left corner** of the die.
+* `(x2, y2)` – Coordinates of the **upper-right corner** of the die.
+* All values are in **Database Units (DBUs)**.
+
+#### **Example:**
+
+```
+DIEAREA (0 0) (660685 671405);
+```
+
+This means:
+
+* Lower-left corner: (0, 0)
+* Upper-right corner: (660685, 671405)
+
+---
+
+### **Units in DEF File**
+
+The DEF file also defines the database unit scale with:
+
+```
+UNITS DISTANCE MICRONS 1000;
+```
+
+This means:
+
+* **1 micron = 1000 DBU**
+* To convert from DBU to microns:
+
+  $$
+  \text{microns} = \frac{\text{DBU}}{1000}
+  $$
+
+---
+
+### **Convert DIEAREA Dimensions to Microns**
+
+* **Width** = 660685 ÷ 1000 = **660.685 μm**
+* **Height** = 671405 ÷ 1000 = **671.405 μm**
+
+---
+
+### **Calculate Chip Area**
+
+$$
+\text{Area} = \text{Width} \times \text{Height}
+= 660.685 \times 671.405 = 443554.61 \, \mu m^2
+$$
+
+---
+
+### **Final Summary**
+
+* **Chip Width**: 660.685 μm
+* **Chip Height**: 671.405 μm
+* **Chip Area**: 443,554.61 μm² (approximate)
+
+
+
