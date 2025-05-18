@@ -26,6 +26,12 @@
     - [Steps to run floorplan using OpenLANE](#Steps-to-run-floorplan-using-OpenLANE)
     - [Review floorplan files and steps to view floorplan](#Review-floorplan-files-and-steps-to-view-floorplan)
     - [Review floorplan layout in Magic](#Review-floorplan-layout-in-Magic)
+  - [Library building and Placement](#Library-building-and-Placement)
+    - [Netlist binding and initial place design](#Netlist-binding-and-initial-place-design)
+    - [Optimize placement using estimated wire-length and capacitance](#Optimize-placement-using-estimated-wire-length-and-capacitance)
+    - [Final placement optimization](#Final-placement-optimization)
+    - [Need for libraries and characterization](#Need-for-libraries-and-characterization)
+    - [Congestion aware placement using RePlAce](#Congestion-aware-placement-using-RePlAce)
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
