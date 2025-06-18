@@ -2410,3 +2410,32 @@ This means:
 
 This method provides a consistent and technology-independent way of capturing cell delay from waveform behavior.
 
+![Screenshot 2025-06-18 170546](https://github.com/user-attachments/assets/99ec46e9-ee97-4ec7-b48f-e60aef74afe5)
+
+In the above example, the `in_rise_thr` and `out_fall_thr` were both set at 50%. However, if the threshold point is shifted closer to the top of the waveform, the output may appear to transition before the input, resulting in a **negative delay**. Since negative delays are not acceptable, this highlights the importance of choosing the **correct threshold point**. A poorly chosen threshold can lead to inaccurate and misleading timing results.
+
+![Screenshot 2025-06-18 170736](https://github.com/user-attachments/assets/b48f4666-dd22-4c68-8d8d-7ea843782421)
+
+Let’s consider another example where the **threshold point is correctly chosen**, yet we still observe a **negative delay**. This happens when the **output transition begins before the input crosses the threshold**, causing the output to appear as if it changes **before** the input.
+
+Even with proper threshold values, such a scenario leads to a **negative delay**, which is not physically acceptable in digital timing. This situation typically arises due to **improper stimulus**, **parasitic effects**, or **incorrect circuit behavior** during simulation.
+
+Hence, in addition to choosing the correct threshold, it's crucial to ensure proper **input stimulus** and **realistic circuit conditions** to avoid such non-physical results.
+
+![Screenshot 2025-06-18 171016](https://github.com/user-attachments/assets/1698123c-59f3-4ae2-a734-4373550efee1)
+
+zooming in
+
+![Screenshot 2025-06-18 171102](https://github.com/user-attachments/assets/3a9dc974-71e6-42bd-8947-7cbeb8edc836)
+
+The **transition time** (also called **slew**) is calculated using the difference between the high and low threshold points on a waveform.
+For a **rising transition**:
+$$
+\text{Transition Time (Rise)} = \text{time(slew\_high\_rise\_thr)} - \text{time(slew\_low\_rise\_thr)}
+$$
+For a **falling transition**:
+$$
+\text{Transition Time (Fall)} = \text{time(slew\_high\_fall\_thr)} - \text{time(slew\_low\_fall\_thr)}
+$$
+These thresholds typically correspond to **20% and 80%** of VDD, but can vary depending on library settings.
+
