@@ -2356,7 +2356,39 @@ These outputs are now ready to be integrated into the standard cell library for 
 ---
 ### Timing threshold definitions
 ---
+As seen in the previous section, where the inverter is connected back to back with power sources and stimulus applied, it becomes essential to understand the different threshold points of a waveform. This concept is known as **"Timing Threshold Definitions."**
 
+In the figure below, the term **`slew_low_rise_thr`** represents a value close to 0, typically set at around **20%** of VDD, though it can also be **30%** depending on design requirements.
+
+![Screenshot 2025-06-18 164428](https://github.com/user-attachments/assets/e6624a1b-7580-4df4-bba4-ac7837d6dc1f)
+
+Slew_high_rise_thr
+
+![Screenshot 2025-06-18 164601](https://github.com/user-attachments/assets/27a711ca-6303-4411-9e2a-d11398ede60b)
+
+Slew_low_fall_thr
+
+![Screenshot 2025-06-18 164648](https://github.com/user-attachments/assets/8b5d86e4-020d-4bc6-9016-8cb5b572fe94)
+
+Slew_high_fall_thr
+
+![Screenshot 2025-06-18 164938](https://github.com/user-attachments/assets/168be275-42f5-4e7b-a742-6f9ff65b1069)
+
+in_rise_thr
+
+![Screenshot 2025-06-18 165105](https://github.com/user-attachments/assets/c57f9f24-9cca-4545-bf77-769e7d3792d6)
+
+in_fall_thr
+
+![image](https://github.com/user-attachments/assets/112841e4-2cb2-46d3-987c-22d8226e4ef2)
+
+out_rise_thr
+
+![Screenshot 2025-06-18 165156](https://github.com/user-attachments/assets/00158c1b-984f-45ab-b7c8-2d7e083f861e)
+
+out_fall_thr
+
+![Screenshot 2025-06-18 165340](https://github.com/user-attachments/assets/af1d83d9-be86-4360-9990-3928e1131a3f)
 
 
 
