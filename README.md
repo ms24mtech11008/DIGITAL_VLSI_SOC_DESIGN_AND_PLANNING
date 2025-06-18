@@ -2051,6 +2051,37 @@ An ideal clock is a theoretical clock with perfect characteristics — zero prop
 **Why setup timing analysis is done after placement:**
 Setup timing analysis checks whether signals arrive at their destination registers before the clock edge. With estimated data path delays available after placement, setup timing analysis helps verify whether the placement meets required timing specifications. It ensures the design can operate at the target frequency.
 ---
+### Need for libraries and characterization
+---
+**Need for Characterization**
+
+Every design follows a standard IC design flow to be implemented on silicon.
+
+**Logic Synthesis:**
+This is the first step where the high-level functional description written in RTL (Register Transfer Level) is converted into a gate-level netlist. Logic synthesis maps the RTL code into a network of logic gates that performs the same functionality as described.
+
+**Output of Logic Synthesis:**
+The result is a gate-level netlist — a structured arrangement of standard logic gates that replicate the behavior of the original RTL design.
+
+**Floorplanning:**
+In this step, the gate-level netlist is imported, and the physical design begins by defining the size of the core and the die. The placement of I/O ports and major blocks is also decided here.
+
+**Placement:**
+Logic cells from the netlist are placed physically on the chip. The objective is to ensure that the initial timing requirements are met by placing cells in optimal positions.
+
+**Clock Tree Synthesis (CTS):**
+This step involves creating a clock distribution network. The goal is to minimize clock skew by ensuring that all flip-flops receive the clock signal simultaneously.
+
+**Routing:**
+This step connects the placed cells with metal interconnects as per the netlist, completing all required paths for data and clock signals.
+
+**Static Timing Analysis (STA):**
+Both setup and hold timings are analyzed in this step. The design is evaluated to ensure that all timing constraints are met under various process and environmental conditions.
+
+**Need for Characterization:**
+In all these steps, one common element is the use of **gates or cells**. For the design tools to correctly interpret and use these gates, they must be fully characterized.
+**Library characterization** provides detailed information about each gate's behavior — including delay, power, area, input/output transition times, and timing arcs — across different operating conditions. Without this data, the tools cannot accurately perform synthesis, placement, CTS, routing, or timing analysis. Hence, characterization is essential for the tools to correctly understand and use the gates throughout the design flow.
+---
 
 
 
