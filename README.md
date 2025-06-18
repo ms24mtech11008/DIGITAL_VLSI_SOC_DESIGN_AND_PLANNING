@@ -2023,4 +2023,19 @@ Optimized placement makes estimations such as wire length and capacitance and, b
 
 ![Screenshot 2025-05-20 133124](https://github.com/user-attachments/assets/0ef80da3-d3c2-4576-bbdc-3e21c22d196a)
 
+**3) Optimize Placement**
+
+In this stage, wire length and capacitance are estimated. Based on these estimations, repeaters (buffers) are inserted.
+
+**How repeaters help (Signal Integrity Concept):**
+Repeaters are buffers that restore the degraded signal by regenerating a new signal identical to the original. Over long wires, signals experience degradation due to resistance and capacitance. This leads to slower transitions, increased delay, and potential signal integrity issues. Repeaters recondition the signal at intervals, maintaining sharp transitions and timing accuracy. This ensures reliable signal transmission across long interconnects. However, inserting repeaters increases area usage.
+
+**Why capacitance is higher for longer wires:**
+Capacitance is proportional to the wire length. Longer wires have more surface area adjacent to other conductors (wires or substrate), resulting in higher parasitic capacitance. This increased capacitance slows down signal propagation and increases delay.
+
+![Screenshot 2025-06-18 120923](https://github.com/user-attachments/assets/f6214de1-f218-4bf8-8829-6151100da95a)
+
+
+
+
 
