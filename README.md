@@ -2023,8 +2023,9 @@ Optimized placement makes estimations such as wire length and capacitance and, b
 
 ![Screenshot 2025-05-20 133124](https://github.com/user-attachments/assets/0ef80da3-d3c2-4576-bbdc-3e21c22d196a)
 
+----
 ### Optimize placement using estimated wire-length and capacitance
-
+---
 In this stage, wire length and capacitance are estimated. Based on these estimations, repeaters (buffers) are inserted.
 
 **How repeaters help (Signal Integrity Concept):**
@@ -2035,6 +2036,21 @@ Capacitance is proportional to the wire length. Longer wires have more surface a
 
 ![Screenshot 2025-06-18 120923](https://github.com/user-attachments/assets/f6214de1-f218-4bf8-8829-6151100da95a)
 
+---
+### Final placement optimization
+---
+**Why some cells are abutted:**
+Certain logic cells are abutted to eliminate or minimize time delay between signals. Abutment reduces interconnect length, thus lowering delay and improving timing. This is especially important for logic operating at very high frequency, where even small delays can cause timing violations. Placing such logic close together ensures faster signal transfer.
+
+**Why hold timing analysis is not done after placement:**
+Hold timing analysis is not meaningful at this stage because it depends on actual delays in the clock network, which is not yet implemented. Since the clock is still ideal (i.e., assumed to have zero skew and zero delay), hold timing violations cannot be evaluated accurately.
+
+**What is an ideal clock:**
+An ideal clock is a theoretical clock with perfect characteristics — zero propagation delay, zero skew, and perfect edge alignment across the design. It does not model the real-world effects of clock distribution.
+
+**Why setup timing analysis is done after placement:**
+Setup timing analysis checks whether signals arrive at their destination registers before the clock edge. With estimated data path delays available after placement, setup timing analysis helps verify whether the placement meets required timing specifications. It ensures the design can operate at the target frequency.
+---
 
 
 
