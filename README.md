@@ -2439,5 +2439,15 @@ Transition Time (Rise) = time(slew_high_rise_thr) - time(slew_low_rise_thr)
 ```
 Transition Time (Fall) = time(slew_high_fall_thr) - time(slew_low_fall_thr)
 ```
+Example values
+![Screenshot 2025-06-18 171719](https://github.com/user-attachments/assets/2dacc74b-9cc2-4c85-b93f-022e8148a8b5)
 
+The following have been marked in the waveform below
+slew_high_rise_thr
+slew_high_fall_thr
+slew_low_rise_thr
+slew_low_fall_thr
 
+![Screenshot 2025-06-18 172152](https://github.com/user-attachments/assets/4228b955-9480-4b3c-bf28-28ddc11ff247)
+
+---
