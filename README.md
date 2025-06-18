@@ -37,6 +37,9 @@
     - [Circuit design steps](#Circuit-design-steps)
     - [Layout design step](#Layout-design-step)
     - [Typical characterization flow](#Typical-characterization-flow)
+  - [General timing characterization parameters](#General-timing-characterization-parameters)
+    - [Timing threshold definitions](#Timing-threshold-definitions)
+    - [Propagation delay and transition time](#Propagation-delay-and-transition-time)
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
@@ -2191,6 +2194,8 @@ The **cell design flow** is divided into three main stages:
 ### **2) Design Steps** *(Core Design Process)*
 
 * **Circuit Design:**
+In circuit Design there are two steps.
+First step is to implement the function itself and second step is to model the PMOS nad NMOS transistor in such a fashion in order to meet the libraray.
 
   * Transistor-level design using SPICE
   * Outputs a **circuit description** (e.g., netlist in Verilog or SPICE)
@@ -2199,13 +2204,20 @@ The **cell design flow** is divided into three main stages:
 
 
 * **Layout Design:**
+  In Layout Design First step is to get the function implemented through the MOS transistor through a set of PMOS and NMOS transistor and the second step is to get the PMOS network graph and the nNMOS network graph out of the design that has been implemented.
 
   * Physical layout of the cell respecting DRC
   * Perform **LVS** to ensure layout matches the schematic
   * Extract parasitics and generate **GDSII** and **extracted SPICE netlist (.cir)**
 
 ![Screenshot 2025-06-18 154811](https://github.com/user-attachments/assets/7bd436fd-02d6-401b-bce8-4e1127ee512f)
+
+After getting the network graphs next step is to obtain the Euler's path. Eule's path is basically the path which is traced only once.
+
 ![Screenshot 2025-06-18 154833](https://github.com/user-attachments/assets/669f25b0-c963-4a7e-bbc1-a2cdbe48bfe7)
+
+Next step is to draw stick diagram based on the Euler's path. This stick diagram is derived out of the circuit diagram.
+
 ![Screenshot 2025-06-18 155056](https://github.com/user-attachments/assets/c54bf8c3-b5a3-4456-b6eb-9f7b44d0cabe)
 
 * **Characterization:**
@@ -2235,9 +2247,17 @@ The **cell design flow** is divided into three main stages:
   * Result of characterization, used in synthesis, placement, STA, etc.
 
 ---
-
 These outputs are essential for the use of the cell in the digital design flow and are interpreted by EDA tools throughout synthesis, placement, routing, and verification.
 
+Let's try to build the characterization flow based on the inputs we have,
+
+First step is to read in the model, second step is to read the extracted spice netlist, third step is to define or recognize the behaviour of the buffer, fourth step is to read the subcircuits of the inverter and then in the fifth step need to attach the necessary power supplies, sixth step is to apply the stimulus then in the seventh step we need to provide the necessary output capacitance then in the final eighth step in which we need to provide necessary simulation command for example if we are doing transent simulation so we need to give .tran command , if we are doing DC simulation then we give .dc command.
+
+---
+## General timing characterization parameters
+---
+### Timing threshold definitions
+---
 
 
 
