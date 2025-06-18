@@ -1990,3 +1990,37 @@ However:
 # Library building and Placement
 ---
 ## Netlist binding and initial place design
+### Placement and Routing
+
+**Step 1: Bind Netlist with Physical Cells**
+All gates have a uniform block-like shape in physical form. These blocks (gates) are defined in the library. The library contains all necessary timing information, such as gate delays. It also specifies the width and height of each cell, along with the required conditions. Multiple physical shapes of the same gate are available in the library. The library offers different sizes for a particular gate — larger gates have lower resistance and are therefore faster. Thus, the library includes different versions (flavours) of the same gate.
+
+![Screenshot 2025-05-20 131144](https://github.com/user-attachments/assets/48fdf5a9-7015-4c64-b86d-aaca9beaeb2c)
+![Screenshot 2025-05-20 131127](https://github.com/user-attachments/assets/f9f56d15-6c4a-4611-9674-067f3ae6fbf2)
+![Screenshot 2025-05-20 131219](https://github.com/user-attachments/assets/6043695b-8553-4263-8437-8771859c168f)
+![Screenshot 2025-05-20 131804](https://github.com/user-attachments/assets/2ede6fc0-9ad6-4a4f-b9d9-ee22299a3a22)
+
+Once the appropriate shapes and sizes are assigned to each gate, they are placed onto the floorplan.
+
+![Screenshot 2025-05-20 132258](https://github.com/user-attachments/assets/e9b01dc4-592a-43ce-a6f2-f4c7388c2f45)
+
+### Summary So Far
+
+We now have a well-defined floorplan with input and output ports properly placed. A netlist is available, and every gate in the netlist has an assigned physical shape and size — giving us a physical view of the logic gates.
+
+![Screenshot 2025-05-20 132338](https://github.com/user-attachments/assets/7223c26c-77fc-4f23-a12e-c25b3c98fe17)
+
+### Next Step: Place the Netlist into the Floorplan
+
+The netlist is now placed onto the floorplan. Some cells are already pre-placed, and during placement, these cells remain fixed. No new cells are placed in those regions.
+
+Cells are positioned based on the locations of their input and output ports to meet timing requirements.
+
+* Some cells are abutted (placed directly next to each other).
+* Some cells are spaced further apart due to the distance between their input and output ports. This results in an optimized placement.
+
+Optimized placement makes estimations such as wire length and capacitance and, based on those estimations, repeaters may be inserted.
+
+![Screenshot 2025-05-20 133124](https://github.com/user-attachments/assets/0ef80da3-d3c2-4576-bbdc-3e21c22d196a)
+
+
