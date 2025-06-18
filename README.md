@@ -657,7 +657,7 @@ The result of the full OpenLANE flow is a **GDSII file**:
 
 ## Get familiar to open-source EDA tools
 ---
-###  OpenLANE Directory structure in detai
+###  OpenLANE Directory structure in detail
 ---
 
 ##  PDKs and Open Source Compatibility
