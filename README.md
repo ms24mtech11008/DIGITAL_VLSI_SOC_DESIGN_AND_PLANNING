@@ -2428,20 +2428,16 @@ zooming in
 
 ![Screenshot 2025-06-18 171102](https://github.com/user-attachments/assets/3a9dc974-71e6-42bd-8947-7cbeb8edc836)
 
-The **transition time** (also called **slew**) is calculated using the difference between the high and low threshold points on a waveform.
+**For Rising Transition:**
 
-For a **rising transition**:
+```
+Transition Time (Rise) = time(slew_high_rise_thr) - time(slew_low_rise_thr)
+```
 
-$$
-\text{Transition Time (Rise)} = \text{time(slew\_high\_rise\_thr)} - \text{time(slew\_low\_rise\_thr)}
-$$
+**For Falling Transition:**
 
-For a **falling transition**:
-
-$$
-\text{Transition Time (Fall)} = \text{time(slew\_high\_fall\_thr)} - \text{time(slew\_low\_fall\_thr)}
-$$
-
-These thresholds typically correspond to **20% and 80%** of VDD, but can vary depending on library settings.
+```
+Transition Time (Fall) = time(slew_high_fall_thr) - time(slew_low_fall_thr)
+```
 
 
