@@ -2210,13 +2210,15 @@ First step is to implement the function itself and second step is to model the P
   * Perform **LVS** to ensure layout matches the schematic
   * Extract parasitics and generate **GDSII** and **extracted SPICE netlist (.cir)**
 
+After getting the network graphs next step is to obtain the Euler's path. Eule's path is basically the path which is traced only once.
+
 ![Screenshot 2025-06-18 154811](https://github.com/user-attachments/assets/7bd436fd-02d6-401b-bce8-4e1127ee512f)
 
-After getting the network graphs next step is to obtain the Euler's path. Eule's path is basically the path which is traced only once.
+Next step is to draw stick diagram based on the Euler's path. This stick diagram is derived out of the circuit diagram.
 
 ![Screenshot 2025-06-18 154833](https://github.com/user-attachments/assets/669f25b0-c963-4a7e-bbc1-a2cdbe48bfe7)
 
-Next step is to draw stick diagram based on the Euler's path. This stick diagram is derived out of the circuit diagram.
+Next step is to convert this stick diagram into a typical Layout, into a proper layout and then get the proper rule we have discissed earlier. Once we get the particular layout then we have the cell width, cell length and all the specifications will be there like drain current, pin locations and so on.
 
 ![Screenshot 2025-06-18 155056](https://github.com/user-attachments/assets/c54bf8c3-b5a3-4456-b6eb-9f7b44d0cabe)
 
