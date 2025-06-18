@@ -2142,6 +2142,104 @@ Zooming in we can see the placement of the standard cells in the standard cell r
 
 ![image](https://github.com/user-attachments/assets/33b79077-2db1-4c34-82b2-b2fd1e5b48f8)
 
+---
+## Cell design and characterization flows
+---
+### Inputs for cell design flow 
+---
+**Cell Design Flow**
+
+Every **standard cell** — such as AND, OR, buffer, inverter, D flip-flop, latch, and ICG — goes through a typical **cell design flow** before it can be used in digital IC design. These cells are stored in the **standard cell library**, which includes:
+
+* Different **functionalities**
+* Various **drive strengths** (sizes)
+* Multiple **threshold voltages (Vt)** for power-performance tradeoffs
+
+![Screenshot 2025-06-18 150848](https://github.com/user-attachments/assets/bb73cb81-4236-425e-8ae7-fa521ef8501a)
+
+### Example: Inverter
+
+The **cell design flow** is divided into three main stages:
+
+![Screenshot 2025-06-18 153146](https://github.com/user-attachments/assets/f30afe68-6a60-45c7-a87a-e26e9c84c5d5)
+
+---
+
+### **1) Inputs** *(Required for Designing the Standard Cell)*
+
+* **PDKs (Process Design Kits):**
+
+  * Contains **DRC (Design Rule Check)** and **LVS (Layout vs Schematic)** rules
+  * Also includes **SPICE models** for simulation
+* **Library Specifications:**
+
+  * Constraints on area, delay, power, etc.
+* **User-defined Specifications:**
+
+  * Functional behavior, target drive strength, input capacitance, etc.
+
+![Screenshot 2025-06-18 153446](https://github.com/user-attachments/assets/ef969b20-8282-47d4-bf1d-06ad3bf0aa5e)
+![Screenshot 2025-06-18 153555](https://github.com/user-attachments/assets/852ee4f9-4834-4956-9c8a-7e47f10e08fb)
+![Screenshot 2025-06-18 153910](https://github.com/user-attachments/assets/5981d8d3-e7bf-40c4-ab66-6021c62b8aa2)
+![Screenshot 2025-06-18 153927](https://github.com/user-attachments/assets/6f593322-1896-4679-91ae-f49906ebea52)
+![Screenshot 2025-06-18 154053](https://github.com/user-attachments/assets/c02fa695-0132-4a51-b7d8-1287dfd87cf5)
+![Screenshot 2025-06-18 154111](https://github.com/user-attachments/assets/5987fd30-4d6a-4d89-9b8d-c640357220c4)
+![Screenshot 2025-06-18 154130](https://github.com/user-attachments/assets/5e20f74c-5097-4057-af37-d00b28c6165d)
+
+---
+
+### **2) Design Steps** *(Core Design Process)*
+
+* **Circuit Design:**
+
+  * Transistor-level design using SPICE
+  * Outputs a **circuit description** (e.g., netlist in Verilog or SPICE)
+
+![Screenshot 2025-06-18 154433](https://github.com/user-attachments/assets/89b1bcf7-09d3-43d9-b5f9-5ec59a7ed293)
+
+
+* **Layout Design:**
+
+  * Physical layout of the cell respecting DRC
+  * Perform **LVS** to ensure layout matches the schematic
+  * Extract parasitics and generate **GDSII** and **extracted SPICE netlist (.cir)**
+
+![Screenshot 2025-06-18 154811](https://github.com/user-attachments/assets/7bd436fd-02d6-401b-bce8-4e1127ee512f)
+![Screenshot 2025-06-18 154833](https://github.com/user-attachments/assets/669f25b0-c963-4a7e-bbc1-a2cdbe48bfe7)
+![Screenshot 2025-06-18 155056](https://github.com/user-attachments/assets/c54bf8c3-b5a3-4456-b6eb-9f7b44d0cabe)
+
+* **Characterization:**
+
+  * Simulate the cell across corners to extract
+
+    * **Timing** (delay, setup/hold)
+    * **Noise characteristics**
+    * **Power consumption**
+  * Output files: `.lib` containing these parameters
+    
+![Screenshot 2025-06-18 155144](https://github.com/user-attachments/assets/01d0370a-898b-468e-8754-52e1b6cb0b20)
+
+
+---
+
+### **3) Outputs** *(Consumed by EDA Tools)*
+
+* **Circuit Description Language:**
+
+  * Result of circuit design (e.g., Verilog, SPICE netlist)
+* **GDSII & Extracted Netlist (.cir):**
+
+  * Result of layout design
+* **.lib Files (Timing, Noise, Power):**
+
+  * Result of characterization, used in synthesis, placement, STA, etc.
+
+---
+
+These outputs are essential for the use of the cell in the digital design flow and are interpreted by EDA tools throughout synthesis, placement, routing, and verification.
+
+
+
 
 
 
