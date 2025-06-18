@@ -2023,7 +2023,7 @@ Optimized placement makes estimations such as wire length and capacitance and, b
 
 ![Screenshot 2025-05-20 133124](https://github.com/user-attachments/assets/0ef80da3-d3c2-4576-bbdc-3e21c22d196a)
 
-**3) Optimize Placement**
+### Optimize placement using estimated wire-length and capacitance
 
 In this stage, wire length and capacitance are estimated. Based on these estimations, repeaters (buffers) are inserted.
 
