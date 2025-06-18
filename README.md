@@ -2251,9 +2251,105 @@ Next step is to convert this stick diagram into a typical Layout, into a proper 
 ---
 These outputs are essential for the use of the cell in the digital design flow and are interpreted by EDA tools throughout synthesis, placement, routing, and verification.
 
-Let's try to build the characterization flow based on the inputs we have,
+---
 
-First step is to read in the model, second step is to read the extracted spice netlist, third step is to define or recognize the behaviour of the buffer, fourth step is to read the subcircuits of the inverter and then in the fifth step need to attach the necessary power supplies, sixth step is to apply the stimulus then in the seventh step we need to provide the necessary output capacitance then in the final eighth step in which we need to provide necessary simulation command for example if we are doing transent simulation so we need to give .tran command , if we are doing DC simulation then we give .dc command.
+### **Characterization Flow**
+
+#### **1. Read the Model**
+
+* Load the **SPICE models** (from PDK) for all devices.
+* These models include electrical characteristics (e.g., mobility, threshold voltage) and are technology-specific.
+
+#### **2. Read the Extracted SPICE Netlist**
+
+* Load the **.cir (extracted SPICE netlist)** of the designed cell (e.g., buffer).
+* This includes parasitic components from layout extraction.
+
+#### **3. Define/Recognize the Behavior of the Cell**
+
+* Define the **functionality** (e.g., buffer, inverter, NAND, etc.) for characterization setup.
+* Recognize input/output ports and functional relationships.
+
+#### **4. Read Subcircuits (e.g., Inverter in Buffer)**
+
+* Parse and identify any **subcircuits** used within the main cell.
+* This step ensures hierarchical cells are properly handled.
+
+#### **5. Attach Power Supplies**
+
+* Connect the **power (VDD)** and **ground (VSS)** sources to the cell.
+* Use typical voltage levels as per library specs.
+
+#### **6. Apply Stimulus**
+
+* Provide **input vectors** or voltage waveforms (e.g., a rising/falling edge) to exercise the cell.
+* This mimics real switching activity.
+
+#### **7. Provide Output Capacitance**
+
+* Connect **load capacitance** at the output node.
+* Helps simulate realistic fanout and measure timing/power accurately.
+
+#### **8. Run Simulation Command**
+
+* Use appropriate SPICE simulation control depending on the analysis:
+
+  * **Transient simulation** → `.tran` command (for delay, slew, dynamic power)
+  * **DC simulation** → `.dc` command (for noise margins, voltage transfer characteristics)
+
+![Screenshot 2025-06-18 163725](https://github.com/user-attachments/assets/ebb2b6fc-d52f-4cb1-a082-9a1533624d0d)
+
+---
+
+This flow produces the timing, power, and functional data required for generating `.lib` files, which are then used by digital EDA tools during synthesis, STA, and place-and-route.
+
+### Feeding Inputs to Characterization Tool – **GUNA**
+
+After completing all 8 steps of the characterization preparation, the next step is to **feed these inputs into a configuration file** that the characterization software **GUNA** can understand.
+
+---
+
+### **Step 9: Create Configuration File for GUNA**
+
+The configuration file should include the following information derived from steps 1 to 8:
+
+1. **SPICE Model Files** – Path to technology-specific transistor models
+2. **Extracted Netlist** – Path to the `.cir` file of the standard cell
+3. **Cell Functionality** – Definition of the cell type (e.g., buffer, inverter, etc.)
+4. **Subcircuit Definitions** – Hierarchical references if subcells are present
+5. **Power Supply Information** – Voltage levels for VDD and VSS
+6. **Input Stimulus** – Signal waveforms or transition times for input pins
+7. **Output Load Capacitance** – Capacitance values to model realistic fanout
+8. **Simulation Type and Commands** –
+
+   * `.tran` for transient
+   * `.dc` for static or noise-related simulations
+
+---
+
+### **Step 10: Run GUNA**
+
+Once the configuration file is set up and all required paths and parameters are correctly defined:
+
+* **Run GUNA**
+* It uses the given inputs to perform:
+
+  * **Timing analysis**
+  * **Power analysis**
+  * **Noise characterization**
+
+---
+
+### **Final Output of GUNA**
+
+GUNA generates standard cell models used by digital design tools:
+
+* **.lib file** → Timing, power, and noise data (for synthesis and STA)
+* Other optional outputs for visualization or debugging (waveforms, logs, etc.)
+
+These outputs are now ready to be integrated into the standard cell library for use across the digital IC design flow.
+
+![Screenshot 2025-06-18 163955](https://github.com/user-attachments/assets/d6f7e4ee-4642-448e-b146-8dc431bbca2e)
 
 ---
 ## General timing characterization parameters
