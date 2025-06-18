@@ -2082,7 +2082,56 @@ Both setup and hold timings are analyzed in this step. The design is evaluated t
 In all these steps, one common element is the use of **gates or cells**. For the design tools to correctly interpret and use these gates, they must be fully characterized.
 **Library characterization** provides detailed information about each gate's behavior — including delay, power, area, input/output transition times, and timing arcs — across different operating conditions. Without this data, the tools cannot accurately perform synthesis, placement, CTS, routing, or timing analysis. Hence, characterization is essential for the tools to correctly understand and use the gates throughout the design flow.
 ---
+### Congestion aware placement using RePlAce
+---
 
+**Placement Stage (Post-Floorplanning)**
+
+After floorplanning, the next stage is **placement**. In this stage, we focus on **congestion-aware placement**, not timing-aware placement. The main goal here is to reduce **congestion** across the chip layout.
+
+In **OpenLane**, placement is done in two stages:
+
+### 1. **Global Placement**
+
+* This is a **coarse placement** stage.
+* There is **no legalization** at this point.
+* The main objective is to minimize **wirelength** using the **HPWL (Half-Perimeter Wire Length)** metric.
+* The OpenLane command for this step is: `run_placement`.
+* Multiple iterations are run during global placement.
+* With each iteration, the **overflow (OVFL)** — a measure of placement congestion — should **converge** (i.e., reduce toward zero).
+
+### 2. **Detailed Placement**
+
+* This stage includes **legalization**.
+* **Legalization** ensures the following:
+
+  * Standard cells are placed **inside standard cell rows**.
+  * Cells must be **abutted** (placed directly next to each other with no unnecessary gaps).
+  * There must be **no overlaps** between cells.
+* Legalization ensures that the placement is **physically valid and manufacturable**.
+
+### Final Check
+
+* After placement and legalization, **legality checks** must be run to verify:
+
+  * All standard cells are inside standard cell rows.
+  * No overlaps exist.
+  * Cells are abutted where required.
+* If everything is legal and overflow is within acceptable limits, the placement stage is considered successful.
+
+---
+
+Now after floorplan, lets invoke openlane and perform run_placement.
+
+![image](https://github.com/user-attachments/assets/b2ce041e-9ece-497a-8ae2-83afd51b271e)
+![image](https://github.com/user-attachments/assets/a88974c7-f149-45b2-b0c9-bc05f33ba229)
+
+
+To view our placement, invoke the same sky130A.tech file and the same merged.lef file but this time our def file will be picorv32a.placement.def
+
+![Screenshot 2025-06-18 133228](https://github.com/user-attachments/assets/bd33be86-ead5-40e9-884a-65bc0b132106)
+
+![Screenshot 2025-06-18 133444](https://github.com/user-attachments/assets/2369854a-7be9-4743-958a-a9e9814aae78)
 
 
 
