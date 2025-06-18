@@ -2390,7 +2390,23 @@ out_fall_thr
 
 ![Screenshot 2025-06-18 165340](https://github.com/user-attachments/assets/af1d83d9-be86-4360-9990-3928e1131a3f)
 
+---
+## Propagation delay and transition time
+---
+Based on the above threshold values, we can calculate key timing parameters such as **propagation delay**, **current**, and **slew**.
 
+To calculate **propagation delay**, we use a common threshold reference—typically **50%** of the supply voltage (VDD)—on both the input and output waveforms.
 
+For example, to compute **rising delay**, the formula is:
 
+> **Time Delay** = **Time(out\_rise\_thr)** − **Time(in\_rise\_thr)**
+> (Both thresholds usually set at **50%**)
+
+This means:
+
+* Measure the time when the **input** crosses 50% during its rising transition.
+* Measure the time when the **output** crosses 50% during its rising transition.
+* Subtract the two to get the **propagation delay**.
+
+This method provides a consistent and technology-independent way of capturing cell delay from waveform behavior.
 
