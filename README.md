@@ -32,6 +32,11 @@
     - [Final placement optimization](#Final-placement-optimization)
     - [Need for libraries and characterization](#Need-for-libraries-and-characterization)
     - [Congestion aware placement using RePlAce](#Congestion-aware-placement-using-RePlAce)
+  - [Cell design and characterization flows](#Cell-design-and-characterization-flows)
+    - [Inputs for cell design flow](#Inputs-for-cell-design-flow)
+    - [Circuit design steps](#Circuit-design-steps)
+    - [Layout design step](#Layout-design-step)
+    - [Typical characterization flow](#Typical-characterization-flow)
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
@@ -2132,6 +2137,12 @@ To view our placement, invoke the same sky130A.tech file and the same merged.lef
 ![Screenshot 2025-06-18 133228](https://github.com/user-attachments/assets/bd33be86-ead5-40e9-884a-65bc0b132106)
 
 ![Screenshot 2025-06-18 133444](https://github.com/user-attachments/assets/2369854a-7be9-4743-958a-a9e9814aae78)
+
+Zooming in we can see the placement of the standard cells in the standard cell rows
+
+![image](https://github.com/user-attachments/assets/33b79077-2db1-4c34-82b2-b2fd1e5b48f8)
+
+
 
 
 
