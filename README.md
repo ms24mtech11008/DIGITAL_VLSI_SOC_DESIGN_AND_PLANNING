@@ -1502,9 +1502,6 @@ The **floorplan is complete**, and the design is now ready for the **placement a
 ---
 # Steps to run floorplan using OpenLANE
 ---
-Certainly! Here's your updated and technically polished explanation without emojis, and with the correct path for `floorplan.tcl`:
-
----
 ### Variables used in OpenLANE during physical design
 ---
 ![Screenshot 2025-05-16 200627](https://github.com/user-attachments/assets/b4441017-b176-48eb-906e-2ed6b0f4cebc)
