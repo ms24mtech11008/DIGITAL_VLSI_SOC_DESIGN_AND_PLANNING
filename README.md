@@ -2618,8 +2618,23 @@ Final step is to include the **model files**, which contain the complete descrip
 
 ![Screenshot 2025-06-19 101221](https://github.com/user-attachments/assets/d8d0d636-8595-4d88-b88f-12517446107d)
 
+![Screenshot 2025-06-19 101517](https://github.com/user-attachments/assets/ccddab8b-6f15-4e15-b80f-1d98605307f6)
 
+---
 
+Lets do the spice simulation for the following specifications
 
+![Screenshot 2025-06-19 101716](https://github.com/user-attachments/assets/cd39fbc4-0935-4281-bc75-216178f2d6d4)
 
+The plot obtained is
+
+![image](https://github.com/user-attachments/assets/f34f72f9-fd0e-43c6-b460-333ffa557f2d)
+
+Now, we perform another simulation where the **PMOS width is set to three times** the **NMOS width**. After running the simulation with this updated sizing, we obtain the output graph as shown below.
+
+![Screenshot 2025-06-19 102333](https://github.com/user-attachments/assets/5d3b3c65-5fcf-4e10-a11e-6d185deb4682)
+
+The plot obtained is
+
+![Screenshot 2025-06-19 102419](https://github.com/user-attachments/assets/402f670d-9ce6-4c79-a9ec-f8e206cea17e)
 
