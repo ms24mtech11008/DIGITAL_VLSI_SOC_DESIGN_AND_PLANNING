@@ -2499,3 +2499,44 @@ Now, the **pins are stacked one above the other**, reflecting the new I/O placem
 ![Screenshot 2025-06-19 092023](https://github.com/user-attachments/assets/119602e9-9cb5-457a-b16a-dfc7a6f6671d)
 
 This shows how OpenLane provides real-time flexibility to experiment with and refine your layout strategy.
+---
+### SPICE deck creation for CMOS inverter
+---
+### SPICE Simulations
+
+The first step in SPICE simulations is to **create the SPICE deck**. A SPICE deck contains the **connectivity information** of the netlist. It also includes the **input sources** to be applied during simulation and the **tap points** where the output is measured.
+
+* **Component Connectivity**:
+  In the SPICE deck, the connectivity of all components must be defined, including the **substrate pin**, which affects the **threshold voltage** of PMOS and NMOS transistors.
+
+  ![Screenshot 2025-06-19 093428](https://github.com/user-attachments/assets/19c92e68-9053-445a-9175-16e0a278acd9)
+
+* **Component Values**:
+  The **W/L ratios** (width/length) of the PMOS and NMOS transistors are specified. For now, the **same size** is used for both.
+
+  ![Screenshot 2025-06-19 094159](https://github.com/user-attachments/assets/0a69d508-8235-44de-bea2-547d18e4d106)
+
+* **Identify Nodes**:
+  Nodes are the points between which components are connected. They are essential for defining the SPICE netlist.
+
+  ![Screenshot 2025-06-19 094258](https://github.com/user-attachments/assets/0475a268-0b25-4421-b16b-8487dbcc1739)
+
+* **Naming Nodes**:
+  Common node names include: `in`, `Vss`, `Vdd`, and `out`.
+
+  ![Screenshot 2025-06-19 094529](https://github.com/user-attachments/assets/b3038c60-a024-4781-abcc-b45d7486cf41)
+
+---
+
+### Starting the SPICE Deck
+
+**MOSFET Syntax in SPICE:**
+
+![Screenshot 2025-06-19 094725](https://github.com/user-attachments/assets/419a3657-f6c7-46fd-96d7-0aed9975b619)
+
+```
+M<name> <drain> <gate> <source> <bulk> <model_name> L=<length> W=<width>
+```
+![Screenshot 2025-06-19 094743](https://github.com/user-attachments/assets/667e9f26-59d4-4a2e-b1ff-a3a051a0a7a3)
+
+
