@@ -40,6 +40,14 @@
   - [General timing characterization parameters](#General-timing-characterization-parameters)
     - [Timing threshold definitions](#Timing-threshold-definitions)
     - [Propagation delay and transition time](#Propagation-delay-and-transition-time)
+- [Day 3 - Design library cell using Magic Layout and ngspice characterization](#Day-3---Design-library-cell-using-Magic-Layout-and-ngspice-characterization)
+  - [Labs for CMOS inverter ngspice simulations](#Labs-for-CMOS-inverter-ngspice-simulations)
+    - [IO placer revision](#IO-placer-revision)
+    - [SPICE deck creation for CMOS inverter](#SPICE-deck-creation-for-CMOS-inverter)
+    - [SPICE simulation lab for CMOS inverter](#SPICE-simulation-lab-for-CMOS-inverter)
+    - [Switching Threshold Vm](#Switching-Threshold-Vm)
+    - [Static and dynamic simulation of CMOS inverter](#Static-and-dynamic-simulation-of-CMOS-inverter)
+    - [Lab steps to git clone vsdstdcelldesign](#Lab-steps-to-git-clone-vsdstdcelldesign)
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
@@ -2451,3 +2459,39 @@ slew_low_fall_thr
 ![Screenshot 2025-06-18 172152](https://github.com/user-attachments/assets/4228b955-9480-4b3c-bf28-28ddc11ff247)
 
 ---
+# Day 3 - Design library cell using Magic Layout and ngspice characterization
+---
+## Labs for CMOS inverter ngspice simulations
+---
+### IO placer revision
+---
+One of the key advantages of **OpenLane** is its flexibility—design parameters can be modified **on the fly** without restarting the entire flow.
+
+### **Example 1: Adjusting Core Utilization**
+
+If the initial core utilization is set to **50%** and you observe **congestion** in placement or routing, you can easily increase the utilization to **65%** in the configuration and **rerun the flow**. This helps in experimenting with different area optimizations efficiently.
+
+---
+
+### **Example 2: Changing I/O Pin Placement Strategy**
+
+Initially, if input/output pins were placed **equidistant** from each other, but now you want to switch to a different placement strategy, OpenLane allows that too.
+
+OpenLane supports **four I/O placement strategies** via the `ioPlacer` tool.
+
+To change the strategy, update the environment variable:
+
+```tcl
+set ::env(FP_IO_MODE) 2
+```
+
+Then rerun floorplanning:
+
+```tcl
+run_floorplan
+```
+
+After running the command, check the updated floorplan.
+Now, the **pins are stacked one above the other**, reflecting the new I/O placement mode.
+
+This shows how OpenLane provides real-time flexibility to experiment with and refine your layout strategy.
