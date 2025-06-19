@@ -2673,7 +2673,9 @@ By analyzing the graph, we can determine at each region (cutoff, linear, saturat
 ![Screenshot 2025-06-19 120804](https://github.com/user-attachments/assets/7cac2174-92cc-4229-ac14-2e07af53b66c)
 
 ---
-### Continuing the Discussion on Switching Threshold (Vm)
+### Static and dynamic simulation of CMOS inverter
+---
+Continuing the Discussion on Switching Threshold (Vm)
 
 ![Screenshot 2025-06-19 121426](https://github.com/user-attachments/assets/764c0091-1e42-4be4-9600-bbfd9591027c)
 
