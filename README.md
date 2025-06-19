@@ -2714,4 +2714,53 @@ Through this dynamic simulation, we can observe:
 
 In this setup, **everything else remains constant**—only the input waveform and the simulation type are changed. This helps us study how **Vm impacts switching speed and symmetry**, which are critical for **timing analysis** and **circuit performance**.
 
+To calculate the **delay** of a CMOS inverter, we need to **plot both the input and output waveforms against time**.
+
+![Screenshot 2025-06-19 123136](https://github.com/user-attachments/assets/10fecc7c-0a26-4185-ad6e-de4322944c06)
+
+---
+
+### **Delay Calculation Method**
+
+* **Delay** is measured from the point where the **input crosses 50% of VDD** to the point where the **output crosses 50% of VDD**.
+* In this case, since **VDD = 2.5V**, the **50% threshold is 1.25V**.
+
+---
+
+### **Step-by-Step Process**
+
+1. **Zoom in** on the waveform around the switching points.
+2. **Note the timestamps** where:
+
+   * **Vin = 1.25V**
+   * **Vout = 1.25V**
+
+---
+
+### **Rise Delay**
+
+* Input is **falling**, output is **rising**.
+* Delay = Time (Vout reaches 1.25V) − Time (Vin falls to 1.25V)
+* Delay = `1.16276 ns` − `1.01446 ns` = **0.1483 ns**
+
+![Screenshot 2025-06-19 123216](https://github.com/user-attachments/assets/0001a631-acb3-4ce2-9eb7-a1214a807349)
+
+![Screenshot 2025-06-19 123233](https://github.com/user-attachments/assets/b64f2405-c528-4b5a-aff1-4105d5675b90)
+
+---
+
+### **Fall Delay**
+
+* Input is **rising**, output is **falling**.
+* Delay = Time (Vout falls to 1.25V) − Time (Vin rises to 1.25V)
+* Delay = `2.07653 ns` − `2.00486 ns` = **0.07167 ns**
+
+![Screenshot 2025-06-19 123521](https://github.com/user-attachments/assets/38747413-0d14-4aa3-bf56-70bd2ea964ff)
+
+![Screenshot 2025-06-19 123716](https://github.com/user-attachments/assets/1b697feb-51cc-44cd-828b-cf59c1efd59b)
+
+---
+
+This analysis gives a clear view of how the inverter responds to input changes and helps in evaluating its **timing performance**.
+
 
