@@ -2533,10 +2533,93 @@ The first step in SPICE simulations is to **create the SPICE deck**. A SPICE dec
 **MOSFET Syntax in SPICE:**
 
 ![Screenshot 2025-06-19 094725](https://github.com/user-attachments/assets/419a3657-f6c7-46fd-96d7-0aed9975b619)
+![Screenshot 2025-06-19 100025](https://github.com/user-attachments/assets/b1eaf262-1229-4112-81b2-f8e7dd2e4329)
+
 
 ```
 M<name> <drain> <gate> <source> <bulk> <model_name> L=<length> W=<width>
 ```
 ![Screenshot 2025-06-19 094743](https://github.com/user-attachments/assets/667e9f26-59d4-4a2e-b1ff-a3a051a0a7a3)
+
+---
+### SPICE simulation lab for CMOS inverter
+---
+Till now, we have described the **connectivity information of the CMOS inverter**. Next, we will define the connectivity of the **other components**, such as the **load capacitor** and **voltage sources**.
+
+![Screenshot 2025-06-19 100222](https://github.com/user-attachments/assets/3012f072-56c7-4626-92f4-9ecd93bcfef2)
+
+---
+
+### **Load Capacitor (Output Capacitance)**
+
+![Screenshot 2025-06-19 100139](https://github.com/user-attachments/assets/216b9ee9-dc45-446b-bd43-18e14d2cc9d4)
+
+* The **load capacitor** is connected between the **`out`** node and **node `0`** (ground).
+* The value of the capacitor is **10fF**.
+
+```
+Cload out 0 10f
+```
+
+---
+
+### **Supply Voltage (Vdd)**
+
+![Screenshot 2025-06-19 100153](https://github.com/user-attachments/assets/ccf9af42-bcdf-4034-a2a1-17278ba624e7)
+
+* The **Vdd source** is connected between **`Vdd`** and **node `0`**.
+* The voltage value is **2.5V**.
+
+```
+Vdd Vdd 0 2.5
+```
+
+---
+
+### **Input Voltage (Vin)**
+
+![Screenshot 2025-06-19 100206](https://github.com/user-attachments/assets/88b4307d-97b6-4106-9c86-682c78d27019)
+
+* The **input voltage source** is connected between **`Vin`** and **node `0`**.
+* The voltage is also **2.5V**.
+
+```
+Vin in 0 2.5
+```
+
+---
+
+These definitions complete the required component connections for simulating the CMOS inverter with proper input, power, and output load conditions.
+
+---
+Now we need to add the **simulation commands** to perform a **DC sweep**. In this case, we're sweeping the input voltage `Vin` from **0V to 2.5V** with a **step size of 0.05V**. This allows us to observe how `Vout` changes as `Vin` varies.
+
+---
+
+### **DC Sweep Command**
+
+![Screenshot 2025-06-19 100713](https://github.com/user-attachments/assets/1a360a75-cfb3-47c0-be44-3b2c7074fb0a)
+
+```spice
+.dc Vin 0 2.5 0.05
+```
+
+* `Vin` → name of the voltage source to sweep
+* `0` → starting value
+* `2.5` → ending value
+* `0.05` → step size
+
+---
+
+This command will simulate the behavior of the CMOS inverter across all input voltages from 0V to 2.5V and generate the corresponding output values, helping us analyze the **VTC (Voltage Transfer Characteristic)**.
+
+---
+Final step is to include the **model files**, which contain the complete description of **NMOS** and **PMOS** transistors.
+
+![Screenshot 2025-06-19 101221](https://github.com/user-attachments/assets/d8d0d636-8595-4d88-b88f-12517446107d)
+
+
+
+
 
 
