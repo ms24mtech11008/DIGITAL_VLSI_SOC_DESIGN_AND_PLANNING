@@ -48,6 +48,16 @@
     - [Switching Threshold Vm](#Switching-Threshold-Vm)
     - [Static and dynamic simulation of CMOS inverter](#Static-and-dynamic-simulation-of-CMOS-inverter)
     - [Lab steps to git clone vsdstdcelldesign](#Lab-steps-to-git-clone-vsdstdcelldesign)
+  - [Inception of layout ̂A CMOS fabrication process](#Inception-of-layout-A-CMOS-fabrication-process)
+    - [Create Active regions](#Create-Active-regions)
+    - [Formation of N-well and P-well](#Formation-of-N-well-and-P-well)
+    - [Formation of gate terminal](#Formation-of-gate-terminal)
+    - [Lightly doped drain (LDD) formation](#Lightly-doped-drain-(LDD)-formation)
+    - [Source - drain formation](#Source---drain-formation)
+    - [Local interconnect formation](#Local-interconnect-formation)
+    - [Higher level metal formation](#Higher-level-metal-formation)
+    - [Lab introduction to Sky130 basic layers layout and LEF using inverter](#Lab-introduction-to-Sky130-basic-layers-layout-and-LEF-using-inverter)
+    - [Lab steps to create std cell layout and extract spice netlist](#Lab-steps-to-create-std-cell-layout-and-extract-spice-netlist)
 
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
 ## How to talk to computers
