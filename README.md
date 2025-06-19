@@ -2763,4 +2763,75 @@ To calculate the **delay** of a CMOS inverter, we need to **plot both the input 
 
 This analysis gives a clear view of how the inverter responds to input changes and helps in evaluating its **timing performance**.
 
+---
+### Lab steps to git clone vsdstdcelldesign
+---
+
+ **What is `git clone`?**
+
+The `git clone` command is used to **download a GitHub repository** (or any Git repo) **to your local machine**.
+
+---
+
+ **Syntax of `git clone`**
+
+```bash
+git clone <repository_url>
+```
+
+---
+
+**Example Usage**
+
+Let’s say you want to clone the [OpenLane](https://github.com/The-OpenROAD-Project/OpenLane) repository from GitHub.
+
+1. **Copy the URL of the repository** (HTTPS link):
+
+   ```
+   https://github.com/The-OpenROAD-Project/OpenLane.git
+   ```
+
+2. **Open terminal or command prompt**, and run:
+
+```bash
+git clone https://github.com/The-OpenROAD-Project/OpenLane.git
+```
+
+This command will:
+
+* Create a folder named `OpenLane`
+* Download all the code, branches, and history from the repo into that folder
+
+---
+
+**Optional: Clone into a Custom Folder Name**
+
+```bash
+git clone https://github.com/The-OpenROAD-Project/OpenLane.git my_openlane
+```
+
+This clones the repo into a folder named `my_openlane`.
+
+---
+
+**After Cloning**
+
+You can go into the cloned repo and start working:
+
+```bash
+cd OpenLane
+```
+
+---
+To get the clone, copy the clone address from reporetery and paste in openlane terminal after the command git clone. this will create the folder called "vsdstdcelldesign" in openlane directory.
+
+![Screenshot 2025-06-19 132343](https://github.com/user-attachments/assets/f4e8bf99-05d1-46cf-8b7b-89710820725c)
+
+![Screenshot 2025-06-19 132638](https://github.com/user-attachments/assets/3e82ab7e-4080-48d2-b56a-0e74ee67261f)
+
+copy the sky130.tech file in vsdstdcelldesign directory
+
+
+
+
 
