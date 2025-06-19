@@ -2849,6 +2849,13 @@ Now to view the invereter layout
 
 ![Screenshot 2025-06-19 144108](https://github.com/user-attachments/assets/90b88ddd-9249-4a8c-bab6-507113f9b4ae)
 
+---
+## Inception of layout ̂CMOS fabrication process
+---
+### Create Active regions
+---
+
+
 
 
 
