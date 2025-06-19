@@ -2855,7 +2855,63 @@ Now to view the invereter layout
 ### Create Active regions
 ---
 
+### 1) **Selecting a Substrate**
 
+We begin with a **p-type silicon substrate** that is:
 
+* **Highly resistive**, typically in the range of **5–50 Ω·cm**
+* **Well-doped** to achieve the desired electrical properties
+* Has a crystal **orientation of (100)**, which is preferred for CMOS fabrication due to better carrier mobility and easier oxide growth
+
+---
+
+### 2) **Creating Active Regions for Transistors**
+
+The **active regions** are the areas where **PMOS and NMOS transistors** will be formed. These regions are defined on the **p-type substrate** by creating **localized pockets**, where the actual devices will reside.
+
+To ensure proper functioning and electrical isolation between these pockets, we create **isolation layers**.
+
+#### **Isolation Layer Formation:**
+
+* First, a **thin layer of silicon dioxide (SiO₂)** is deposited, typically around **40 nm** thick.
+* Next, a **layer of silicon nitride (Si₃N₄)** is deposited over the SiO₂, with a thickness of approximately **80 nm**.
+
+These layers form the foundation for **LOCOS (Local Oxidation of Silicon)** or **Shallow Trench Isolation (STI)**, which are used to electrically isolate individual transistors in integrated circuits.
+
+![Screenshot 2025-06-19 145924](https://github.com/user-attachments/assets/c14a19e3-7c2c-40e0-a7fc-c7fecc75afc7)
+
+![Screenshot 2025-06-19 145954](https://github.com/user-attachments/assets/3df40b6d-da7e-4c5f-b932-32f1062c19bd)
+
+Before creating the pocket, we first **identify the regions** where the pockets need to be formed. Then, a **photoresist layer** of approximately **1 μm** thickness is **deposited** over the surface. Using **UV light exposure**, we create a **mask (Mask 1)** on this photoresist layer to define the desired regions.
+
+![Screenshot 2025-06-19 150018](https://github.com/user-attachments/assets/05609b3d-8943-44f6-aa89-35e897816555)
+
+The **unwanted areas** are **exposed to UV light**, and as a result, a **pattern is formed** on the photoresist layer. The **exposed regions** become soluble and are **washed away** during the **development process**, leaving behind the **desired pattern** for further processing.
+
+![Screenshot 2025-06-19 150256](https://github.com/user-attachments/assets/feb7a456-c9d3-4942-8edc-121d7f6ff765)
+
+In the next step, the **photoresist mask is removed**, and **etching is performed** on the **Si₃N₄ (silicon nitride) layer** in the **exposed areas**. This etching process selectively removes the Si₃N₄ only from regions not protected by the photoresist, thereby opening windows where the **active regions or isolation structures** will be formed.
+
+![Screenshot 2025-06-19 150328](https://github.com/user-attachments/assets/aac6db53-5435-4eae-89e0-2e87110d8de5)
+
+Now, the next step is to **remove the photoresist** using a **chemical reaction** (commonly called photoresist stripping). At this stage, the **Si₃N₄ layer itself acts as a protective mask** for the underlying **SiO₂ layer**.
+
+Next, the wafer is placed in an **oxidation furnace**. If we perform the **LOCOS (Local Oxidation of Silicon)** process, the **exposed regions of SiO₂** will **grow thermally**, and a characteristic **bird's beak** structure will form at the edges of the oxide.
+
+This **grown oxide** acts as an **isolation layer**, effectively **separating adjacent PMOS and NMOS transistors**, and **preventing unwanted communication** between them. This is how electrical isolation between two transistors is achieved during fabrication.
+
+![Screenshot 2025-06-19 150418](https://github.com/user-attachments/assets/ba20d791-9de9-4bdd-adac-f0944ba2daf0)
+
+![Screenshot 2025-06-19 150552](https://github.com/user-attachments/assets/85fbb589-eb6f-4274-bb30-b965314b8892)
+
+The next step is to **remove the Si₃N₄ (silicon nitride) layer**, which served as a protective mask during oxidation. This is done using **hot phosphoric acid (H₃PO₄)**, which selectively etches away **Si₃N₄** without affecting the underlying **SiO₂**.
+
+This step clears the wafer surface for subsequent processing steps, while retaining the **field oxide regions** formed during LOCOS for **transistor isolation**.
+
+![Screenshot 2025-06-19 150658](https://github.com/user-attachments/assets/42aa17e6-2d54-4bb0-8156-9eae20bb673d)
+
+---
+### Formation of N-well and P-well
+---
 
 
