@@ -3195,5 +3195,151 @@ After this process, the **P⁺ and N⁺ implants** officially become the **funct
 ---
 ### Local interconnect formation
 ---
+### 7) **Steps to Form Contacts and Local Interconnects**
 
+---
 
+#### **Step 1: Remove Screen Oxide**
+
+* The **thin screen oxide layer** (used earlier to prevent channeling during implantation) is now **removed by etching** to expose the **source, drain, and gate regions**.
+
+---
+
+#### **Step 2: Titanium (Ti) Deposition**
+
+* A thin layer of **titanium (Ti)** is **deposited using sputtering**.
+* Titanium is chosen because of its **very low resistivity**, which helps in forming good electrical contact with the underlying silicon.
+* This layer is essential for forming **titanium silicide (TiSi₂)** in the next steps, which significantly reduces **contact resistance**.
+
+This process sets the foundation for forming **local interconnects** and ensuring **reliable connections** between transistors and metal layers.
+
+![Screenshot 2025-06-19 161102](https://github.com/user-attachments/assets/3a623ac5-0721-42f8-a2e6-1d87ad3d541d)
+
+![Screenshot 2025-06-19 161123](https://github.com/user-attachments/assets/5dc276d7-3aa2-4176-acfc-5afcfe4f1d96)
+
+![Screenshot 2025-06-19 161154](https://github.com/user-attachments/assets/192a2bcc-8125-4723-83a9-4a3bc09752d4)
+
+![Screenshot 2025-06-19 161206](https://github.com/user-attachments/assets/783b2782-9c4e-4c0f-a5aa-5903f91221d6)
+
+### **Next Step: Silicidation and Formation of Local Interconnects**
+
+After depositing the **titanium (Ti) layer**, the wafer is subjected to a **rapid thermal annealing** process to initiate reactions:
+
+---
+
+####  **Silicidation Reaction**
+
+* The wafer is **heated to 650–700 °C** in a **nitrogen (N₂) ambient** for about **60 seconds**.
+
+* At this temperature, **titanium reacts with exposed silicon** regions (source, drain, and gate) to form **titanium silicide (TiSi₂)**.
+
+  **Reaction:**
+  `Ti + Si → TiSi₂`
+
+* **TiSi₂** has **low contact resistance**, which improves the performance and speed of the CMOS devices.
+
+---
+
+####  **Formation of TiN (Titanium Nitride)**
+
+* Simultaneously, **titanium also reacts with nitrogen** from the ambient to form **titanium nitride (TiN)**.
+
+  **Reaction:**
+  `Ti + N₂ → TiN`
+
+* **TiN** does not form on silicon but rather over field oxide or other regions, and it is used for **local interconnects** due to its **good conductivity** and **barrier properties**.
+
+![Screenshot 2025-06-19 161235](https://github.com/user-attachments/assets/c036f0b4-59b4-421e-9598-1ebe865a6c23)
+
+![Screenshot 2025-06-19 161310](https://github.com/user-attachments/assets/44cfb55b-d631-4018-8685-0179a48520b6)
+
+Now, using **Mask 11** and **photoresist**, we define the specific regions where **contacts** need to be formed.
+
+* Apply **photoresist**, expose it through **Mask 11**, and develop the pattern to selectively expose **TiN** in unwanted areas.
+* The exposed **TiN (Titanium Nitride)** is then **etched out** using the **RCA cleaning process**.
+
+This step ensures that **TiN remains only in the desired regions**, forming **defined local interconnects**, while **opening contact windows** for metal connections in subsequent steps.
+
+![Screenshot 2025-06-19 161350](https://github.com/user-attachments/assets/74071fe4-bcf0-4c60-83ac-260671090947)
+
+![Screenshot 2025-06-19 161429](https://github.com/user-attachments/assets/96aa9bde-b1bf-41b3-b36d-7affe05b41d7)
+
+![Screenshot 2025-06-19 161444](https://github.com/user-attachments/assets/83aaa104-c8c7-455d-9f8a-268aa822eb1b)
+
+![Screenshot 2025-06-19 161502](https://github.com/user-attachments/assets/9f253496-bcd6-4487-a8bb-bb1f16e501bf)
+
+Now, after **etching the unwanted TiN** and **removing the photoresist**, the **local interconnects** are successfully formed.
+
+* The **TiN** remains only in the designated regions, serving as **conductive paths** between nearby source, drain, and gate terminals.
+* These interconnects enable **local signal routing** within the CMOS structure before global metal layers are added.
+
+This completes the **local interconnect formation** stage.
+
+![Screenshot 2025-06-19 161516](https://github.com/user-attachments/assets/ff65d320-7993-4f1b-9319-1fb19db92d5e)
+
+---
+### Higher level metal formation
+---
+### 8) Higher Level Metal Formation
+
+The process of forming higher-level metal interconnects follows a pattern similar to earlier interconnect steps, but begins with surface preparation.
+
+#### Surface Planarization
+
+At this stage, the wafer surface is highly non-planar due to the presence of gates, spacers, silicides, and local interconnects. Using a non-planar surface for global metal interconnections can lead to issues such as:
+
+* Metal discontinuity
+* Step coverage problems
+* Lithography misalignment
+
+To resolve this, the following steps are taken:
+
+1. A **thick layer of SiO₂** is deposited over the entire surface. This oxide may be lightly doped to reduce its resistivity.
+2. The wafer is then subjected to **CMP (Chemical Mechanical Polishing)**, which uniformly polishes the surface and removes topographical variations.
+
+This results in a **flat and uniform surface**, making it suitable for creating reliable metal interconnect layers in the following steps.
+
+![Screenshot 2025-06-19 162316](https://github.com/user-attachments/assets/76aea474-8dfa-4929-b5f5-a35027843532)
+
+Now, using **Mask 12** and **photoresist**, we define the regions where metal contacts or interconnects need to be formed:
+
+1. **Photoresist** is applied over the planarized SiO₂ layer.
+2. The wafer is exposed using **Mask 12**, which defines the via/contact openings.
+3. After development, the **exposed SiO₂** is **etched** to create **vias or trenches** where the metal will be deposited.
+
+![Screenshot 2025-06-19 162328](https://github.com/user-attachments/assets/57c8179e-9890-4c4d-ae86-a81870e44093)
+
+Now, remove the photoresist and deposit a thin layer of TiN (\~10 nm) over the wafer. TiN serves as an excellent adhesion layer for SiO₂ and also acts as a barrier between the bottom layer and the top metal interconnect layer.
+
+![Screenshot 2025-06-19 162343](https://github.com/user-attachments/assets/e60a7c1a-c6e6-453c-b610-74fc1ed9b978)
+
+Next step is to deposit a blanket layer of tungsten (W) over the wafer. After deposition, perform CMP (Chemical Mechanical Polishing) to planarize the surface.
+
+![Screenshot 2025-06-19 162352](https://github.com/user-attachments/assets/19fba74c-4e58-40c0-b044-6dda7f5bec74)
+
+This tungsten (W) fills the contact holes, enabling vertical connections. These holes need to connect to the higher metal layer, so we now deposit a layer of aluminium (Al) over the wafer.
+
+![Screenshot 2025-06-19 162412](https://github.com/user-attachments/assets/c02d1559-e1d1-48cf-9f8b-a8f40d9b34d2)
+
+Then, using **Mask 13** and **photoresist**, we perform **plasma etching** to remove the unwanted **tungsten (W) layer**, leaving contacts only at the specified locations.
+
+![Screenshot 2025-06-19 162422](https://github.com/user-attachments/assets/e8a4a0ec-a426-4058-a7ed-30bbc691aa0f)
+
+This completes the formation of the **first level of metal interconnects**. Now, we repeat the **same process** to form the **second level of metal interconnects**:
+
+* Use **Mask 14** to **etch out the SiO₂ layer** and define vias for the second metal layer.
+* Then use **Mask 15** to **etch the aluminium (Al) layer**, forming the desired metal routing for the second level.
+
+![Screenshot 2025-06-19 162434](https://github.com/user-attachments/assets/702dabeb-ade2-403c-8854-a3f791d32409)
+
+The upper layer of aluminium (Al) is slightly thicker compared to the lower layer of Al. Now, deposit a layer of SiO₂ or Si₃N₄ over the entire surface to protect the chip.
+
+![Screenshot 2025-06-19 162443](https://github.com/user-attachments/assets/7b625455-d1d2-4320-b565-dfbd3111b19e)
+
+And finally, after completing all the fabrication steps, our **CMOS structure** appears as shown—fully formed with multiple metal layers, interconnects, and protective passivation, ready for packaging and further testing.
+
+![Screenshot 2025-06-19 162455](https://github.com/user-attachments/assets/33d5fe4a-062a-4837-be42-6a24b472e607)
+
+---
+### Lab introduction to Sky130 basic layers layout and LEF using inverter
+---
