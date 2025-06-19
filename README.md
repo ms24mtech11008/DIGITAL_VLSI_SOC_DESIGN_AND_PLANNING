@@ -2914,4 +2914,54 @@ This step clears the wafer surface for subsequent processing steps, while retain
 ### Formation of N-well and P-well
 ---
 
+### 3) **N-well and P-well Formation**
 
+We **cannot form both P-well and N-well simultaneously**, as the doping requirements are different. Therefore, we must **protect one region** while forming the other using a **photoresist layer**.
+
+To form the **P-well**, we proceed as follows:
+
+* First, **deposit a photoresist** layer on the wafer.
+* Then, using **Mask 2** and **UV light exposure**, we **pattern the photoresist** to define the areas where the **P-well** is to be created.
+* The **exposed regions** are developed, opening windows for **P-type dopant implantation** while protecting the rest of the wafer.
+
+This selective process ensures **controlled well formation** in the desired regions. The same method is repeated later for **N-well formation**, using a different mask and dopant type.
+
+![Screenshot 2025-06-19 151640](https://github.com/user-attachments/assets/354bd9b5-5cfc-4797-bf54-9b8eda886a03)
+
+Now, the area where we want to form the **P-well** is **exposed** after the photoresist is patterned. The **mask is then removed**, and the wafer is subjected to **ion implantation** using **Boron** as the dopant.
+
+* The implantation energy is typically around **200 keV**.
+* This step introduces **P-type dopants** into the exposed silicon region, but at this stage, it is still referred to as a **P-type implant**.
+
+To activate the dopants and drive them deeper into the substrate, a **high-temperature annealing** process is performed. After annealing, the doped region becomes a fully formed **P-well**.
+
+![Screenshot 2025-06-19 151731](https://github.com/user-attachments/assets/5edcb685-e56c-45e2-901a-3378cdf4c956)
+
+A **similar process** is followed to form the **N-well**:
+
+* Apply a **new photoresist layer** and use **Mask 3** to define the N-well regions.
+* Expose the wafer to **UV light**, pattern the photoresist, and **develop** it to expose only the areas where the N-well is to be formed.
+* Remove the photoresist from exposed regions.
+* Perform **ion implantation** using **Phosphorus ions** (N-type dopant), typically at an energy of around **200 keV**.
+* Finally, carry out **high-temperature annealing** to activate the dopants and drive them into the silicon.
+
+This completes the **N-well formation**.
+
+![Screenshot 2025-06-19 151845](https://github.com/user-attachments/assets/9d53d2bd-d369-4d29-9557-0fbafd655594)
+
+Till now, the **depth of the wells** (P-well and N-well) has not been fully established. To achieve the desired depth and proper dopant distribution, the wafer is placed into a **high-temperature furnace**.
+
+This step is known as **drive-in diffusion**.
+
+* During this process, the **implanted dopants diffuse deeper** into the silicon substrate.
+* The **depth and concentration** of the wells are determined by the **temperature** and **duration** of this step.
+
+This completes the proper formation of **P-well and N-well regions** with defined depths, making them ready for active device fabrication.
+
+![Screenshot 2025-06-19 151929](https://github.com/user-attachments/assets/5153ae30-d87a-430c-9998-162fba4c5093)
+
+![Screenshot 2025-06-19 151955](https://github.com/user-attachments/assets/cd9e2842-0618-4c08-99f4-c160f890be78)
+
+![Screenshot 2025-06-19 152006](https://github.com/user-attachments/assets/0a6a156b-8284-40e2-91f2-4a955e63b02d)
+
+---
