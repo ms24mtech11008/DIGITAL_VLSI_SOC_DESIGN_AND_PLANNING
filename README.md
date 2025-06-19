@@ -2831,6 +2831,13 @@ To get the clone, copy the clone address from reporetery and paste in openlane t
 
 copy the sky130.tech file in vsdstdcelldesign directory
 
+![Screenshot 2025-06-19 142013](https://github.com/user-attachments/assets/621264be-e70a-4e2c-a6bf-cbead18884c9)
+
+Now to view the invereter layout 
+
+![Screenshot 2025-06-19 143954](https://github.com/user-attachments/assets/8f68752f-1813-4d5d-a69f-e807e81d94ad)
+
+![Screenshot 2025-06-19 144108](https://github.com/user-attachments/assets/90b88ddd-9249-4a8c-bab6-507113f9b4ae)
 
 
 
