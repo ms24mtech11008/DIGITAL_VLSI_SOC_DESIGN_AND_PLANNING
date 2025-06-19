@@ -2673,5 +2673,43 @@ By analyzing the graph, we can determine at each region (cutoff, linear, saturat
 ![Screenshot 2025-06-19 120804](https://github.com/user-attachments/assets/7cac2174-92cc-4229-ac14-2e07af53b66c)
 
 ---
+### Continuing the Discussion on Switching Threshold (Vm)
+
+![Screenshot 2025-06-19 121426](https://github.com/user-attachments/assets/764c0091-1e42-4be4-9600-bbfd9591027c)
+
+We now move forward by studying the effect of changing the **PMOS width-to-length ratio (W/L)** as an **integer multiple** of the **NMOS (W/L)**. The goal is to **evaluate the robustness** of the **switching threshold (Vm)** under different sizing conditions.
+
+Earlier, we had already simulated the case where:
+
+```
+(W/L of PMOS) / (W/L of NMOS) = 1
+```
+![Screenshot 2025-06-19 121340](https://github.com/user-attachments/assets/89f3e795-ddbf-44e5-8e6d-6f9bcb2215d4)
+
+---
+
+### **Dynamic Simulation**
+
+In this step, we shift from DC analysis to **dynamic (transient) simulation**.
+
+![Screenshot 2025-06-19 121813](https://github.com/user-attachments/assets/b137565f-5d06-402b-9f9a-0f4fde33b729)
+
+* An **input pulse** is defined in the SPICE deck.
+
+This **pulse waveform** is applied to the **CMOS inverter** as the input signal, and we run a **transient analysis** using the `.tran` command.
+
+![Screenshot 2025-06-19 121914](https://github.com/user-attachments/assets/b03d5821-29e1-4222-bdc6-6836d5ba6817)
+
+---
+
+### **Purpose of This Simulation**
+
+Through this dynamic simulation, we can observe:
+
+* **Rise delay** (low → high transition at output)
+* **Fall delay** (high → low transition at output)
+* How these delays **change with variations in Vm** (caused by different PMOS/NMOS sizing)
+
+In this setup, **everything else remains constant**—only the input waveform and the simulation type are changed. This helps us study how **Vm impacts switching speed and symmetry**, which are critical for **timing analysis** and **circuit performance**.
 
 
