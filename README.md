@@ -48,7 +48,7 @@
     - [Switching Threshold Vm](#Switching-Threshold-Vm)
     - [Static and dynamic simulation of CMOS inverter](#Static-and-dynamic-simulation-of-CMOS-inverter)
     - [Lab steps to git clone vsdstdcelldesign](#Lab-steps-to-git-clone-vsdstdcelldesign)
-  - [Inception of layout ̂A CMOS fabrication process](#Inception-of-layout-A-CMOS-fabrication-process)
+  - [Inception of layout ̂CMOS fabrication process](#Inception-of-layout-CMOS-fabrication-process)
     - [Create Active regions](#Create-Active-regions)
     - [Formation of N-well and P-well](#Formation-of-N-well-and-P-well)
     - [Formation of gate terminal](#Formation-of-gate-terminal)
