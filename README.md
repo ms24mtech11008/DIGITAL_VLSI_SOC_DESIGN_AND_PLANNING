@@ -1,4 +1,4 @@
-![Screenshot 2025-06-19 154052](https://github.com/user-attachments/assets/4cffca63-df00-4e94-8705-c464bf08c35b)![Screenshot 2025-06-19 154038](https://github.com/user-attachments/assets/45b6a045-df77-4320-adc2-53aad75b27e3)# DIGITAL VLSI SOC DESIGN AND PLANNING
+
 ## Table of contents
 - [Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK](#day-1---inception-of-open-source-eda-openlane-and-sky130-pdk)
   - [How to talk to computers](#How-to-talk-to-computers)
