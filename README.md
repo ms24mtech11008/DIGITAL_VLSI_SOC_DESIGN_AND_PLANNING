@@ -1,4 +1,4 @@
-# DIGITAL VLSI SOC DESIGN AND PLANNING
+![Screenshot 2025-06-19 154052](https://github.com/user-attachments/assets/4cffca63-df00-4e94-8705-c464bf08c35b)![Screenshot 2025-06-19 154038](https://github.com/user-attachments/assets/45b6a045-df77-4320-adc2-53aad75b27e3)# DIGITAL VLSI SOC DESIGN AND PLANNING
 ## Table of contents
 - [Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK](#day-1---inception-of-open-source-eda-openlane-and-sky130-pdk)
   - [How to talk to computers](#How-to-talk-to-computers)
@@ -2965,3 +2965,235 @@ This completes the proper formation of **P-well and N-well regions** with define
 ![Screenshot 2025-06-19 152006](https://github.com/user-attachments/assets/0a6a156b-8284-40e2-91f2-4a955e63b02d)
 
 ---
+### Formation of gate terminal
+---
+### 4) **Gate Formation**
+
+The **gate terminal** is the most critical terminal of both **PMOS and NMOS transistors**, as it directly controls the **threshold voltage (V<sub>th</sub>)** of the device.
+
+The **threshold voltage** is influenced by two main factors:
+
+* **Doping concentration** in the channel region
+* **Oxide capacitance** (which depends on oxide thickness and permittivity)
+
+---
+
+### **Step 1: Channel Doping Adjustment**
+
+To adjust the **doping concentration** in the channel and help control the threshold voltage, we perform **channel doping** as follows:
+
+* Apply **Mask 4** to define the gate region.
+* Carry out **ion implantation** using **Boron ions** (a P-type dopant).
+* The implantation is done at a **lower energy**, typically around **60 keV**, so the dopants stay close to the surface.
+
+This step ensures the **channel is properly doped** before the actual gate structure is built, allowing for precise **threshold voltage tuning**.
+
+![Screenshot 2025-06-19 152713](https://github.com/user-attachments/assets/27c338c5-590c-4936-b6e2-bb253362c780)
+
+![Screenshot 2025-06-19 152735](https://github.com/user-attachments/assets/b41871f8-3778-495d-af66-9dfa60ca7d0d)
+
+The **same process is repeated** for the **N-well** region as well:
+
+* This time, we use **Mask 5** to define the required area.
+* Perform **ion implantation** using **Arsenic ions** (an N-type dopant).
+* The implantation is done at **low energy**, similar to the previous step, to control the **surface doping concentration**.
+
+This step ensures proper **channel doping** for **PMOS transistors** formed in the N-well, contributing to accurate **threshold voltage control**.
+
+![Screenshot 2025-06-19 152829](https://github.com/user-attachments/assets/582bdcac-db73-490a-a7eb-da273d142bb2)
+
+![Screenshot 2025-06-19 152852](https://github.com/user-attachments/assets/eb3f8992-18c8-4588-acac-b7051712012d)
+
+### 5) **Gate Oxide Formation and Polysilicon Deposition**
+
+Before forming the final gate structure, we need to ensure that the **gate oxide layer** is of **high quality**, since it plays a critical role in device performance.
+
+---
+
+### **Step 1: Gate Oxide Removal and Regrowth**
+
+* The previously formed **oxide layer** has been **damaged** due to earlier ion implantation and processing steps.
+* Therefore, we **remove the damaged oxide** using an **HF (hydrofluoric acid)** solution.
+* A new, high-quality **gate oxide layer** is then **thermally grown** to the **same thickness** as required, ensuring **reliability and uniformity**.
+
+---
+
+### **Step 2: Polysilicon Deposition**
+
+* A layer of **polysilicon** is deposited **over the newly grown gate oxide**.
+* This polysilicon is **heavily doped** to **reduce resistance**, making it suitable for use as the **gate terminal**.
+
+---
+
+### **Step 3: Gate Patterning**
+
+* Apply **photoresist** and use **Mask 6** to define the **gate structure**.
+* Using **photolithography and etching**, the **polysilicon layer is etched**, leaving behind the **gate terminals** exactly over the channel region of the NMOS and PMOS transistors.
+
+This completes the formation of the **gate structure**, enabling precise control of the transistor switching behavior.
+
+![Screenshot 2025-06-19 153009](https://github.com/user-attachments/assets/0749a2d9-bed7-4842-af43-7e7df07f4233)
+
+After the **etching process**, the **photoresist is removed** using a stripping solution or plasma ashing. Once the photoresist is cleared:
+
+* The **gate terminal**—made of **doped polysilicon**—is now clearly defined.
+* It **sits precisely over the channel region** between the source and drain of both PMOS and NMOS.
+* The underlying **gate oxide** remains intact under the polysilicon, forming the **MOS capacitor structure** essential for transistor operation.
+
+At this stage, the **gate terminal is ready** to control current flow in the device by modulating the channel beneath it through applied voltage.
+
+![Screenshot 2025-06-19 153058](https://github.com/user-attachments/assets/7cdcc399-2a5f-4f9e-ba83-ba5a216fce06)
+
+---
+### Lightly doped drain (LDD) formation
+---
+### 5) **LDD (Lightly Doped Drain) Formation**
+
+To mitigate issues like the **hot electron effect** and **short channel effects** in scaled-down devices, we use a **graded doping profile** near the drain and source regions of transistors.
+
+---
+
+### **Doping Profiles Needed:**
+
+* For **PMOS** (in N-well):
+  → **P⁺**, **P⁻**, and **N** regions
+* For **NMOS** (in P-well):
+  → **N⁺**, **N⁻**, and **P** regions
+
+This graded profile is achieved using **LDD structures** (Lightly Doped Drain).
+
+---
+
+### **Formation of LDD:**
+
+* Using **Mask 7**, we open regions in the **P-well** where **NMOS transistors** will be formed.
+* Then, perform **ion implantation** using **phosphorus** (an N-type dopant) at **low concentration** and **lower energy**.
+  → This creates a **lightly doped N⁻ region** near the channel area of NMOS.
+
+The same process is later repeated for PMOS using a **P-type dopant** (e.g., Boron) to create **P⁻ regions**.
+
+These lightly doped extensions near the gate help in:
+
+* Reducing **electric field strength** near the drain
+* Controlling **drain-induced barrier lowering (DIBL)**
+* Minimizing **hot carrier injection**
+  Thus, **LDD formation is crucial for device reliability and performance** in deep submicron technologies.
+
+![Screenshot 2025-06-19 154027](https://github.com/user-attachments/assets/ab3e93cc-6c27-4342-bb37-a7032c9698b2)
+
+![Screenshot 2025-06-19 154038](https://github.com/user-attachments/assets/afb63e0b-f353-4f20-902e-692b2c164574)
+
+![Screenshot 2025-06-19 154052](https://github.com/user-attachments/assets/04cb00b1-8667-43cc-b31a-fc0c0c21d66e)
+
+The **same process is repeated for the N-well** region to form the LDD structure for **PMOS transistors**.
+
+* We use **Mask 8** to expose the required regions in the **N-well**.
+* Then, perform **ion implantation** using **Boron ions** (a P-type dopant) at **low concentration** and **low energy**.
+
+This creates the **lightly doped P⁻ regions** near the channel of the PMOS transistor.
+
+These **P⁻ regions**, along with the previously formed **P⁺ regions** (in later steps), help reduce electric field stress and improve device reliability—just like in NMOS.
+
+![Screenshot 2025-06-19 154119](https://github.com/user-attachments/assets/8b7bcbe1-ea82-4311-aec7-6ca5e35f2874)
+
+![Screenshot 2025-06-19 154141](https://github.com/user-attachments/assets/271e2005-8c1c-4e6a-b565-018a8985cc6f)
+
+Now, to **protect the lightly doped regions (P⁻ and N⁻)** and to define the spacing before forming heavily doped source/drain regions, we **create spacers** along the sides of the gate.
+
+To do this:
+
+* A **thick layer of SiO₂ or Si₃N₄** is **deposited over the entire wafer**, covering the **gate terminal and surrounding areas**.
+* This layer is then **anisotropically etched**, so that material remains only **along the sidewalls of the gate**, forming **spacers**.
+
+These **spacers** serve to:
+
+* **Physically separate** the gate from the next doping step
+* **Protect the lightly doped drain extensions** (P⁻/N⁻) during the upcoming high-dose implant
+* Define the final **source and drain junction depth and overlap**
+
+This ensures the **structure remains intact** and maintains the desired **doping profile and device performance**.
+
+![Screenshot 2025-06-19 154801](https://github.com/user-attachments/assets/3f6783e5-7edf-435c-9b4a-58f7122f0a0e)
+
+Now, we perform **plasma anisotropic etching**, which selectively removes the deposited oxide or nitride layer **vertically**, while leaving material intact on the **sidewalls of the gate**.
+
+As a result, **sidewall spacers** are formed along the gate structure.
+
+These spacers:
+
+* **Protect the lightly doped regions (LDD)**
+* **Define the offset** between the gate and the upcoming heavily doped source/drain regions
+* Help in **reducing short-channel effects** and **improving device reliability**
+
+This completes the **spacer formation** step.
+
+![Screenshot 2025-06-19 154837](https://github.com/user-attachments/assets/f9eba89d-c096-43a9-aa08-a647862fdaa7)
+
+![Screenshot 2025-06-19 154915](https://github.com/user-attachments/assets/8c748c71-e486-4eb3-bd6a-8aed79f010ad)
+
+---
+### Source - drain formation
+---
+### 6) **Source–Drain Formation**
+
+The next step is to **form the heavily doped source and drain regions** for both NMOS and PMOS transistors.
+
+---
+
+### **Step 1: Screen Oxide Deposition**
+
+Before performing the heavy ion implantation, we **deposit a very thin layer of screen oxide** over the wafer surface.
+
+* This **screen oxide** helps to **reduce channeling effects**, which can occur when high-energy ions penetrate too deeply through crystalline defects or at steep angles.
+* It also provides **better control over dopant placement** and protects the underlying silicon during implantation.
+
+This oxide layer is usually a few nanometers thick and is thermally grown or deposited just before the **source–drain implantation step**.
+
+![Screenshot 2025-06-19 155819](https://github.com/user-attachments/assets/a98d4b71-4ad1-4348-acea-e9d92c336025)
+
+Now, to form the **source and drain** regions for **PMOS**, we perform the following:
+
+* Use **Mask 9** to expose the appropriate regions in the **P-well**.
+* Then, carry out **ion implantation** using **arsenic ions** (an N-type dopant) at an energy of around **75 keV**.
+* This creates the **N⁺ source and drain regions** in the P-well for **PMOS transistors**.
+
+This **high-dose implant** ensures low-resistance source and drain contacts, completing the heavily doped N⁺ regions for PMOS devices.
+
+![Screenshot 2025-06-19 155834](https://github.com/user-attachments/assets/47972f67-c547-43a4-964d-82a584c3e520)
+
+![Screenshot 2025-06-19 155857](https://github.com/user-attachments/assets/869fe67f-3f11-4747-96a0-cf0dc6c028cd)
+
+![Screenshot 2025-06-19 160000](https://github.com/user-attachments/assets/91916943-a6c3-4946-a716-650a4a094c04)
+
+The **same process is repeated** to form the **source and drain regions** for **NMOS transistors**:
+
+* Use **Mask 10** to expose the desired regions in the **N-well**.
+* Perform **ion implantation** using **boron ions** (a P-type dopant) at an energy of around **50 keV**.
+* This creates the **P⁺ source and drain regions** in the N-well, completing the **NMOS transistor structure**.
+
+At this stage, both NMOS and PMOS transistors have their respective **source, drain, and gate terminals** fully defined and ready for subsequent processing steps like silicidation, contact formation, and metallization.
+
+![Screenshot 2025-06-19 160013](https://github.com/user-attachments/assets/7a7192a9-bde1-400a-8f29-53f9cb528fa2)
+
+![Screenshot 2025-06-19 160038](https://github.com/user-attachments/assets/69de8e82-282f-40f1-a6ff-9e65fb2cc77d)
+
+![Screenshot 2025-06-19 160101](https://github.com/user-attachments/assets/f56c62f2-68ea-4802-a6ed-cf5fa6c49bd0)
+
+Now, the partially fabricated CMOS wafer is placed into a **high-temperature annealing furnace** (typically around **1000 °C**).
+
+This annealing step serves two key purposes:
+
+* It **activates the dopants** in the **P⁺ and N⁺ regions**, allowing them to become electrically active.
+* It causes **lateral and vertical diffusion**, helping the implanted dopants **fully form the source and drain regions** for both **NMOS and PMOS** transistors.
+
+After this process, the **P⁺ and N⁺ implants** officially become the **functional source and drain terminals** of the CMOS devices.
+
+![Screenshot 2025-06-19 160117](https://github.com/user-attachments/assets/a7d3a97d-e7db-4b55-a954-4999f3d94ef1)
+
+![Screenshot 2025-06-19 160154](https://github.com/user-attachments/assets/836c23e1-3e14-4539-bf4f-18f9eb55ebd4)
+
+---
+### Local interconnect formation
+---
+
+
