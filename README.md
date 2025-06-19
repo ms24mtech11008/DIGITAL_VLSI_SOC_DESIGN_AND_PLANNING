@@ -2638,3 +2638,40 @@ The plot obtained is
 
 ![Screenshot 2025-06-19 102419](https://github.com/user-attachments/assets/402f670d-9ce6-4c79-a9ec-f8e206cea17e)
 
+The difference between the two graphs is that, in the **second graph**, the **transfer characteristic lies exactly in the middle** of the graph. In contrast, in the **first graph**, the **transfer characteristic is shifted to the left** of the center.
+
+---
+### Switching Threshold Vm
+---
+Both models with different transistor widths have their **own specific applications**. By comparing the waveforms from each, we observe that the **overall shape remains the same**, regardless of the voltage levels. This consistency indicates that **CMOS is a highly robust technology**.
+
+When `Vin` is low, the output remains high, and when `Vin` is high, the output goes low—demonstrating that the **inverter characteristic is preserved** across different sizing ratios of NMOS and PMOS. This is one of the key reasons why **CMOS logic is widely used** in digital gate design.
+
+One important parameter that reflects the robustness of an inverter is the **switching threshold, Vm** — the point where `Vin = Vout`. This point marks the transition level at which the inverter switches its state. A well-balanced inverter has this threshold near the **midpoint of the supply voltage**, contributing to **noise margin balance and signal integrity**.
+
+![Screenshot 2025-06-19 115834](https://github.com/user-attachments/assets/7493b280-2594-40a2-b8c9-d0ec3380a905)
+
+In this figure, we observe that at **Vm ≈ 0.9V**, the condition **Vin = Vout** is met. This point is critical for CMOS operation because at **Vm**, there is a high possibility that **both the PMOS and NMOS transistors are partially turned on**.
+
+![Screenshot 2025-06-19 120235](https://github.com/user-attachments/assets/28ad5b9c-3d4c-454d-a710-2151015a0d3d)
+
+When both transistors conduct simultaneously, it creates a direct path from **Vdd to Vss (power to ground)**, resulting in **leakage current**. This current can lead to **increased power consumption** and may affect circuit reliability if not properly controlled.
+
+By comparing the two graphs, we gain a clear understanding of the **switching threshold voltage (Vm)** and how it plays a key role in defining the **operating region and power behavior** of a CMOS inverter.
+
+![Screenshot 2025-06-19 120547](https://github.com/user-attachments/assets/a4946e35-477d-43ba-9d80-5a66cad0f954)
+
+In the graph below, we can identify the **operating regions** of the **PMOS and NMOS transistors** at different points along the transfer characteristic curve.
+
+The **direction of current flow** is also different for each:
+
+* For **NMOS**, current flows from **drain to source** (typically from `Vout` to `GND`).
+* For **PMOS**, current flows from **source to drain** (typically from `Vdd` to `Vout`).
+
+By analyzing the graph, we can determine at each region (cutoff, linear, saturation) whether the NMOS or PMOS is conducting, and in what mode. This is helpful for understanding the **dynamic behavior and power dissipation** of the CMOS inverter across its input voltage range.
+
+![Screenshot 2025-06-19 120804](https://github.com/user-attachments/assets/7cac2174-92cc-4229-ac14-2e07af53b66c)
+
+---
+
+
