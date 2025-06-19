@@ -2490,8 +2490,12 @@ Then rerun floorplanning:
 ```tcl
 run_floorplan
 ```
+![Screenshot 2025-06-19 091400](https://github.com/user-attachments/assets/e73e4cb4-c83a-4c27-b382-b67ad5a41b16)
 
 After running the command, check the updated floorplan.
 Now, the **pins are stacked one above the other**, reflecting the new I/O placement mode.
+
+![Screenshot 2025-06-19 091919](https://github.com/user-attachments/assets/e849560b-31a3-4cf4-8849-a2a99a369e82)
+![Screenshot 2025-06-19 092023](https://github.com/user-attachments/assets/119602e9-9cb5-457a-b16a-dfc7a6f6671d)
 
 This shows how OpenLane provides real-time flexibility to experiment with and refine your layout strategy.
