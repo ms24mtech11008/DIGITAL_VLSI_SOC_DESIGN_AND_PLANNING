@@ -3420,4 +3420,7 @@ This generates the **.spice file**, which can now be used for simulation in **ng
 
 ![Screenshot 2025-06-20 102918](https://github.com/user-attachments/assets/34f7b24a-d27d-4028-9c9c-fa52f6e8622c)
 
+contents og .spice file 
+
+![image](https://github.com/user-attachments/assets/2f44194e-6956-4c4f-97c7-d300720ec9a5)
 
