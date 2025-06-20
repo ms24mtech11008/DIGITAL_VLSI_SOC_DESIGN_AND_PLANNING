@@ -3357,3 +3357,11 @@ In SKY130, each **color represents a specific layer** of the CMOS layout:
 In the **Tckon window**, you can select a region to identify the transistor type. For example, selecting a specific area shows it as **NMOS**, and similarly, you can check for **PMOS**.
 
 This is how we **verify and inspect the CMOS structure**, ensuring it is functioning as expected.
+
+![image](https://github.com/user-attachments/assets/68afb512-5236-4414-b50f-2b7feb5dc4b2)
+
+we can see the information of layer by placing our cursor on different colors
+
+![image](https://github.com/user-attachments/assets/ef9a5a76-091d-435f-9d7e-719c9d3f1a0c)
+
+
