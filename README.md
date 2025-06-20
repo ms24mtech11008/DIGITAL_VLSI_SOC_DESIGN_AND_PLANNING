@@ -3344,3 +3344,16 @@ And finally, after completing all the fabrication steps, our **CMOS structure** 
 ---
 ### Lab introduction to Sky130 basic layers layout and LEF using inverter
 ---
+In SKY130, each **color represents a specific layer** of the CMOS layout:
+
+* The **first layer** (local interconnect) is shown in **blue-purple**.
+* The **second layer**, **Metal 1**, appears in **light purple**.
+* **Metal 2** is represented by the **pink** color.
+* The **N-well** is indicated by a **solid dashed line**.
+* **Green** shows the **N-diffusion** region.
+* **Red** represents the **polysilicon gate**.
+* **Brown** is used for the **P-diffusion** region.
+
+In the **Tckon window**, you can select a region to identify the transistor type. For example, selecting a specific area shows it as **NMOS**, and similarly, you can check for **PMOS**.
+
+This is how we **verify and inspect the CMOS structure**, ensuring it is functioning as expected.
