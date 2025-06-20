@@ -3364,4 +3364,9 @@ we can see the information of layer by placing our cursor on different colors
 
 ![image](https://github.com/user-attachments/assets/ef9a5a76-091d-435f-9d7e-719c9d3f1a0c)
 
+when the poly crosses N-diffusion then the device is a NMOS and if it crosses P-diffusion then the device is a PMOS.
+
+![image](https://github.com/user-attachments/assets/73cc357e-a2f4-4847-95e5-3331ec74582c)
+
+![image](https://github.com/user-attachments/assets/9b3577ab-c102-4219-bd71-d2676712f234)
 
