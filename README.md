@@ -3355,7 +3355,6 @@ In SKY130, each **color represents a specific layer** of the CMOS layout:
 * **Brown** is used for the **P-diffusion** region.
 
 In the **Tckon window**, you can select a region to identify the transistor type. For example, selecting a specific area shows it as **NMOS**, and similarly, you can check for **PMOS**.
-
 This is how we **verify and inspect the CMOS structure**, ensuring it is functioning as expected.
 
 ![image](https://github.com/user-attachments/assets/68afb512-5236-4414-b50f-2b7feb5dc4b2)
@@ -3369,4 +3368,17 @@ when the poly crosses N-diffusion then the device is a NMOS and if it crosses P-
 ![image](https://github.com/user-attachments/assets/73cc357e-a2f4-4847-95e5-3331ec74582c)
 
 ![image](https://github.com/user-attachments/assets/9b3577ab-c102-4219-bd71-d2676712f234)
+
+Similarly, we will check the **output terminal** as well — by **double pressing "S"**, we can **select the entire connected structure** at the output node **Y**.
+
+![image](https://github.com/user-attachments/assets/7a741d93-b875-4bc6-91d5-525ff4aecb29)
+
+So, we can observe that **"Y" is connected to the local interconnect** in the **cell definition of sky130\_inv**.
+We can also verify whether the **source of the PMOS is connected to VDD**, and similarly, check if the **source of the NMOS is connected to GND**.
+
+---
+### Lab steps to create std cell layout and extract spice netlist
+---
+
+
 
