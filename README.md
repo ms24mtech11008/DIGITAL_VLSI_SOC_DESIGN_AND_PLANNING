@@ -3380,5 +3380,44 @@ We can also verify whether the **source of the PMOS is connected to VDD**, and s
 ### Lab steps to create std cell layout and extract spice netlist
 ---
 
+To understand the **logical functioning of the inverter**, the first step is to **extract its SPICE netlist** and then simulate it using the **NGSPICE open-source tool**.
+
+1. Open the **Tkcon** window and check the current path using the command:
+
+   ```
+   pwd
+   ```
+![Screenshot 2025-06-20 102113](https://github.com/user-attachments/assets/5e44f630-e7bf-414f-a9de-acfe698a4de2)
+
+2. Create an extraction file by using the command:
+
+   ```
+   extract all
+   ```
+![Screenshot 2025-06-20 102113](https://github.com/user-attachments/assets/c731c7bf-ae35-4484-997f-022b2ed89260)
+
+3. Go to the working directory and verify whether the file **sky130\_inv.ext** has been generated.
+
+![Screenshot 2025-06-20 102148](https://github.com/user-attachments/assets/51cd8c03-fd53-407d-81c1-89eff9c1c728)
+
+4. Now, to generate the SPICE netlist (including parasitic capacitances), use the following command:
+
+   ```
+   ext2spice cthresh 0 rthresh 0
+   ```
+![Screenshot 2025-06-20 102852](https://github.com/user-attachments/assets/c20b500c-9872-422a-b35f-8cbcaf11077b)
+
+   This extracts **all parasitic capacitance** values. Note that this step **does not create any new folder**.
+
+5. Finally, use the command:
+
+   ```
+   ext2spice
+   ```
+![Screenshot 2025-06-20 102852](https://github.com/user-attachments/assets/dd246df3-95c7-4cd0-a995-2ca387caa028)
+
+   This generates the **.spice file**, which can now be used for simulation in **ngspice**.
+
+![Screenshot 2025-06-20 102918](https://github.com/user-attachments/assets/34f7b24a-d27d-4028-9c9c-fa52f6e8622c)
 
 
