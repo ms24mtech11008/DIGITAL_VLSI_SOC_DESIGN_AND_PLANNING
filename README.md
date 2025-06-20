@@ -3405,9 +3405,9 @@ To understand the **logical functioning of the inverter**, the first step is to 
    ```
    ext2spice cthresh 0 rthresh 0
    ```
-![Screenshot 2025-06-20 102852](https://github.com/user-attachments/assets/c20b500c-9872-422a-b35f-8cbcaf11077b)
+![Screenshot 2025-06-20 125638](https://github.com/user-attachments/assets/089fccda-4f01-4410-87ba-5312218f52c0)
 
-   This extracts **all parasitic capacitance** values. Note that this step **does not create any new folder**.
+ This extracts **all parasitic capacitance** values. Note that this step **does not create any new folder**.
 
 5. Finally, use the command:
 
@@ -3416,8 +3416,7 @@ To understand the **logical functioning of the inverter**, the first step is to 
    ```
 ![Screenshot 2025-06-20 125638](https://github.com/user-attachments/assets/1e79d9db-46ea-458a-b1d0-006777bc4349)
 
-
-   This generates the **.spice file**, which can now be used for simulation in **ngspice**.
+This generates the **.spice file**, which can now be used for simulation in **ngspice**.
 
 ![Screenshot 2025-06-20 102918](https://github.com/user-attachments/assets/34f7b24a-d27d-4028-9c9c-fa52f6e8622c)
 
