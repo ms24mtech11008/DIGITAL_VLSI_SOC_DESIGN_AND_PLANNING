@@ -3414,7 +3414,8 @@ To understand the **logical functioning of the inverter**, the first step is to 
    ```
    ext2spice
    ```
-![Screenshot 2025-06-20 102852](https://github.com/user-attachments/assets/dd246df3-95c7-4cd0-a995-2ca387caa028)
+![Screenshot 2025-06-20 125638](https://github.com/user-attachments/assets/1e79d9db-46ea-458a-b1d0-006777bc4349)
+
 
    This generates the **.spice file**, which can now be used for simulation in **ngspice**.
 
