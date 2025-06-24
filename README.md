@@ -3424,3 +3424,71 @@ contents of the .spice file
 
 ![image](https://github.com/user-attachments/assets/2f44194e-6956-4c4f-97c7-d300720ec9a5)
 
+---
+##
+---
+### 
+---
+Now we have to edit the above file for our ngspice simulation.
+To measure the smallest dimenion we do the following steps as shown in the pictures below:
+Select the smallest grid box and then in the Tcon terminal type the command "box"
+
+![Screenshot 2025-06-24 100746](https://github.com/user-attachments/assets/637d3399-acea-4a13-a233-0d14f8f408fa)
+
+![Screenshot 2025-06-24 100815](https://github.com/user-attachments/assets/3f1ea963-7c06-477c-ba7e-06fbfbe179b9)
+
+so our scale is 0.01u
+
+---
+![Screenshot 2025-06-20 130328](https://github.com/user-attachments/assets/50ab0942-7ff2-480c-9cd8-7af3bcd09b0a)
+
+In the given netlist, we can observe complete details regarding the connectivity of the NMOS and PMOS transistors, along with the power supply connections.
+
+Here:
+
+* `X0` represents the **NMOS**, and
+* `X1` represents the **PMOS**.
+
+For both transistors, the connection order follows: **Gate, Drain, Substrate, Source**.
+
+---
+
+Now, to proceed with simulation:
+
+We need to include the PMOS and NMOS model library files. These are located inside the `libs` folder within the `vsdstdcellsdesign` directory. To include them in the netlist, use the following commands:
+
+![Screenshot 2025-06-24 101351](https://github.com/user-attachments/assets/bdb0bf02-b400-4977-91fc-838dbe2c6803)
+
+```
+.include ./libs/pshort.lib  
+.include ./libs/nshort.lib
+```
+
+Next, define the power supply voltages:
+
+```
+VDD VPWR 0 3.3V  
+VSS VGND 0 0V
+```
+
+Then, set up the input source using a pulse waveform:
+
+```
+Va A VGND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns)
+```
+
+Finally, add the commands required for simulation:
+
+```
+.tran 1n 20n  
+.control  
+run  
+.endc  
+.end
+```
+![Screenshot 2025-06-24 103827](https://github.com/user-attachments/assets/47478c2c-659b-4cb5-be8e-14d3556d5c01)
+![Screenshot 2025-06-24 103654](https://github.com/user-attachments/assets/d5f9db3e-5e05-4ee8-9582-1bdf5d6340d8)
+
+---
+
+
