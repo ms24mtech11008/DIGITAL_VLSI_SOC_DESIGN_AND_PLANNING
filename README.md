@@ -3490,5 +3490,13 @@ run
 ![Screenshot 2025-06-24 103654](https://github.com/user-attachments/assets/d5f9db3e-5e05-4ee8-9582-1bdf5d6340d8)
 
 ---
+Now running the ngspice
+
+![Screenshot 2025-06-24 104237](https://github.com/user-attachments/assets/685db0bd-8432-4a94-8b3a-df1722a538a2)
+
+output of ngspice 
+
+![Screenshot 2025-06-24 104641](https://github.com/user-attachments/assets/2f180e60-c6d8-4f27-9b73-9f120d8cd452)
+
 
 
