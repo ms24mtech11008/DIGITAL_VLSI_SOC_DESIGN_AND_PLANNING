@@ -3707,3 +3707,60 @@ cif see VIA2
 ```
 
 A group of **black squares** will appear inside the selected area. These represent the **VIA2 layer**, which indicates the vias connecting **Metal2 to Metal3**.
+
+![Screenshot 2025-06-25 165259](https://github.com/user-attachments/assets/41687127-7d2c-4bb0-9b9e-da605ce2a36f)
+
+---
+### Lab exercise to fix poly.9 error in Sky130 tech-file
+---
+Now, open the **poly.mag** file in the Magic tool using the following command in the **Tkcon terminal**:
+
+```
+load poly.mag
+```
+
+This will load the **poly layout**, which can then be analyzed or edited further as required.
+
+![Screenshot 2025-06-25 170510](https://github.com/user-attachments/assets/ad107b51-90b7-4775-9848-4ba62fe8a4f6)
+
+Now consider the rule **poly.9** and refer to the **Google-Skywater PDK documentation** to understand the details of this rule. 
+
+![Screenshot 2025-06-25 170909](https://github.com/user-attachments/assets/00a1d644-4f63-4537-a134-58a0eb36df6b)
+
+The rule **poly.9** in the Google‑SkyWater PDK specifies:
+
+![Screenshot 2025-06-25 171006](https://github.com/user-attachments/assets/3875bc26-585f-476a-94e0-9b52f796a5cb)
+
+![Screenshot 2025-06-25 171158](https://github.com/user-attachments/assets/86d63d3f-4fa8-4f96-8395-410df17ed955)
+
+
+> **Minimum spacing between poly‑resistor and either poly (non‑resistor) or diffusion/tap:** **0.480 µm** ([github.com][1])
+
+### To check it in your layout:
+
+1. Identify the layout violation marked as **poly.9** in Magic.
+2. Refer to the documentation (Periphery → Design Rules) where rule number 9 lists:
+
+   * “Poly resistor spacing to poly or spacing (no overlap) to diff/tap” = **0.480 µm** ([github.com][1])
+3. Use that as the reference rule for fixing the DRC violation.
+
+To locate the error, refer to the **sky130A.tech** file, which is available in the **drc\_tests** directory. This file can be opened using any Linux text editor for inspection and analysis.
+
+![Screenshot 2025-06-25 171646](https://github.com/user-attachments/assets/019480f2-b684-434e-a65f-cc18171e86f7)
+
+Search for **'poly.9'** in the **sky130A.tech** file. You will see a few DRCs but apparently there are no attempts to fix DRCs associated to distance between polyresistor to poly. So we will add these DRCs manually. Apply the necessary corrections to the **'poly.9'** rule in both sections to resolve the DRC violation.
+
+![Screenshot 2025-06-25 172157](https://github.com/user-attachments/assets/2e5b9f2e-30fc-422d-a92a-d48279f4c8f9)
+
+![Screenshot 2025-06-25 172308](https://github.com/user-attachments/assets/c34399b7-f743-40c9-97f3-c2bcfdd8cf99)
+
+![dummy](https://github.com/user-attachments/assets/c84fa17d-bb6c-4e78-adff-77c7490b2882)
+
+we can see that the distance between npolyres and poly is 0.21u and as per the poly.9 DRCs checks any distance below 0.42u should viloate the rule so its clear that there are no DRCs check rules for distance between polyres and poly and hence we add them manually.
+below are the pictures showing the additions to sky130A.tech 
+
+![Screenshot 2025-06-25 175327](https://github.com/user-attachments/assets/9467a75d-7d47-415f-8a56-a571e5ed761e)
+
+![Screenshot 2025-06-25 175358](https://github.com/user-attachments/assets/00eae76a-65cb-45c6-b6af-ed21de378642)
+
+now load the file using the command **tech load sky130A.tech** in the tcon window
