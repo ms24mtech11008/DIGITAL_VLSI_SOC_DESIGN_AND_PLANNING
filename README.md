@@ -3549,5 +3549,30 @@ $$
 
 or approximately **64.01 ps**.
 
+* **Fall Time (tf):**
+
+$$
+(4.09512 - 4.05264) \times 10^{-9} = 42.48 \, \text{ps}
+$$
+
+* **Propagation Delay (tpd):**
+
+$$
+(2.2106 - 2.15012) \times 10^{-9} = 60.48 \, \text{ps}
+$$
+
+This is measured from the **rising edge of the input** to the **falling edge or rising edge of the output** crossing the 50% point.
+
+* **Cell Fall Delay:**
+
+$$
+(4.07735 - 4.04988) \times 10^{-9} = 27.47 \, \text{ps}
+$$
+
+This is specifically measured for the **output falling transition**, typically from the **input rising edge** (50%) to the **output falling edge** (50%).
+
+---
+
+
 
 
