@@ -3572,6 +3572,25 @@ $$
 This is specifically measured for the **output falling transition**, typically from the **input rising edge** (50%) to the **output falling edge** (50%).
 
 ---
+### Lab introduction to Magic tool options and DRC rules
+---
+
+###  **References for Magic DRC and Skywater PDK Design Rules:**
+
+* To learn more about **Magic DRC (Design Rule Check)**, you can refer to the official Magic documentation:
+  ➡️ [The Magic Technology File Manual – DRC Section](http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection)
+
+* The detailed **Skywater PDK Design Rules** are available here:
+  ➡️ [Skywater PDK Documentation – Design Rules](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html)
+
+* For additional reference, including files, models, and open-source resources, the official **Google Skywater PDK GitHub repository** can be accessed here:
+  ➡️ [Google Skywater PDK GitHub Repository](https://github.com/google/skywater-pdk)
+
+---
+### Lab introduction to Sky130 pdk's and steps to download labs
+---
+
+
 
 
 
