@@ -3763,4 +3763,8 @@ below are the pictures showing the additions to sky130A.tech
 
 ![Screenshot 2025-06-25 175358](https://github.com/user-attachments/assets/00eae76a-65cb-45c6-b6af-ed21de378642)
 
-now load the file using the command **tech load sky130A.tech** in the tcon window
+now load the file using the command **tech load sky130A.tech** in the tcon window and then use the command **drc check**
+
+![Screenshot 2025-06-25 181220](https://github.com/user-attachments/assets/c4810011-fbe5-4f2c-9ca4-7bc1e9ba13b5)
+
+---
