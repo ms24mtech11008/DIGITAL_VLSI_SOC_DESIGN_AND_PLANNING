@@ -3425,9 +3425,9 @@ contents of the .spice file
 ![image](https://github.com/user-attachments/assets/2f44194e-6956-4c4f-97c7-d300720ec9a5)
 
 ---
-##
+## Sky130 Tech File Labs
 ---
-### 
+### Lab steps to create final SPICE deck using Sky130 tech
 ---
 Now we have to edit the above file for our ngspice simulation.
 To measure the smallest dimenion we do the following steps as shown in the pictures below:
@@ -3487,6 +3487,7 @@ run
 .end
 ```
 ![Screenshot 2025-06-24 103827](https://github.com/user-attachments/assets/47478c2c-659b-4cb5-be8e-14d3556d5c01)
+
 ![Screenshot 2025-06-24 103654](https://github.com/user-attachments/assets/d5f9db3e-5e05-4ee8-9582-1bdf5d6340d8)
 
 ---
@@ -3498,6 +3499,55 @@ output of ngspice
 
 ![Screenshot 2025-06-24 104641](https://github.com/user-attachments/assets/2f180e60-c6d8-4f27-9b73-9f120d8cd452)
 
+Now, ploting the graph here by command, plot y vs time a.
+
+![Screenshot 2025-06-24 112315](https://github.com/user-attachments/assets/426fcf27-f994-4c31-b1f5-c633c2764cb3)
+
+![Screenshot 2025-06-24 112505](https://github.com/user-attachments/assets/556c8565-6a8f-46e6-9759-e0897a869497)
+
+If we increase the value of C3 from 0.024fF to 2fF, the output waveform becomes noticeably smoother. This happens because the larger capacitance slows down the voltage transitions, effectively filtering out sharp edges and noise from the signal.
+
+![Screenshot 2025-06-24 112815](https://github.com/user-attachments/assets/191e5a42-9b94-4582-9897-ca62eb6e1a10)
+
+![Screenshot 2025-06-24 112854](https://github.com/user-attachments/assets/e2caa4b3-34f6-4a2c-9075-3eaf58f1ef45)
+
+---
+### Lab steps to characterize inverter using sky130 model files
+---
+
+Now that we have obtained the transient response, our next step is to **characterize the cell** by calculating four key parameters:
+
+1. **Rise Time (tr)** – The time taken for the output waveform to transition from **20% to 80% of its maximum value** during a rising edge.
+2. **Fall Time (tf)** – The inverse of rise time; it is the time taken for the waveform to fall from **80% to 20% of its maximum value** during a falling edge.
+3. **Propagation Delay (tpd)** – The time delay between the input transition (either rising or falling) and the corresponding output transition crossing the 50% voltage level.
+4. **Cell Fall Delay** – Specifically refers to the propagation delay when the **output transitions from high to low**, typically measured from the **rising edge of the input to the falling edge of the output** at their respective 50% voltage points.
+
+Calculation of Rise time:
+Maximum value of waveform is 3.3V (as defined in spice lib)
+20% of 3.33 is:
+
+$$
+= \frac{20}{100} \times 3.33 = 0.666
+$$
+
+So, **0.666V**.
+
+By zooming into our waveform near **0.66V** (which is **20% of 3.3V**), we observe that the corresponding time is approximately **2.18197 ns**.
+Similarly, we calculate **80% of 3.3V**, which is:
+
+$$
+= \frac{80}{100} \times 3.3 = 2.64V
+$$
+
+Then, by locating the point on the waveform where the voltage reaches **2.64V** we note the corresponding time value = **2.24598 ns** 
+
+The **rise time** can be calculated as:
+
+$$
+\text{Rise Time} = 2.24598 \, \text{ns} - 2.18197 \, \text{ns} = 0.06401 \, \text{ns}
+$$
+
+or approximately **64.01 ps**.
 
 
 
