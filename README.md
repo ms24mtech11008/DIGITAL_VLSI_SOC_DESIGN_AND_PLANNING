@@ -3574,6 +3574,37 @@ This is specifically measured for the **output falling transition**, typically f
 ---
 ### Lab introduction to Magic tool options and DRC rules
 ---
+### CIF Format (Caltech Intermediate Form)
+
+* **CIF (Caltech Intermediate Form)** is a standard ASCII text file format used for describing **integrated circuit (IC) layouts**.
+* It is primarily used for exchanging layout data between different EDA (Electronic Design Automation) tools and for mask generation in semiconductor fabrication.
+
+### Key Features:
+
+* Text-based, human-readable format.
+* Describes geometric shapes (polygons, rectangles) along with layer information.
+* Contains scaling factors, cell definitions, and placement information.
+* Simpler and more compact compared to GDSII (but less widely used now).
+
+### Typical Uses:
+
+* IC layout design transfer.
+* Mask generation.
+* Compatibility between different layout tools.
+
+### Example Syntax:
+
+```plaintext
+DS Example ;         // Start of design
+9 0 0 1000 1000;     // Boundary box
+L 3;                 // Layer 3
+P 4 0 0 100 0 100 100 0 100;  // Polygon with 4 points
+DF ;                 // End of design
+```
+
+### Common File Extension:
+
+`.cif`
 
 ###  **References for Magic DRC and Skywater PDK Design Rules:**
 
@@ -3590,8 +3621,89 @@ This is specifically measured for the **output falling transition**, typically f
 ### Lab introduction to Sky130 pdk's and steps to download labs
 ---
 
+Follow the steps:
 
+First, go to the home directory.
 
+To download the lab files for performing DRC corrections:
 
+```
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+```
+![Screenshot 2025-06-25 131302](https://github.com/user-attachments/assets/a77450e7-5a53-4609-9ffd-55ea39aecf48)
 
+To extract the lab files from the downloaded file:
 
+```
+tar xfz drc_tests.tgz
+```
+
+Navigate inside the extracted folder `drc_tests`:
+
+```
+cd drc_tests
+```
+
+To list all the directories:
+
+```
+ls -al
+```
+![Screenshot 2025-06-25 131416](https://github.com/user-attachments/assets/e73d4185-afa7-4908-a521-78d5e3dc7e71)
+
+To view the `.magicrc` file:
+
+```
+gvim .magicrc
+```
+![Screenshot 2025-06-25 131558](https://github.com/user-attachments/assets/1efe425a-69d6-4080-b4cf-af273e3e1dcf)
+![Screenshot 2025-06-25 131630](https://github.com/user-attachments/assets/8a784d30-893a-4332-9666-1cc5f1f86cf1)
+
+The `.magicrc` file serves as the startup script for Magic and specifies the location of the technology file. The technology file is available locally in the same directory and can be modified if needed.
+
+To start Magic with better graphics support:
+
+```
+magic -d XR &
+```
+---
+### Lab introduction to Magic and steps to load Sky130 tech-rules
+---
+
+Use the command below to open the Magic tool with improved graphics:
+
+```
+magic -d XR &
+```
+
+After Magic opens, go to the **File** menu and select **Open**, then choose the file:
+
+```
+met3.mag
+```
+
+This file contains different layout patterns, each associated with various **DRC violations**, represented as **rule numbers**. Each number corresponds to a specific design rule being violated in that region of the layout.
+
+![Screenshot 2025-06-25 133028](https://github.com/user-attachments/assets/c06e14ab-ca7e-4ef7-a518-7d1b0f1da0b8)
+
+These rule numbers can be found in the **Google-Skywater PDK documentation**, which provides detailed explanations of each design rule, including layer specifications, spacing, width, enclosure, and other constraints. The reference for these rules is available at:
+
+```
+https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html
+```
+![Screenshot 2025-06-25 133455](https://github.com/user-attachments/assets/3d311ab8-8c3c-4ad2-82ac-792176724da8)
+
+Now select any layout area and check the DRC violations using the **"Why"** option in the **Tkcon** window. This command will display the reason for the DRC error, along with the corresponding rule number and a brief description of the violation.
+
+![Screenshot 2025-06-25 134635](https://github.com/user-attachments/assets/d193a726-18fc-4321-84e1-8e460bf4304f)
+
+![Screenshot 2025-06-25 134846](https://github.com/user-attachments/assets/79060f3f-18da-43f0-ae53-fb257e0951cb)
+
+To viualze metal 3 and vias, select a blank area in the layout window. Hover the mouse pointer over the **Metal3 contact icon**, then press the **'p'** key to pick that icon. 
+Then execute the following command in the Tkcon tab:
+
+```
+cif see VIA2
+```
+
+A group of **black squares** will appear inside the selected area. These represent the **VIA2 layer**, which indicates the vias connecting **Metal2 to Metal3**.
