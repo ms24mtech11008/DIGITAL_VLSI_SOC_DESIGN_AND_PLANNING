@@ -3991,7 +3991,81 @@ The main advantage of this **clock blocking** mechanism is **power saving**. Dur
 
 ![image](https://github.com/user-attachments/assets/9bb4ae1e-25f2-4471-9991-2d48742dd8bb)
 
+Let's consider a clock tree where a buffer at the first stage is driving the load of two downstream buffers. In the **clock gating technique**, we replace this buffer with an **AND gate** to control the clock based on the enable signal.
 
+By doing this swap, we will now observe whether the other characteristics—such as **delay, load driving capability, transition time, and power consumption**—remain the same or change due to this modification. These impacts will be analyzed in the following steps.
+
+![Screenshot 2025-06-26 194648](https://github.com/user-attachments/assets/4b4d4a10-2322-4225-9c4f-9a6bc6aac921)
+
+Before swapping the buffer with the gate, we have made the following assumptions:
+
+1. The **input transition** and **load capacitance** remain the same before and after replacing the buffer with the gate.
+2. The **driving strength** of the gate is assumed to be comparable to that of the buffer.
+3. The overall **clock frequency** and **operating conditions** do not change.
+4. Only the **functional block (buffer to AND gate)** is swapped, while the rest of the clock tree structure remains unchanged.
+5. Any added logic for gating does not introduce functional errors; it only controls clock propagation based on the enable signal.
+
+These assumptions will help in accurately analyzing the impact of the swap on parameters like **delay, transition, and power consumption** in the coming steps.
+
+![Screenshot 2025-06-26 194700](https://github.com/user-attachments/assets/09705021-1c5b-4fd8-bf6c-e548d1e32914)
+
+Assume the following capacitance values:
+
+* **C1 = C2 = C3 = C4 = 25 fF**
+* **Cbuf1 = Cbuf2 = 30 fF**
+
+The total capacitance at each node is:
+
+* **Node A → 60 fF**
+* **Node B → 50 fF**
+* **Node C → 50 fF**
+
+### Observations:
+
+* The circuit consists of **2 levels of buffering**.
+* At each level, every node drives the **same load**.
+* **Identical buffers** are used at the same level.
+* The **output capacitance of the buffers is not constant** across the circuit; the load at each output varies.
+* Due to this varying output load, the **input transition time also varies**.
+
+As a result, the circuit experiences **multiple delay values** depending on the varying input transitions and output loads.
+
+### How is this delay captured?
+
+This is done using **delay tables**.
+
+### Preparation of Delay Tables:
+
+* A single buffer is extracted from the circuit.
+* The **input transition** is varied within a defined range (e.g., **10 ps to 100 ps**).
+* Simultaneously, the **output load** is also varied.
+* The corresponding **delay values are measured and recorded**.
+* This data is organized into a **tabular format**, forming the delay table that models how delay changes with input transition and output load.
+
+![image](https://github.com/user-attachments/assets/be4c3efb-2cd1-49b8-b506-4e20839520d4)
+
+### Delay Table Usage – Part 1
+
+Let's take the example of the other buffers.
+Using the delay table, we can check how the delay of each buffer changes with different input transition and output load. As the load and transition are different for every buffer, delay will vary.
+The delay table captures this variation accurately by giving the delay corresponding to a particular input transition and load.
+
+![Screenshot 2025-06-26 195122](https://github.com/user-attachments/assets/f854055e-abdc-4223-8a7b-8af4f54f4d2d)
+
+For a practical example, let's say we have the **input transition of 40ps** for **buffer1** and the **output capacitance** of this buffer is **60fF**. The delay of the cell in this case lies between **x9-x10**.
+The values which are not available in the delay table are extrapolated from the given data, so we can take the range in that case.
+
+### Delay Table Usage – Part 2
+
+Now we have to calculate the delay of **buffer2**, and after that, we can find the **latency at the 4 clock endpoints**.
+Here, the **input transition is common for both the buffers**. Assuming the transition is around **60ps** and the **load at both buffers is 50fF**, it will give the delay of **y15**.
+The total delay from input to output is **x9' + y15** (here, we are ignoring the delay of the wires). This means the **skew at any output point is zero**.
+If the **load is not the same at every node**, then the **skew will not be zero**.
+
+### Lab Steps to Configure Synthesis Settings to Fix Slack and Include VSDINV
+
+We will try to modify the parameters of our cell by referring to the **README.md** file in the **configuration folder** in the **OpenLane directory**.
+The **README.md** file contains information about the **parameters of the cell**.
 
 
 
