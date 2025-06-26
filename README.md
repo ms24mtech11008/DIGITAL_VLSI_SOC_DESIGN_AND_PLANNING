@@ -3774,3 +3774,9 @@ now load the file using the command **tech load sky130A.tech** in the tcon windo
 ![Screenshot 2025-06-25 181220](https://github.com/user-attachments/assets/c4810011-fbe5-4f2c-9ca4-7bc1e9ba13b5)
 
 ---
+# Day 4 - Pre-layout timing analysis and importance of good clock tree
+---
+## Timing modeling using delay tables
+---
+### Lab steps to convert grid info to track info
+---
