@@ -3780,3 +3780,35 @@ now load the file using the command **tech load sky130A.tech** in the tcon windo
 ---
 ### Lab steps to convert grid info to track info
 ---
+Now, we need to extract the **`.lef` file** from the **`.mag` file** so that it can be used in the **picorv32a flow**.
+
+There are specific guidelines that must be followed when designing standard cells:
+
+* The **input and output ports** should be placed exactly at the **intersection of vertical and horizontal tracks**.
+* The **width** of the standard cell should be an **odd multiple of the horizontal track pitch**, and the **height** should be an **odd multiple of the vertical track pitch**.
+
+To check the track pitch details, open the **track.info** file located at:
+
+```
+pdk/sky130/libs.tech/openlane/sky130_fd_sc_hd/track.info
+```
+
+This file provides information about the routing tracks, which is essential for ensuring that the cell aligns correctly with the routing grid during physical design.
+
+![Screenshot 2025-06-26 120757](https://github.com/user-attachments/assets/f4b0fe92-8ca1-4934-9b58-8fe1abc3bdc6)
+
+![Screenshot 2025-06-26 120830](https://github.com/user-attachments/assets/29c498d6-f6f9-41b9-8d42-d9246a59eb2c)
+
+![Screenshot 2025-06-26 121043](https://github.com/user-attachments/assets/e2137b70-6fa7-47af-9d19-f55462021324)
+
+![Screenshot 2025-06-26 121230](https://github.com/user-attachments/assets/174d0f03-6a1f-44e4-a928-cfc776577366)
+
+* The entry **`li1 x 0.23 0.46`** indicates that for the **li1 metal layer**, the **horizontal offset is 0.23** and the **pitch is 0.46**.
+* Similarly, **`li1 y 0.23 0.46`** means the **vertical offset is 0.23** and the **vertical pitch is 0.46**.
+
+According to the standard cell guidelines, the **ports should be placed at the intersection of the horizontal and vertical tracks** of the **li1 metal layer**, since the ports are defined in the **li1 layer**.
+
+To verify this in **Magic**, press the **`g` key** to enable the grid. Upon zooming in, small boxes will appear which act as references for layout alignment.
+
+Next, we align this grid with the **track pitch values (offset = 0.23, pitch = 0.46)** to verify whether the ports **A** and **Y** are correctly placed at the intersections of the **horizontal and vertical tracks** of the **li1 metal layer**.
+
