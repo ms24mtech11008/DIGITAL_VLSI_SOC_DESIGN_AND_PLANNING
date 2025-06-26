@@ -3810,5 +3810,21 @@ According to the standard cell guidelines, the **ports should be placed at the i
 
 To verify this in **Magic**, press the **`g` key** to enable the grid. Upon zooming in, small boxes will appear which act as references for layout alignment.
 
+![Screenshot 2025-06-26 123059](https://github.com/user-attachments/assets/cff2a8bc-273c-41ee-9d08-cd76e68aab97)
+
 Next, we align this grid with the **track pitch values (offset = 0.23, pitch = 0.46)** to verify whether the ports **A** and **Y** are correctly placed at the intersections of the **horizontal and vertical tracks** of the **li1 metal layer**.
+
+Now, open the Tkcon window and, using the reference from the track.info file, set the grid according to the given offset and pitch values. The commmands are shown in the picture below.
+
+![Screenshot 2025-06-26 123618](https://github.com/user-attachments/assets/b82a6dda-1f56-40ae-aa24-57458a132644)
+
+after pressing enter u see the following changes in the magic tool
+
+![Screenshot 2025-06-26 123655](https://github.com/user-attachments/assets/1e993c55-9f17-456e-8811-50ea997a6a65)
+
+so the routing of li1 layer can only happen along this grid as shown above.
+we can also see that the input and output port is at the intersection of horizontal and vertical metal layer.
+
+![Screenshot 2025-06-26 124033](https://github.com/user-attachments/assets/37cbbde0-448e-4609-87ac-a5e24e88fdc1)
+
 
