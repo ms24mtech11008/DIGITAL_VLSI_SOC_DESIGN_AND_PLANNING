@@ -3827,4 +3827,10 @@ we can also see that the input and output port is at the intersection of horizon
 
 ![Screenshot 2025-06-26 124033](https://github.com/user-attachments/assets/37cbbde0-448e-4609-87ac-a5e24e88fdc1)
 
+The intersection ensures that the routing can connect to the port from both the **horizontal and vertical directions** effectively.
+
+---
+
+### 
+
 
