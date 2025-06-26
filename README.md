@@ -3763,6 +3763,12 @@ below are the pictures showing the additions to sky130A.tech
 
 ![Screenshot 2025-06-25 175358](https://github.com/user-attachments/assets/00eae76a-65cb-45c6-b6af-ed21de378642)
 
+---
+### Lab exercise to implement poly resistor spacing to diff and tap
+---
+To correctly implement the **poly resistor spacing**, modifications need to be made again in the **sky130A.tech** file. This involves adjusting the spacing rules under the relevant sections to ensure compliance with the design rule requirements.
+
+
 now load the file using the command **tech load sky130A.tech** in the tcon window and then use the command **drc check**
 
 ![Screenshot 2025-06-25 181220](https://github.com/user-attachments/assets/c4810011-fbe5-4f2c-9ca4-7bc1e9ba13b5)
