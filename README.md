@@ -3828,9 +3828,77 @@ we can also see that the input and output port is at the intersection of horizon
 ![Screenshot 2025-06-26 124033](https://github.com/user-attachments/assets/37cbbde0-448e-4609-87ac-a5e24e88fdc1)
 
 The intersection ensures that the routing can connect to the port from both the **horizontal and vertical directions** effectively.
+Now, we can observe that the ports are placed exactly at the **intersection of the tracks**, satisfying the first requirement. Additionally, within the cell boundaries, **3 grid boxes are covered**, which confirms that the **second requirement related to the cell width being an odd multiple of the track pitch is also satisfied**.
 
 ---
 
-### 
+### Lab steps to convert magic layout to std cell LEF
+---
+
+### **`port class`**
+
+Defines the **direction** of the port.
+
+* **`INPUT`** – The port is an input.
+* **`OUTPUT`** – The port is an output.
+* **`INOUT`** – The port is bidirectional (can act as both input and output).
+
+---
+
+### **`port use`**
+
+Defines the **functional purpose** of the port.
+
+* **`SIGNAL`** – Regular signal port (input/output/inout).
+* **`POWER`** – Power supply port (e.g., VDD).
+* **`GROUND`** – Ground port (e.g., VSS).
+* **`CLOCK`** – Clock signal port.
+* **`ANALOG`** – Analog signal port (if applicable).
+
+![Screenshot 2025-06-26 140556](https://github.com/user-attachments/assets/5d0ef364-5125-4ca0-817b-621924e4b253)
+
+After these parameters are set (which is already configured for us), we are now ready to extract the **.lef** file from the **.mag** file.
+
+before we extract lets give this cell a coustom name. Right now the cell name is sky130_inv.
+follow the below image.
+
+![Screenshot 2025-06-26 141953](https://github.com/user-attachments/assets/3c912022-1bbb-4288-a0b5-a665178a4adb)
+
+![Screenshot 2025-06-26 142037](https://github.com/user-attachments/assets/7315204e-eca7-4a14-9bc8-6033e70871ee)
+
+Now, open the layout file in Magic using the following command:
+
+```
+magic -T sky130A.tech sky130_vsdinv.mag &
+```
+
+To extract the **.lef** file, enter the following command in the **Tkcon window**:
+
+```
+lef write
+```
+
+![Screenshot 2025-06-26 142714](https://github.com/user-attachments/assets/4f36518b-b1da-4a3d-82cd-52d3d3cec215)
+
+This will generate the **.lef** file in the **vsdstdcellsdesign** directory. You can verify its creation by using the command:
+
+```
+ls -ltr
+```
+![Screenshot 2025-06-26 142741](https://github.com/user-attachments/assets/48e15306-9543-4549-93dd-fd492d1bd2d7)
+
+The contents of the .lef file generated is shown below
+
+![Screenshot 2025-06-26 143312](https://github.com/user-attachments/assets/e174a46f-beaf-424d-8c98-737f12c5566b)
+
+![Screenshot 2025-06-26 143337](https://github.com/user-attachments/assets/32a5d359-ba03-4a96-85e4-f9be737e52e1)
+
+![Screenshot 2025-06-26 143350](https://github.com/user-attachments/assets/7fefbe7b-1423-4b08-8d39-852e767f633b)
+
+---
+### Introduction to timing libs and steps to include new cell in synthesis
+---
+
+
 
 
