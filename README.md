@@ -3898,6 +3898,99 @@ The contents of the .lef file generated is shown below
 ---
 ### Introduction to timing libs and steps to include new cell in synthesis
 ---
+Now that the **.lef** file has been generated, the next step is to integrate it into **picorv32a**. Before proceeding, the file needs to be moved to the **src** folder, where all the design files are located in one place.
+
+To do this, use the **`cp`** command to copy the file:
+
+```
+cp sky130_vsdinv.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/design/picorv32a/src
+```
+
+This will place the **.lef** file into the **src** directory, ready to be used in the picorv32a design flow.
+
+![Screenshot 2025-06-26 165102](https://github.com/user-attachments/assets/1002222a-e54c-41f1-aad2-7ac44a25f5f2)
+
+![Screenshot 2025-06-26 165155](https://github.com/user-attachments/assets/db78c8c1-2166-4ceb-a602-e9cdbb8c2fd3)
+
+Now, we need to include the **custom cell** in the **OpenLane flow**, and the first step in the OpenLane flow is **synthesis**.
+
+During the synthesis process, the **ABC step** maps the netlist to the cells present in the library. Therefore, it is necessary to have a library that includes the **definition of our custom cell** for successful synthesis.
+
+To proceed, open the **library file** as shown in the image below and verify that the custom cell entry is present in it.
+
+![Screenshot 2025-06-26 165851](https://github.com/user-attachments/assets/6765479d-5cd6-4b31-a30e-9e985b47e83a)
+
+below are the contents of sky130_fc_sc_hd_typical.lib
+
+
+![Screenshot 2025-06-26 170035](https://github.com/user-attachments/assets/c60c45c8-cd46-4510-9317-524f19d7a6ad)
+
+![Screenshot 2025-06-26 170156](https://github.com/user-attachments/assets/582315ef-358b-4062-a0cd-f81b8c5a1973)
+
+![Screenshot 2025-06-26 170213](https://github.com/user-attachments/assets/f220fded-613c-4bc5-883a-944fb93c49ce)
+
+![Screenshot 2025-06-26 170232](https://github.com/user-attachments/assets/90e510be-ddc4-457f-af69-9ee4a7694617)
+
+![Screenshot 2025-06-26 170248](https://github.com/user-attachments/assets/b0fdd69f-e0cb-4f66-8f48-de6390d5f560)
+
+This is how the **library file** appears. There are multiple library files available, typically categorized based on process corners such as **typical**, **slow**, and **fast**. Each library represents different operating conditions:
+
+* **Typical** – Standard or nominal process, voltage, and temperature conditions.
+* **Slow** – Worst-case slow silicon performance.
+* **Fast** – Best-case fast silicon performance.
+
+Our custom cell needs to be added to all relevant libraries to ensure it is available across all corners during synthesis and further stages of the OpenLane flow.
+
+now we will copy all the libraries into the src folder
+
+![Screenshot 2025-06-26 165851](https://github.com/user-attachments/assets/e8c4bcf2-f7ca-4e05-9ca6-168a3b9aab47)
+
+![Screenshot 2025-06-26 171206](https://github.com/user-attachments/assets/e2db740b-ca95-4ded-916e-4e6db2433718)
+
+![Screenshot 2025-06-26 171402](https://github.com/user-attachments/assets/7141351c-0623-4d64-9cd3-030a026443f5)
+
+Here, we need to modify the **`config.tcl`** file located in the **picorv32a** directory.
+
+Open the **`config.tcl`** file and add the commands shown in the image below. These commands are necessary to include the custom cell in the OpenLane flow, allowing the synthesis and implementation process to recognize and use the newly created cell.
+
+before addition:
+
+![Screenshot 2025-06-26 171945](https://github.com/user-attachments/assets/258c8625-d3ef-419f-abe1-de9fb0668d35)
+
+after addition:
+
+![Screenshot 2025-06-26 172946](https://github.com/user-attachments/assets/7117cdbd-cae1-43c5-9c9e-d5e079e20846)
+
+### OPENLANE:
+
+Now, go to the **OpenLane** directory and execute the docker command.
+
+Then, execute the following commands sequentially in the same session:
+
+```
+./flow.tcl -interactive
+package require openlane 0.9
+prep -design picorv32a -tag "latest directory name that i have in my runs folder" -overwrite // This is to continue my runs in the same directory as previous
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+run_synthesis
+```
+
+This process prepares the design, adds the custom **.lef** files to the flow, and initiates the **synthesis step** for the **picorv32a** design.
+
+---
+### Introduction to delay tables
+---
+### Power Aware CTS:
+
+If the **enable pin** of an **AND gate** is set to **logic '1'**, the clock signal will propagate. If it is set to **logic '0'**, the clock will be blocked.
+
+Similarly, for an **OR gate**, when the **enable pin** is set to **logic '0'**, the clock propagates, and when set to **logic '1'**, it blocks the clock.
+
+The main advantage of this **clock blocking** mechanism is **power saving**. During the blocked periods, unnecessary clock switching activity is avoided in parts of the circuit, leading to significant power reduction in the clock tree.
+
+![image](https://github.com/user-attachments/assets/9bb4ae1e-25f2-4471-9991-2d48742dd8bb)
+
 
 
 
