@@ -3992,6 +3992,7 @@ some results of synthesis
 
 ![Screenshot 2025-06-27 093014](https://github.com/user-attachments/assets/c261803e-0be6-42bd-a369-4f3385e3dbc3)
 
+we see a huge slack violation in the synthesis stage itself. So now we have to correct this slack violation.
 ---
 ### Introduction to delay tables
 ---
@@ -4058,8 +4059,9 @@ This is done using **delay tables**.
 
 ![image](https://github.com/user-attachments/assets/be4c3efb-2cd1-49b8-b506-4e20839520d4)
 
+---
 ### Delay Table Usage – Part 1
-
+---
 Let's take the example of the other buffers.
 Using the delay table, we can check how the delay of each buffer changes with different input transition and output load. As the load and transition are different for every buffer, delay will vary.
 The delay table captures this variation accurately by giving the delay corresponding to a particular input transition and load.
@@ -4069,17 +4071,106 @@ The delay table captures this variation accurately by giving the delay correspon
 For a practical example, let's say we have the **input transition of 40ps** for **buffer1** and the **output capacitance** of this buffer is **60fF**. The delay of the cell in this case lies between **x9-x10**.
 The values which are not available in the delay table are extrapolated from the given data, so we can take the range in that case.
 
+---
 ### Delay Table Usage – Part 2
+---
 
 Now we have to calculate the delay of **buffer2**, and after that, we can find the **latency at the 4 clock endpoints**.
 Here, the **input transition is common for both the buffers**. Assuming the transition is around **60ps** and the **load at both buffers is 50fF**, it will give the delay of **y15**.
 The total delay from input to output is **x9' + y15** (here, we are ignoring the delay of the wires). This means the **skew at any output point is zero**.
 If the **load is not the same at every node**, then the **skew will not be zero**.
 
+---
 ### Lab Steps to Configure Synthesis Settings to Fix Slack and Include VSDINV
+---
 
-We will try to modify the parameters of our cell by referring to the **README.md** file in the **configuration folder** in the **OpenLane directory**.
-The **README.md** file contains information about the **parameters of the cell**.
+We will try to modify the parameters of our cell by referring to the **README.md** file located in the **configuration folder** inside the **OpenLane directory**.
+The **README.md** file contains detailed information about the **parameters of the cell**, which will help in adjusting the synthesis settings as needed.
 
+![Screenshot 2025-06-27 104405](https://github.com/user-attachments/assets/f009b376-a1a4-4e7d-8a70-2b1649169d50)
 
+What is WNS and TNS?
+WNS (Worst Negative Slack): The worst (most negative) slack among all timing paths in the design. If WNS is negative, it indicates the most critical timing violation in the design.
+TNS (Total Negative Slack): The sum of all negative slack values across all violating timing paths in the design. It indicates the overall severity of the timing violations.
+
+![Screenshot 2025-06-27 093014](https://github.com/user-attachments/assets/0ef3a4c5-fd2a-4c6f-82b6-238cb1a2cc11)
+
+![Screenshot 2025-06-27 103558](https://github.com/user-attachments/assets/78059997-c2d4-4d33-8132-4c0a7824a62a)
+
+Let's see if we can repair this **slack**. For this, we perform a **timing-driven synthesis** where we try to balance between **delay and area**.
+
+In the **README.md** file, we find that the strategy named **SYNTH\_STRATEGY** focuses on **timing-driven synthesis**.
+
+Currently, the **chip area** is **147712.918400**.
+
+* **TNS (Total Negative Slack)** is **-711.59**.
+* **WNS (Worst Negative Slack)** is **-23.89**.
+
+In the OpenLane window, type the command:
+
+* Now, once again, we have to **prep the design** to update the variables:
+
+```
+prep -design picorv32a -tag 24-03_10-03 -overwrite
+```
+
+* Additional commands to **include the newly added LEF file** into the OpenLane flow:
+
+```
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+```
+
+* Command to **display the current value of `SYNTH_STRATEGY`:**
+
+```
+echo $::env(SYNTH_STRATEGY)
+```
+
+* Command to **set a new value for `SYNTH_STRATEGY`:**
+
+```
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+```
+
+* Command to **check whether `SYNTH_BUFFERING` is enabled:**
+
+```
+echo $::env(SYNTH_BUFFERING)
+```
+
+* Command to **check the current value of `SYNTH_SIZING`:**
+
+```
+echo $::env(SYNTH_SIZING)
+```
+
+* Command to **set a new value for `SYNTH_SIZING`:**
+
+```
+set ::env(SYNTH_SIZING) 1
+```
+
+* Command to **display the current value of `SYNTH_DRIVING_CELL`** to verify whether it's set to the proper cell:
+
+```
+echo $::env(SYNTH_DRIVING_CELL)
+```
+
+* Now that the design is prepped and ready, run the **synthesis** using the following command:
+
+```
+run_synthesis
+```
+![Screenshot 2025-06-27 160158](https://github.com/user-attachments/assets/34ac4592-cb3c-481c-b905-71fd9f45047f)
+
+![Screenshot 2025-06-27 160548](https://github.com/user-attachments/assets/a65bf3b9-8016-4c43-b44b-3938bd2236cb)
+
+Now we see that the area has increased
+
+![Screenshot 2025-06-27 161054](https://github.com/user-attachments/assets/ff745301-0286-46cd-a564-88583afbffdb)
+
+and the slack is fixed
+
+![Screenshot 2025-06-27 161009](https://github.com/user-attachments/assets/1e43a5ba-6392-4aeb-a8b5-701cbc9dfe7d)
 
