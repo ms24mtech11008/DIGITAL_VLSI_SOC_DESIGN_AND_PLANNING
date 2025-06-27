@@ -4174,3 +4174,75 @@ and the slack is fixed
 
 ![Screenshot 2025-06-27 161009](https://github.com/user-attachments/assets/1e43a5ba-6392-4aeb-a8b5-701cbc9dfe7d)
 
+Once the synthesis has accepted our **custom inverter**, we can now proceed to run **floorplan** and **placement** to verify that the cell is properly accepted in the **PnR flow**.
+
+Now that our custom inverter is successfully integrated into the synthesis, we can run the **floorplan** using the following command:
+
+```
+run_floorplan
+```
+![Screenshot 2025-06-27 161617](https://github.com/user-attachments/assets/53c036d9-6d67-4fd7-8b80-1f859fab96ea)
+
+![Screenshot 2025-06-27 161927](https://github.com/user-attachments/assets/162d2277-f7e6-4351-a97e-6e6056540e3b)
+
+Since we are facing an unexpected, unexplained error while using the `run_floorplan` command, we can instead use the following set of commands. These are derived from the file:
+
+```
+Desktop/work/tools/openlane_working_dir/openlane/scripts/tcl_commands/floorplan.tcl
+```
+
+and from the Floorplan Commands section in:
+
+```
+Desktop/work/tools/openlane_working_dir/openlane/docs/source/OpenLANE_commands.md
+```
+
+These commands are internally sourced within the `run_floorplan` command:
+
+```
+init_floorplan
+place_io
+tap_decap_or
+```
+
+Using these commands step-by-step can help bypass the issue with `run_floorplan` and proceed with the floorplanning process manually.
+
+![Screenshot 2025-06-27 163055](https://github.com/user-attachments/assets/9c712cb5-8855-4202-872a-f9bc497fbedd)
+
+![Screenshot 2025-06-27 163126](https://github.com/user-attachments/assets/a2a65b4b-1995-4211-9251-4cc695d2f77d)
+
+Now that the floorplan is done we can do placement.
+run_placement 
+
+![Screenshot 2025-06-27 163553](https://github.com/user-attachments/assets/6283456d-03c1-4050-8a9a-622723d8b2cb)
+
+![Screenshot 2025-06-27 163743](https://github.com/user-attachments/assets/92c02110-ec19-44b8-9243-c8642bd338a4)
+
+Now lets visualize our placement in magic tool 
+
+![Screenshot 2025-06-27 165919](https://github.com/user-attachments/assets/18f11bdb-8950-4170-81bd-6f5064f1a973)
+
+Screenshot of Custom Inverter in Placement DEF with Proper Abutment
+After running placement, the custom inverter can be seen correctly placed inside the placement DEF file along with standard cells.
+
+The abutment is proper, meaning the cell edges align perfectly with neighboring cells without overlaps or gaps.
+
+![Screenshot 2025-06-27 170515](https://github.com/user-attachments/assets/fca95004-4967-4cb8-90f1-c05a1c586e23)
+
+zooming in
+
+![Screenshot 2025-06-27 170515](https://github.com/user-attachments/assets/ba83b4b7-5460-457e-a625-e7b3e1a8719b)
+
+Command in Tkcon Window to View Internal Layers of Cells:
+
+![Screenshot 2025-06-27 170542](https://github.com/user-attachments/assets/b78d2328-0b82-4d6f-bf06-0bef42972c0e)
+
+Abutment of Power Pins with Other Cells Clearly Visible:
+When zoomed in after running the above commands, the power rails (VDD and VSS) of the custom inverter are clearly aligned and abutted with the power rails of other standard cells from the library.
+
+This proper abutment ensures continuous power connectivity across the row in the layout.
+
+![Screenshot 2025-06-27 170612](https://github.com/user-attachments/assets/f8d1b1eb-7b07-4232-9291-a2e4b0233e53)
+
+
+
