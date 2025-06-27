@@ -3986,6 +3986,12 @@ This process prepares the design, adds the custom **.lef** files to the flow, an
 
 ![Screenshot 2025-06-27 092402](https://github.com/user-attachments/assets/7c14d79c-6e6c-48dd-97b0-9aeea6190eec)
 
+some results of synthesis 
+
+![Screenshot 2025-06-27 093001](https://github.com/user-attachments/assets/1a16eefc-99fc-4fac-a186-a2bb6d55472a)
+
+![Screenshot 2025-06-27 093014](https://github.com/user-attachments/assets/c261803e-0be6-42bd-a369-4f3385e3dbc3)
+
 ---
 ### Introduction to delay tables
 ---
