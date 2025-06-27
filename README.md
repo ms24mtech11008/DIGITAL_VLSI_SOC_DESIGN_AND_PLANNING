@@ -3978,6 +3978,14 @@ run_synthesis
 
 This process prepares the design, adds the custom **.lef** files to the flow, and initiates the **synthesis step** for the **picorv32a** design.
 
+![Screenshot 2025-06-27 091911](https://github.com/user-attachments/assets/28e6a026-e5fb-4378-aa74-2dc0804bb72a)
+
+![Screenshot 2025-06-27 092116](https://github.com/user-attachments/assets/268a2275-8522-483f-80b0-2884c315761b)
+
+![Screenshot 2025-06-27 092257](https://github.com/user-attachments/assets/d2c7378d-90cf-438e-99ee-1e040e9396e4)
+
+![Screenshot 2025-06-27 092402](https://github.com/user-attachments/assets/7c14d79c-6e6c-48dd-97b0-9aeea6190eec)
+
 ---
 ### Introduction to delay tables
 ---
