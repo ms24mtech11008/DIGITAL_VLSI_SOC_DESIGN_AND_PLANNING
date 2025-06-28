@@ -4390,6 +4390,36 @@ Newly created pre_sta.conf for STA analysis in openlane directory
 
 ![Screenshot 2025-06-28 120348](https://github.com/user-attachments/assets/0ebf01fd-18b0-4e28-af0d-eb801e8105cf)
 
+The newly created **`my_base.sdc`** file for **STA (Static Timing Analysis)** is placed in the following directory:
+
+```
+openlane/designs/picorv32a/src
+```
+
+This file is created based on the reference from:
+
+```
+openlane/scripts/base.sdc
+```
+
+The **`my_base.sdc`** file defines timing constraints such as clock definitions, input/output delays, and other constraints necessary for accurate STA analysis during the OpenLANE flow for the **picorv32a** design.
+
+![Screenshot 2025-06-28 121154](https://github.com/user-attachments/assets/68f32cf2-1ee3-45b1-bae9-3afafc6462b5)
+
+
+* **Change the directory to the OpenLANE working directory:**
+
+```
+cd Desktop/work/tools/openlane_working_dir/openlane
+```
+
+* **Run OpenSTA with the required configuration file:**
+
+```
+sta pre_sta.conf
+```
+
+This command invokes the **OpenSTA** tool and runs the static timing analysis based on the constraints and setup defined in the **`pre_sta.conf`** file.
 
 
 
