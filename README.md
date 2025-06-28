@@ -4431,6 +4431,65 @@ This command invokes the **OpenSTA** tool and runs the static timing analysis ba
 
 ![Screenshot 2025-06-28 131323](https://github.com/user-attachments/assets/a3b199fa-7286-4870-9d50-a32d0c81cb54)
 
+---
+### Lab steps to optimize synthesis to reduce setup violations
+---
+Since higher fanout is contributing to increased delay, we can add parameters to reduce fanout and then perform synthesis again.
+### Reframed Commands Without Changing Meaning:
+
+* **Prepare the design by creating the required files and directories for running the design `picorv32a`:**
+
+```
+prep -design picorv32a 
+```
+
+* **Add the newly created LEF files to the OpenLANE flow:**
+
+```
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+```
+
+* **Set the value for `SYNTH_SIZING` to enable cell sizing:**
+
+```
+set ::env(SYNTH_SIZING) 1
+```
+
+* **Set the value for `SYNTH_MAX_FANOUT` to limit maximum fanout and reduce delay:**
+
+```
+set ::env(SYNTH_MAX_FANOUT) 4
+```
+
+* **Check the current value of `SYNTH_DRIVING_CELL` to ensure the correct driving cell is selected:**
+
+```
+echo $::env(SYNTH_DRIVING_CELL)
+```
+
+* **Run synthesis for the design:**
+
+```
+run_synthesis
+```
+
+![Screenshot 2025-06-28 143454](https://github.com/user-attachments/assets/32a924f0-a142-4fb9-b796-6283b323f74d)
+
+![Screenshot 2025-06-28 143759](https://github.com/user-attachments/assets/b2196759-79c9-4a5e-a5d4-e6a3d7449a64)
+
+Now, run the sta pre_sta.conf command in a new terminal in openlane directory itself,
+
+![Screenshot 2025-06-28 143934](https://github.com/user-attachments/assets/ab79d4c5-5456-4496-acb9-4d7c77a79d7c)
+
+![Screenshot 2025-06-28 143957](https://github.com/user-attachments/assets/c1378e38-799d-42d6-99a7-8ddcde4cf2b0)
+
+![Screenshot 2025-06-28 144020](https://github.com/user-attachments/assets/50e53f02-c595-414c-84ae-8ae0311bb6ee)
+
+![Screenshot 2025-06-28 144057](https://github.com/user-attachments/assets/75c7e184-08ef-4a7b-8b48-8971db346f3e)
+
+---
+
 
 
 
