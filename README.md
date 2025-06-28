@@ -4489,6 +4489,73 @@ Now, run the sta pre_sta.conf command in a new terminal in openlane directory it
 ![Screenshot 2025-06-28 144057](https://github.com/user-attachments/assets/75c7e184-08ef-4a7b-8b48-8971db346f3e)
 
 ---
+### Lab steps to do basic timing ECO
+---
+
+here is the **generalized form** of the commands with **`instance_name`** and **`net_name`** placeholders instead of specific names:
+
+* **Report all connections to a net:**
+
+```
+report_net -connections <net_name>
+```
+
+* **Check the syntax of the replace command:**
+
+```
+help replace_cell
+```
+
+* **Replace the cell with a higher drive strength cell:**
+
+```
+replace_cell <instance_name> <new_cell_name>
+```
+
+* **Generate a custom timing report with details like net capacitance, slew, and input pins:**
+
+```
+report_checks -fields {net cap slew input_pins} -digits 4
+```
+
+###  **Example usage:**
+
+If an instance named **`or_gate_inst`** needs to be replaced with a higher drive cell like **`sky130_fd_sc_hd__or3_4`**, the command would be:
+
+```
+replace_cell or_gate_inst sky130_fd_sc_hd__or3_4
+```
+
+This format can be used for any instance in the design.
+
+below is the Driver net whose fanout is 4 by the cell driving it has a strenghth 2
+
+![Screenshot 2025-06-28 161312](https://github.com/user-attachments/assets/7757f3eb-6ed2-4317-9a55-438744d3f92c)
+
+![Screenshot 2025-06-28 161442](https://github.com/user-attachments/assets/fce66a23-04f6-4a46-9d53-762e7e4623b0)
+
+the wns is -23.9
+
+![Screenshot 2025-06-28 161501](https://github.com/user-attachments/assets/ed99d38c-4b71-4e76-8460-fd60699f850a)
+
+![Screenshot 2025-06-28 162229](https://github.com/user-attachments/assets/c24d31cf-1222-4515-87bc-717185c2f513)
+
+wns has reduced.
+
+![Screenshot 2025-06-28 163033](https://github.com/user-attachments/assets/6be4e585-13cb-4125-87b2-2c03ddc7cf1c)
+
+![Screenshot 2025-06-28 163101](https://github.com/user-attachments/assets/9f15c3c0-5f96-4a39-a143-d8e3ed1fcb46)
+
+![Screenshot 2025-06-28 163227](https://github.com/user-attachments/assets/b9e3d730-1ab9-485e-bbee-a69df8806ace)
+
+![Screenshot 2025-06-28 163259](https://github.com/user-attachments/assets/860fa128-f09d-4345-8fd6-6b0911422f14)
+
+This is how we reduce slack.
+
+---
+
+
+
 
 
 
