@@ -4325,5 +4325,72 @@ Next, we need to determine the **combinational path delay** for both **Stage 1**
 
 ![image](https://github.com/user-attachments/assets/dc38faa7-98ff-428d-9d78-6a23bbc777fe)
 
+---
+### Lab steps to configure OpenSTA for post-synth timing analysis
+---
+
+Since we have achieved **0 WNS** after the improved timing run, we will now perform **timing analysis on the initial synthesis run**, which contains **multiple violations** as no parameters were applied to optimize the timing.
+Below are the commands to **invoke the OpenLANE flow**, **include the new LEF**, and **run synthesis**.
+
+* **Change the directory to the OpenLANE flow directory:**
+
+```
+cd Desktop/work/tools/openlane_working_dir/openlane
+```
+
+* **Invoke the OpenLANE Docker container:**
+  Since the long Docker command is already aliased to `docker`, we can simply run:
+
+```
+docker
+```
+
+* **Start the OpenLANE flow in interactive mode:**
+
+```
+./flow.tcl -interactive
+```
+
+* **Load the required package for OpenLANE functionality:**
+
+```
+package require openlane 0.9
+```
+
+* **Prepare the design by creating the necessary files and directories. In this case, the design is `picorv32a`:**
+
+```
+prep -design picorv32a
+```
+
+* **Include the newly added LEF files into the OpenLANE flow:**
+
+```
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+```
+
+* **Set the `SYNTH_SIZING` variable to enable cell sizing:**
+
+```
+set ::env(SYNTH_SIZING) 1
+```
+
+* **Run synthesis for the design:**
+
+```
+run_synthesis
+```
+
+![Screenshot 2025-06-28 115910](https://github.com/user-attachments/assets/6770a960-7cd2-45ab-bcd2-d5d06c5eaa24)
+
+![Screenshot 2025-06-28 115933](https://github.com/user-attachments/assets/e72889f4-5e0a-40fa-b0cc-ecc88166d0f9)
+
+Newly created pre_sta.conf for STA analysis in openlane directory
+
+![Screenshot 2025-06-28 120348](https://github.com/user-attachments/assets/0ebf01fd-18b0-4e28-af0d-eb801e8105cf)
+
+
+
 
 
