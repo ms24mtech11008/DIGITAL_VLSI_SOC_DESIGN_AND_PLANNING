@@ -4404,8 +4404,7 @@ openlane/scripts/base.sdc
 
 The **`my_base.sdc`** file defines timing constraints such as clock definitions, input/output delays, and other constraints necessary for accurate STA analysis during the OpenLANE flow for the **picorv32a** design.
 
-![Screenshot 2025-06-28 121154](https://github.com/user-attachments/assets/68f32cf2-1ee3-45b1-bae9-3afafc6462b5)
-
+![Screenshot 2025-06-28 124714](https://github.com/user-attachments/assets/82ba66fa-500b-44f1-a09c-5b756a2df835)
 
 * **Change the directory to the OpenLANE working directory:**
 
@@ -4418,8 +4417,19 @@ cd Desktop/work/tools/openlane_working_dir/openlane
 ```
 sta pre_sta.conf
 ```
+![Screenshot 2025-06-28 121436](https://github.com/user-attachments/assets/39bd8a72-de42-4f36-8f5c-7f919ce56a93)
 
 This command invokes the **OpenSTA** tool and runs the static timing analysis based on the constraints and setup defined in the **`pre_sta.conf`** file.
+
+![Screenshot 2025-06-28 131205](https://github.com/user-attachments/assets/e854cc88-516b-40f6-8b97-9cf4a568686c)
+
+![Screenshot 2025-06-28 131222](https://github.com/user-attachments/assets/99fe3996-aef9-4c0f-b297-f7d148554c81)
+
+![Screenshot 2025-06-28 131239](https://github.com/user-attachments/assets/2d68c954-b0cb-409d-859d-764043eaba02)
+
+![Screenshot 2025-06-28 131303](https://github.com/user-attachments/assets/c25cd4c6-ecbc-4a10-8759-48b6c8ac0815)
+
+![Screenshot 2025-06-28 131323](https://github.com/user-attachments/assets/a3b199fa-7286-4870-9d50-a32d0c81cb54)
 
 
 
