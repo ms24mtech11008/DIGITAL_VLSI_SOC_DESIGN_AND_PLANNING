@@ -4553,6 +4553,65 @@ wns has reduced.
 This is how we reduce slack.
 
 ---
+## Clock tree synthesis TritonCTS and signal integrity
+---
+### Clock tree routing and buffering using H-Tree algorithm
+---
+
+### Clock Tree Synthesis:
+
+Connect **clk1** to **FF1 and FF2 of stage 1**, **FF1 of stage 3**, and **FF2 of stage 4** using a **physical wire**.
+
+![Screenshot 2025-06-28 164125](https://github.com/user-attachments/assets/1ce533a6-2c39-4cbe-b7c3-7f95776ecf6b)
+
+Now let’s understand the issue here. Suppose there is some **physical distance** between **clk and FF1/FF2**, which leads to **t2 > t1**.
+The **Skew = t2 - t1**, and ideally, the **skew should be 0 ps**.
+
+![Screenshot 2025-06-28 164232](https://github.com/user-attachments/assets/da62db95-5521-49e3-8aff-12ac7f89f97a)
+
+Previously, we built a **bad clock tree**, and now we will try to improve it in a **smarter way**. Here, the **clock (clk)** will enter from a **midpoint**, allowing it to reach all flip-flops at **approximately the same time**. Similarly, we will connect **clk2** to the flip-flops using the **midpoint approach**.
+
+![Screenshot 2025-06-28 164344](https://github.com/user-attachments/assets/b9ddd968-4a04-4232-b669-b32ffcbf4d0c)
+
+Now let's look at **Clock Tree Synthesis (Buffering)**. Suppose we have a **clock route** that needs to reach specific locations and **clock endpoints**. Along this path, there are multiple **capacitances and resistances** present.
+
+![image](https://github.com/user-attachments/assets/4a7b7a05-89da-40f8-a963-70a6abeacfa3)
+
+Due to the **wire length** and the presence of **RC networks**, the waveform at the output does not match the input. To resolve this issue, we use **repeaters**. The key difference between repeaters used for the **clock** and those used for the **data path** is that **clock repeaters maintain equal rise and fall times**.
+
+The first step is to **remove the existing clock route**, place **two repeaters**, and allow the clock signal to pass through them. In this setup, the waveform generated at the input will properly propagate to the output. We can add **as many repeaters as needed** to maintain the **continuous flow of the clock signal** until the output.
+
+![image](https://github.com/user-attachments/assets/46d040ff-4935-4ce5-b19c-9eb7546e6535)
+
+---
+### Crosstalk and clock net shielding
+---
+### Clock Net Shielding:
+
+Until now, we have constructed the clock tree in a way that the **skew between the launch flop and capture flop is zero**, where **skew refers to the latency difference between the clock ports of the flop pins**.
+
+**Clock net shielding** is applied to critical clock nets in the design. It involves **shielding the clock net**, meaning we **protect the clock signal from interference from the outside world**. This shielding acts like a **house for the clock**, ensuring signal integrity and reducing noise and coupling effects.
+
+![Screenshot 2025-06-28 164851](https://github.com/user-attachments/assets/b9b930fb-1c27-4832-b59b-54c2eb2c8a3d)
+
+If the **clock net is not protected**, we can face two major issues: **Glitch** and **Delta Delay**.
+
+Let’s consider one clock net. Whenever there is a **switching activity** on the **aggressor net**, the **coupling capacitance** between adjacent wires can cause interference. If this capacitance is significant, **any switching activity on the aggressor will directly affect the nearby clock net**, leading to signal integrity problems like glitches or unexpected delays.
+
+![Screenshot 2025-06-28 164951](https://github.com/user-attachments/assets/622e02d7-f391-46d4-b900-bc3ea6c3b8d0)
+
+**Shielding** is a technique used to **protect the net from problems like glitch and delta delay**. In shielding, an **extra wire is placed between two signal wires** where **coupling capacitance** is generated. This extra wire is either **connected to ground (GND) or VDD** to absorb interference.
+
+When switching from **logic '1' to logic '0'**, the presence of coupling causes a **bump**, resulting in **delta delay**. Due to this, the **skew is no longer zero**. The impact of **crosstalk-induced delta delay** is that it causes the clock skew to become **non-zero**, affecting timing integrity.
+
+![Screenshot 2025-06-28 165105](https://github.com/user-attachments/assets/6e432faa-50d2-4afe-9bde-d2048a236c4b)
+
+By shielding we are breaking the coupling capacitance between the aggraser and victim. Shields don't switch.
+
+---
+### Lab steps to run CTS using Triton
+---
+
 
 
 
