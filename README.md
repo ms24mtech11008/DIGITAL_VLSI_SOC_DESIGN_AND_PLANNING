@@ -4612,9 +4612,128 @@ By shielding we are breaking the coupling capacitance between the aggraser and v
 ### Lab steps to run CTS using Triton
 ---
 
+We now need to replace the old netlist with the newly generated netlist obtained after slack reduction, and then proceed with floorplanning, placement, and CTS.
 
+![Screenshot 2025-06-28 220738](https://github.com/user-attachments/assets/30532d5c-2032-4b61-9167-1b8d0dabebdd)
 
+The image shown above represents the netlist before applying any modifications.
 
+We need to create a copy of this old netlist and then add the newly generated netlist, which will be used in the OpenLane flow for further processes.
+
+Follow these commands to make the copy:
+
+1. Navigate to the directory:
+
+```bash
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/02-04_05-27/results/synthesis/
+```
+
+2. List the contents of the directory:
+
+```bash
+ls -ltr
+```
+
+3. Copy the netlist with a new name:
+
+```bash
+cp picorv32a.synthesis.v picorv32a.synthesis_old.v
+```
+
+4. Verify the copied file by listing the contents again:
+
+```bash
+ls -ltr
+```
+Now we will do synthesis again then floorplan , placement and cts in the openlane directory itself by the following commands,
+
+```tcl
+prep -design picorv32a -tag 02-04_05-27 -overwrite
+
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+set ::env(SYNTH_SIZING) 1
+
+run_synthesis
+init_floorplan
+place_io
+tap_decap_or
+run_placement
+
+# If any error occurs during CTS, use the following command
+unset ::env(LIB_CTS)
+
+run_cts
+```
+
+This flow initializes the design with the specified tag, adds necessary LEF files, applies synthesis with a delay-driven strategy, and continues through floorplanning, IO placement, tap/decap insertion, placement, and clock tree synthesis (CTS). If CTS errors out, the `unset ::env(LIB_CTS)` command can be used to resolve the issue before rerunning CTS.
+
+![Screenshot 2025-06-28 221554](https://github.com/user-attachments/assets/377fe24a-bd01-4236-bd72-136d8efff4a0)
+
+![Screenshot 2025-06-28 221608](https://github.com/user-attachments/assets/2ea17d3f-fd51-490a-9fa8-d91732172f02)
+
+![Screenshot 2025-06-28 221641](https://github.com/user-attachments/assets/be961c8c-a8fa-445f-9e53-0334c44697c1)
+
+![Screenshot 2025-06-28 221753](https://github.com/user-attachments/assets/fa1a4dbe-b59d-483e-ac47-0cb36f51751d)
+
+![Screenshot 2025-06-28 221838](https://github.com/user-attachments/assets/e156c26c-bc70-407b-966f-02c53f2cfd22)
+
+![Screenshot 2025-06-28 222009](https://github.com/user-attachments/assets/bbf4705d-1d74-4441-8eae-8c25a59b6a4d)
+
+![Screenshot 2025-06-29 094409](https://github.com/user-attachments/assets/043e9510-8df3-46ef-9a73-8536afca9bde)
+
+After run_cts we get a new netlist (.v) in the location shown in below image.
+
+![Screenshot 2025-06-29 094628](https://github.com/user-attachments/assets/6deef137-eb6f-4e93-ae16-b41d9aa12504)
+
+### Why Do We Get a New Netlist After `run_cts`?
+
+When you run Clock Tree Synthesis (CTS) using `run_cts` in OpenLane (or any digital design flow), a new netlist is generated because the clock tree is inserted into the design.
+
+### Reason for New Netlist:
+
+* The initial netlist after synthesis only contains:
+
+  * Combinational logic
+  * Sequential elements (flip-flops, latches)
+  * Basic clock definitions without clock tree buffers or proper clock distribution
+
+* The clock tree synthesis (CTS) step:
+
+  * Adds clock buffers or inverters.
+  * Builds a balanced clock distribution network.
+  * Reduces clock skew and ensures the clock reaches all sequential elements reliably within timing constraints.
+
+### Modifications in the New Netlist:
+
+* Insertion of:
+
+  * Clock buffers such as CLKBUF, INV, BUFX
+  * Clock tree routing connections
+* Updates to:
+
+  * Wire connections (nets)
+  * Instance list (new cells added for the clock tree)
+
+### File Naming:
+
+* The netlist after CTS is typically named like:
+
+  * `picorv32a.cts.v`
+    This represents the design with the clock tree inserted.
+
+### Summary:
+
+* Synthesis netlist: Contains functional logic without a clock tree.
+* CTS netlist: Contains functional logic along with a clock distribution network (clock buffers and routing).
+
+This CTS-updated netlist is then used for further steps like routing and signoff checks.
+
+---
+### Lab steps to verify CTS runs
+---
 
 
 
