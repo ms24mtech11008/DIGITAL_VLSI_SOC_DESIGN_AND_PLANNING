@@ -5015,4 +5015,45 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 ### Introduction to Maze Routing – Lee’s algorithm
 ---
 
+The next and final stage in the physical design process is **Routing and DRC**.
+
+### **Routing:**
+
+Routing is the process of determining the best and shortest possible connection between two endpoints, where one is the **source** and the other is the **target**, with minimal twists and turns in the path.
+
+### **Maze Routing (Lee’s Algorithm):**
+
+This method ensures that the routing paths do not form zig-zag patterns. Most of the routes follow **L-shaped or Z-shaped paths**. The algorithm starts by creating a set of **grids**, known as the **routing grid**, which is used at the backend for routing. These grids have defined dimensions and form the routing space.
+
+In this grid, there are two main points: the **source** and the **target**. The algorithm’s goal is to find the best possible route between these two points using the routing grid.
+
+The first step of the algorithm involves **labeling all the adjacent grids** around the source. Only the **horizontal and vertical adjacent grids** are labeled, while the **diagonal grids are ignored**, as illustrated in the image below.
+
+![Screenshot 2025-06-29 124905](https://github.com/user-attachments/assets/fa421d8c-23e1-4703-911d-5da03e12130a)
+
+---
+### **Lee’s Algorithm Conclusion:**
+----
+
+The grids are labeled with successive integers step by step until the target point is reached. In the given example, the target is reached when the label reaches the integer **9**.
+
+![Screenshot 2025-06-29 125038](https://github.com/user-attachments/assets/c2a409e0-c780-4c26-b39a-b44aacb65b6e)
+
+Now, there are multiple possible paths to reach the target from the source, but the goal is to select the best and shortest possible path. It is preferable to avoid zig-zag paths and instead choose routing paths that are primarily in ‘L’ shape for better efficiency.
+
+![Screenshot 2025-06-29 125147](https://github.com/user-attachments/assets/1c3d3b52-3730-4d93-b258-5302b9141edf)
+
+Now, let’s consider another example for routing and follow the exact same steps as demonstrated in the previous example.
+
+![Screenshot 2025-06-29 125252](https://github.com/user-attachments/assets/f32a4f42-630c-438e-93c7-bb1760c84dd7)
+
+![Screenshot 2025-06-29 125619](https://github.com/user-attachments/assets/79e7436d-634a-4137-9a67-abd7997a6c86)
+
+---
+### Design Rule Check
+---
+To proceed with DRC, we need to follow certain steps known as DRC cleaning.
+Let’s consider the example of the circuit discussed above. Suppose there are two parallel wires, the design rule specifies that there must be a minimum required distance maintained between these two wires.
+
+![Screenshot 2025-06-29 125935](https://github.com/user-attachments/assets/8b815424-256b-4287-96a0-8f4017d4f668)
 
