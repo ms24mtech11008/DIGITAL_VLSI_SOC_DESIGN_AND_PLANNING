@@ -4435,7 +4435,6 @@ This command invokes the **OpenSTA** tool and runs the static timing analysis ba
 ### Lab steps to optimize synthesis to reduce setup violations
 ---
 Since higher fanout is contributing to increased delay, we can add parameters to reduce fanout and then perform synthesis again.
-### Reframed Commands Without Changing Meaning:
 
 * **Prepare the design by creating the required files and directories for running the design `picorv32a`:**
 
@@ -4812,7 +4811,6 @@ exit
 ---
 
 
-i
 
 
 
