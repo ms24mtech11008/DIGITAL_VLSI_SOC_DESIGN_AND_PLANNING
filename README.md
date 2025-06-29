@@ -4993,4 +4993,26 @@ set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_
 # Check CTS_CLK_BUFFER_LIST after reinserting
 echo $::env(CTS_CLK_BUFFER_LIST)
 ```
+![Screenshot 2025-06-29 115256](https://github.com/user-attachments/assets/a7cb4bb8-220d-431d-bc89-e7afcb3cbb74)
+
+![Screenshot 2025-06-29 115643](https://github.com/user-attachments/assets/88db73a4-a54f-4cad-a2ca-ff741c47c280)
+
+![Screenshot 2025-06-29 120535](https://github.com/user-attachments/assets/d24be58f-84bb-4e42-bad6-74ff632e7786)
+
+![Screenshot 2025-06-29 120743](https://github.com/user-attachments/assets/517f7d16-66fd-45b0-9ef9-fdba09a07f80)
+
+![Screenshot 2025-06-29 120815](https://github.com/user-attachments/assets/ab245693-79a8-476a-ba48-fce3efee3efd)
+
+![Screenshot 2025-06-29 120938](https://github.com/user-attachments/assets/1a8c0366-23aa-47cb-9e16-0157fc466a59)
+
+![Screenshot 2025-06-29 121217](https://github.com/user-attachments/assets/fb4d45f0-0d3b-4f7b-83a2-56f9697394f5)
+
+---
+# Day 5 -Final step for RTL2GDS using tritinRoute and openSTA
+---
+## Routing and design rule check (DRC)
+---
+### Introduction to Maze Routing – Lee’s algorithm
+---
+
 
