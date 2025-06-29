@@ -4809,8 +4809,104 @@ exit
 ![Screenshot 2025-06-29 110421](https://github.com/user-attachments/assets/27825137-bdb5-478e-94c4-3d347999e25b)
 
 ---
+## Timing analysis with real clock using openSTA
+---
+### Setup timing analysis using real clocks
+---
 
+The clock tree in a real circuit appears slightly different from an ideal clock because it includes components like buffers and wires. The clock signal reaches the launch and capture flip-flops through a series of buffers. As a result, the clock signal does not arrive at the flip-flop exactly at time t = 0 due to the delay introduced by these buffers.
 
+Therefore, the setup timing equation is modified. Initially, the ideal condition was:
 
+```
+θ < T
+```
 
+With the real clock tree, it becomes:
+
+```
+(θ + 1 + 2) < (T + 1 + 3 + 4)
+```
+
+Here:
+
+* `θ` represents the data path delay.
+* `1` and `2` are the clock delays to the launch flip-flop.
+* `3` and `4` are the clock delays to the capture flip-flop.
+* `T` is the clock period.
+
+This equation accounts for the additional clock delays introduced by the clock tree elements like buffers and wires.
+
+![Screenshot 2025-06-29 112233](https://github.com/user-attachments/assets/d67dbdcf-6050-4bf6-aac5-b3c27c317f8a)
+
+Let’s define **“1 + 2” as ∆1**, and **“1 + 3 + 4” as ∆2**, where the skew is given by **(∆1 − ∆2)**.
+
+![image](https://github.com/user-attachments/assets/0969e4d6-3cd6-4874-b7ec-d25897c50d86)
+
+Here, we also need to consider **propagation skew (S)** and **uncertainty delay (US)**. So, the final equation becomes:
+
+```
+(θ + ∆1) < (T + ∆2 - S - US)
+```
+
+We can also interpret this as:
+
+* **(θ + ∆1)** → **Data arrival time**
+* **(T + ∆2 - S - US)** → **Data required time**
+
+If **(Data required time - Data arrival time)** is **positive**, the timing is met. If it is **negative**, it is referred to as **slack**.
+
+---
+
+### Hold Timing Analysis:
+
+Hold timing analysis is slightly different from setup timing analysis. Here, the first clock pulse is sent to both the **launch flip-flop** and the **capture flip-flop** simultaneously.
+
+The hold condition states that:
+
+```
+Hold time (H) < Combinational delay (θ)
+```
+
+Or simply:
+
+```
+θ > H
+```
+
+This ensures that data does not get captured too early at the capture flip-flop.
+
+![Screenshot 2025-06-29 112625](https://github.com/user-attachments/assets/2ce393a7-5e98-449f-8570-dcf55223519c)
+
+Hence, a finite time **‘H’** is required for **‘Qm’** to reach **‘Q’**, which means the **internal delay of MUX2 is equal to the hold time**.
+
+Now, when we consider the real clock network, the equation changes to:
+
+```
+(θ + ∆1) > (H + ∆2)
+```
+![Screenshot 2025-06-29 112727](https://github.com/user-attachments/assets/c250bfcf-1eee-412f-9d96-068f863325b2)
+
+---
+### Hold timing analysis using real clocks
+---
+The combinational delay should be greater than the hold time of the capture flip-flop. When the clock reaches the launch flip-flop, it experiences approximately a 2-buffer delay (∆1), and when it reaches the capture flip-flop, it goes through approximately a 3-buffer delay (∆2). The uncertainty remains the same for both flip-flops since the clock is applied to both from the same clock edge. Now, let’s incorporate the uncertainty value into the equation.
+
+![image](https://github.com/user-attachments/assets/1cae9dfb-915b-4d5b-ae1c-4952cb0a2123)
+
+Slack is calculated as Data arrival time minus Data required time. Slack should either be positive or zero. If slack becomes negative, it is referred to as a violation.
+
+![Screenshot 2025-06-29 113001](https://github.com/user-attachments/assets/af5dec81-bd9c-43fd-aeb9-e071e9865378)
+
+Let's identify the timing paths from design, with single clock
+
+![Screenshot 2025-06-29 113021](https://github.com/user-attachments/assets/8e73295b-261e-4956-9fa6-b6b4a4c7f9d3)
+
+![Screenshot 2025-06-29 113034](https://github.com/user-attachments/assets/615e0143-ca5b-4cf6-b0fd-b1bbee637576)
+
+![Screenshot 2025-06-29 113042](https://github.com/user-attachments/assets/f05e9953-8d8e-4e9a-9328-e5cfc9a57957)
+
+---
+### Lab steps to analyze timing with real clocks using OpenSTA
+---
 
