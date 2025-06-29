@@ -4734,6 +4734,84 @@ This CTS-updated netlist is then used for further steps like routing and signoff
 ---
 ### Lab steps to verify CTS runs
 ---
+Continuing after run_cts
+
+### Commands to Run OPENROAD and Create the Database
+
+```bash
+# Command to start OpenROAD tool
+openroad
+```
+
+### Load Design Files into OpenROAD
+
+```tcl
+# Read LEF file (contains technology and physical information)
+read_lef /openLANE_flow/designs/picorv32a/runs/29-06_03-58/tmp/merged.lef
+
+# Read DEF file (contains placement and routing information)
+read_def /openLANE_flow/designs/picorv32a/runs/29-06_03-58/results/cts/picorv32a.cts.def
+```
+
+### Create and Load an OpenROAD Database
+
+```tcl
+# Create an OpenROAD database from the loaded LEF and DEF
+write_db pico_cts.db
+
+# Load the created database
+read_db pico_cts.db
+```
+
+### Load Netlist, Library, and Constraints
+
+```tcl
+# Read netlist generated after CTS
+read_verilog /openLANE_flow/designs/picorv32a/runs/29-06_03-58/results/synthesis/picorv32a.synthesis_cts.v
+
+# Read the timing library for the design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# Link the design with the library
+link_design picorv32a
+
+# Read the custom SDC file containing constraints
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+```
+
+### Setup Clocks and Generate Timing Report
+
+```tcl
+# Set all clocks as propagated clocks
+set_propagated_clock [all_clocks]
+
+# Check syntax and options for the report_checks command
+help report_checks
+
+# Generate a detailed timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+```
+
+### Exit OpenROAD
+
+```tcl
+exit
+```
+![Screenshot 2025-06-29 104204](https://github.com/user-attachments/assets/9cad1e1e-1585-4e93-84c5-7dd7fe69c8e4)
+
+![Screenshot 2025-06-29 105214](https://github.com/user-attachments/assets/e187354b-61b3-4475-aabb-0009a912c7ed)
+
+![Screenshot 2025-06-29 110104](https://github.com/user-attachments/assets/abe034cd-3594-4cdb-910b-b3b51d3706bc)
+
+![Screenshot 2025-06-29 110204](https://github.com/user-attachments/assets/2c4d961c-ca20-40a1-b81f-9cecd7b5c38d)
+
+![Screenshot 2025-06-29 110401](https://github.com/user-attachments/assets/c8874a3f-610b-4224-a8d4-f2cd694fa415)
+
+![Screenshot 2025-06-29 110421](https://github.com/user-attachments/assets/27825137-bdb5-478e-94c4-3d347999e25b)
+
+---
+
+
 
 
 
