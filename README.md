@@ -5057,3 +5057,47 @@ Let’s consider the example of the circuit discussed above. Suppose there are t
 
 ![Screenshot 2025-06-29 125935](https://github.com/user-attachments/assets/8b815424-256b-4287-96a0-8f4017d4f668)
 
+Rule 1 – Wire Width:
+The width of the wire must meet a minimum requirement, which is determined based on the optical wavelength of the lithography technique being used.
+
+![Screenshot 2025-06-29 130023](https://github.com/user-attachments/assets/aa3954c4-8d12-4631-9d07-2c27b3449d9e)
+
+Rule 2 – Wire Pitch:
+The minimum pitch between two wires must be maintained as specified, as illustrated in the figure below.
+
+![Screenshot 2025-06-29 130034](https://github.com/user-attachments/assets/29594dba-a2ec-4e46-a657-bab9efc92f9c)
+
+Rule 3 – Wire Spacing:
+The spacing between two wires should follow the required minimum distance, as demonstrated in the image below.
+
+![image](https://github.com/user-attachments/assets/654e68be-c884-4502-9bdb-dbac9c147b6a)
+
+Let’s consider another aspect of the design rule check using the same example.
+
+![Screenshot 2025-06-29 130901](https://github.com/user-attachments/assets/a6b89089-b4c3-4c06-97db-1d8427461e02)
+
+The solution to this signal short problem is to move one of the wires to a different metal layer. Typically, the upper metal layers are wider compared to the lower ones.
+
+![Screenshot 2025-06-29 131002](https://github.com/user-attachments/assets/0647f67e-9ab9-435f-9067-4da21fcbfca3)
+
+After this solution, we add two new DRC rules should be check.
+
+Rule 1) Via Width:- via width should be some minimum value.
+
+![Screenshot 2025-06-29 131109](https://github.com/user-attachments/assets/cbdda84d-d40d-4c59-b69c-3b26b9772323)
+
+Rule 2 – Via Spacing:
+The spacing between vias should adhere to the specified minimum value.
+
+![image](https://github.com/user-attachments/assets/483eeed5-19af-44e0-89cf-b3a38d559d86)
+
+After routing and DRC, the next step is parasitic extraction. The resistance and capacitance present on every wire are extracted and used for the subsequent steps in the flow.
+
+![Screenshot 2025-06-29 131311](https://github.com/user-attachments/assets/1e5006ab-1184-4df6-b85e-83ffc1749476)
+
+---
+## Power Distribution Network and routing
+---
+### Lab steps to build power distribution network
+---
+
