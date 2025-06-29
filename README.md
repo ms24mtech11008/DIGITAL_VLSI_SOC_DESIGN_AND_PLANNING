@@ -4733,6 +4733,10 @@ This CTS-updated netlist is then used for further steps like routing and signoff
 ---
 ### Lab steps to verify CTS runs
 ---
+and
+---
+### Lab steps to analyze timing with real clocks using OpenSTA
+---
 Continuing after run_cts
 
 ### Commands to Run OPENROAD and Create the Database
@@ -4907,6 +4911,86 @@ Let's identify the timing paths from design, with single clock
 ![Screenshot 2025-06-29 113042](https://github.com/user-attachments/assets/f05e9953-8d8e-4e9a-9328-e5cfc9a57957)
 
 ---
-### Lab steps to analyze timing with real clocks using OpenSTA
+### Lab steps to execute OpenSTA with right timing libraries and CTS assignment
 ---
+and 
+---
+### Lab steps to observe impact of bigger CTS buffers on setup and hold timing
+---
+
+Explore post-CTS OpenROAD timing analysis by removing the **`sky130_fd_sc_hd__clkbuf_1`** cell from the clock buffer list variable **`CTS_CLK_BUFFER_LIST`**. The following commands are used in the OpenLANE flow to perform OpenROAD timing analysis after modifying **`CTS_CLK_BUFFER_LIST`**:
+
+```tcl
+# Check the current value of CTS_CLK_BUFFER_LIST
+echo $::env(CTS_CLK_BUFFER_LIST)
+
+# Remove 'sky130_fd_sc_hd__clkbuf_1' from the list
+set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]
+
+# Verify the updated CTS_CLK_BUFFER_LIST
+echo $::env(CTS_CLK_BUFFER_LIST)
+
+# Check the current value of CURRENT_DEF
+echo $::env(CURRENT_DEF)
+
+# Set CURRENT_DEF to the placement DEF
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/placement/picorv32a.placement.def
+
+# Run CTS after modifying the buffer list
+run_cts
+
+# Verify CTS_CLK_BUFFER_LIST again
+echo $::env(CTS_CLK_BUFFER_LIST)
+
+# Launch OpenROAD tool
+openroad
+
+# Read LEF file
+read_lef /openLANE_flow/designs/picorv32a/runs/24-03_10-03/tmp/merged.lef
+
+# Read DEF file
+read_def /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.cts.def
+
+# Create OpenROAD database
+write_db pico_cts1.db
+
+# Load the created database
+read_db pico_cts.db
+
+# Read the post-CTS netlist
+read_verilog /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.synthesis_cts.v
+
+# Read the liberty file
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# Link design and library
+link_design picorv32a
+
+# Load the custom SDC file
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+# Set all clocks as propagated
+set_propagated_clock [all_clocks]
+
+# Generate the timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+# Report clock skew for hold
+report_clock_skew -hold
+
+# Report clock skew for setup
+report_clock_skew -setup
+
+# Exit OpenROAD
+exit
+
+# Verify CTS_CLK_BUFFER_LIST once more
+echo $::env(CTS_CLK_BUFFER_LIST)
+
+# Reinsert 'sky130_fd_sc_hd__clkbuf_1' to the beginning of the list
+set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_sc_hd__clkbuf_1]
+
+# Check CTS_CLK_BUFFER_LIST after reinserting
+echo $::env(CTS_CLK_BUFFER_LIST)
+```
 
