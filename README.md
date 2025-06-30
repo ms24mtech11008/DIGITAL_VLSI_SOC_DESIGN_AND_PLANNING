@@ -5101,3 +5101,119 @@ After routing and DRC, the next step is parasitic extraction. The resistance and
 ### Lab steps to build power distribution network
 ---
 
+The commands used in the previous terminal session are as follows:
+
+```tcl
+docker
+
+./flow.tcl -interactive
+
+package require openlane 0.9
+
+prep -design picorv32a -tag 29-06_03-58 //we are not using -overwrite so that we can continue from our last run
+
+echo $::env(CURRENT_DEF) //to see until which step we performed in the previous run
+```
+
+Up to this point, **CTS has been completed**, and now we are moving on to the **routing stage**. However, before starting routing, it is necessary to generate the **PDN (Power Distribution Network)** using the following command:
+
+```tcl
+gen_pdn
+```
+Here is the explanation without emojis:
+
+---
+
+The command:
+
+```tcl
+echo $::env(CURRENT_DEF)
+```
+
+**Meaning:**
+This command is used to **display the current DEF file path** that OpenLANE is using at that stage of the flow.
+
+**Significance:**
+
+* **`CURRENT_DEF`** is an environment variable that holds the path to the **latest DEF (Design Exchange Format) file** generated during the design flow.
+* The DEF file contains the physical layout information of the design at the current stage, whether it is after placement, CTS, or routing.
+
+**Purpose of Running This Command:**
+
+* To check and verify which DEF file OpenLANE is currently pointing to.
+* It confirms whether the flow is using the **placement DEF, CTS DEF, or routed DEF**, based on the progress of the design flow.
+* It is useful for verification, debugging, or when performing manual steps like CTS, routing, or timing analysis.
+
+**In simple terms:**
+It tells you *“Which layout file am I currently working with?”*
+
+![Screenshot 2025-06-30 093545](https://github.com/user-attachments/assets/57615753-b989-4594-8f86-46f3ba2ac31f)
+
+![Screenshot 2025-06-30 093714](https://github.com/user-attachments/assets/1b1d4e29-ad34-4448-ab63-86796391847b)
+
+![Screenshot 2025-06-30 093911](https://github.com/user-attachments/assets/63de5e47-bc76-43e3-b82e-4d985308c09c)
+
+It appears that the net **VGND** represents the **total number of nodes on the grid matrix**, indicating that it has been successfully created.
+The chip receives power through the **VDD and GND pads**, which then flows through the **power tracks** and ultimately reaches the cells to supply them with power.
+
+---
+### Lab steps from power straps to std cell power
+---
+
+![Screenshot 2025-06-30 094547](https://github.com/user-attachments/assets/b143c84a-02a6-4192-954c-cc755e7a6e67)
+
+### 1. **Padframe (Outer Yellow Blocks):**
+
+* These are **I/O pads and corner pads** placed around the boundary of the chip.
+* They serve as connection points between the chip and the external world (packaging, PCB, etc.).
+
+### 2. **Power Pad Connections:**
+
+* **VDD (Red) and GND (Blue)** pads are placed at regular intervals on the padframe.
+* Power enters the chip through these pads.
+
+### 3. **Block Power Ring:**
+
+* Thick horizontal and vertical red (VDD) and blue (GND) lines form a **power ring** around the core area.
+* This ring helps distribute power uniformly into the core.
+
+### 4. **Power Stripes:**
+
+* Vertical and horizontal power lines (stripes) extend from the power ring into the core area.
+* They provide power deeper into the chip, reaching the **standard cells**.
+
+### 5. **Standard Cell Power Connections:**
+
+* Inside the core, **standard cell rows** are connected to the power grid through horizontal and vertical lines.
+* This ensures that each **standard cell** receives a stable VDD and GND supply.
+
+### 6. **Standard Cell Rows (Green Region):**
+
+* This is where the majority of the logic gates are placed.
+* The cells are aligned in rows for efficient routing and power delivery.
+
+### 7. **Macro Cell (RAM - Pink Block):**
+
+* A large block typically like SRAM or any hard macro.
+* It has its own **block power ring** for dedicated and stable power.
+
+### 8. **Block Halo:**
+
+* A reserved area around the macro cell to prevent routing congestion and to separate standard cells from the macro.
+
+### 9. **I/O to Core Spacing:**
+
+* This spacing is provided between the padframe and the core to facilitate routing tracks for signals and power.
+
+---
+
+### **Power Flow Summary:**
+
+* Power flows from **VDD and GND pads → Power Rings → Power Stripes → Standard Cells and Macros**.
+
+This structure ensures reliable power delivery while minimizing voltage drops and IR drop issues across the chip.
+
+the same details are shown in our gen_pdn output
+
+![Screenshot 2025-06-30 095630](https://github.com/user-attachments/assets/075fac90-96ed-4b15-896c-cdbbe47ce661)
+
