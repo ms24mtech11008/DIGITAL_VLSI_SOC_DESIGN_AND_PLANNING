@@ -5217,3 +5217,15 @@ the same details are shown in our gen_pdn output
 
 ![Screenshot 2025-06-30 095630](https://github.com/user-attachments/assets/075fac90-96ed-4b15-896c-cdbbe47ce661)
 
+### **Commands to Load PDN DEF in Magic (from another terminal):**
+
+```bash
+# Navigate to the directory where the PDN DEF file is located
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/30-06_07-09/tmp/floorplan/
+
+# Load the PDN DEF file into Magic
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech \
+lef read ../../tmp/merged.lef \
+def read 17-pdn.def &
+```
+![Screenshot 2025-06-30 161550](https://github.com/user-attachments/assets/4dfba53d-2ebb-499b-950e-6cfc38168a25)
