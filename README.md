@@ -5229,3 +5229,43 @@ lef read ../../tmp/merged.lef \
 def read 17-pdn.def &
 ```
 ![Screenshot 2025-06-30 161550](https://github.com/user-attachments/assets/4dfba53d-2ebb-499b-950e-6cfc38168a25)
+
+Image of the pdn def
+
+![Screenshot 2025-06-30 161735](https://github.com/user-attachments/assets/57cb827c-9e25-4c0b-a41f-a17712d4a0c8)
+
+![Screenshot 2025-06-30 162042](https://github.com/user-attachments/assets/8bb43c26-fa09-44ef-9951-3bf719b6ed4e)
+
+![Screenshot 2025-06-30 161953](https://github.com/user-attachments/assets/3590a698-8e55-4c56-9a00-c2f3fe81c2a5)
+
+![Screenshot 2025-06-30 162015](https://github.com/user-attachments/assets/57e0f62a-8a66-4f0e-807d-19eda2a063b9)
+
+### **2. Perform Detailed Routing Using TritonRoute and Explore the Routed Layout**
+
+### **Commands to Perform Routing:**
+
+```tcl
+# Check the current DEF file in use
+echo $::env(CURRENT_DEF)
+
+# Check the current routing strategy being applied
+echo $::env(ROUTING_STRATEGY)
+
+# Run detailed routing using TritonRoute
+run_routing
+```
+![Screenshot 2025-06-30 162447](https://github.com/user-attachments/assets/bb5c0d5e-2f2f-4247-ace8-568bbc76369d)
+
+
+### **Commands to Load Routed DEF in Magic (from another terminal):**
+
+```bash
+# Navigate to the directory where the routed DEF file is located
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/30-06_07-09/results/routing/
+
+# Load the routed DEF file into Magic
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech \
+lef read ../../tmp/merged.lef \
+def read picorv32a.def &
+```
+
