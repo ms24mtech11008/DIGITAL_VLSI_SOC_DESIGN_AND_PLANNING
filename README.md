@@ -203,7 +203,6 @@ These are called **Macros** because they are **pre-built, reusable modules**, of
 | Customization    | Minimal (standard blocks)               | High (often tailored to the application)    |
 | Integration Type | Built into the flow at transistor level | Integrated as black boxes (hardened blocks) |
 
-Here's a clear and slightly expanded version of your explanation, with technical details filled in and arranged in logical order. This can serve as part of documentation, a presentation, or a tutorial step-by-step:
 
 ---
 # Introduction to RISCV
@@ -1654,7 +1653,6 @@ In OpenLane, floorplanning behavior is controlled by environment variables defin
 ```tcl
 set ::env(FP_IO_MODE) 1 ; # 0 = matching mode, 1 = random equidistant
 ```
-Here's the updated section of your explanation with the `FP_IO_MODE` command included along with a clear explanation of what it does:
 
 ---
 
@@ -5174,7 +5172,6 @@ Up to this point, **CTS has been completed**, and now we are moving on to the **
 ```tcl
 gen_pdn
 ```
-Here is the explanation without emojis:
 
 ---
 
