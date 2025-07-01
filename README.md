@@ -113,12 +113,12 @@
 - [Acknowledgement](#acknowledgement)
 
 
-      
+---      
 # Day 1 - Inception of open-source EDA, OpenLANE and sky130 PDK
+---
 ## How to talk to computers
+---
 ### Introduction to QFN-48 Package, chip, pads, core, die and IPs
-Absolutely — here’s a more detailed version of your outline, while still keeping it clear and concise. This version can fit well in a presentation, document, or technical write-up.
-
 ---
 
 ##  Example: Dissecting the ARDUINO Chip — From Board to Silicon
