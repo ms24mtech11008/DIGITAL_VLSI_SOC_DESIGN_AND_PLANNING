@@ -5411,4 +5411,20 @@ exit
 
 ---
 
+# References
+
+* [Google SkyWater PDK](https://github.com/google/skywater-pdk)
+* [VSD Standard Cell Design by Nickson Jose](https://github.com/nickson-jose/vsdstdcelldesign)
+* [Ngspice – Open Source Circuit Simulator](https://sourceforge.net/projects/ngspice/)
+* [VSD Workshop GitHub Material](https://github.com/)
+* [Introduction to Industrial Physical Design Flow (PDF)](https://www.vlsisystemdesign.com/wp-content/uploads/2017/07/Introduction-to-Industrial-Physical-Design-Flow.pdf)
+* [NPTEL – Physical Design of Digital VLSI Systems by Prof. Indranil Sengupta](https://nptel.ac.in/courses/117105150)
+
+---
+
+# Acknowledgement
+
+I sincerely express my gratitude to Mr. Kunal Ghosh, Co-founder of VLSI System Design (VSD) Corp. Pvt. Ltd., and Mr. Nickson Jose for their remarkable guidance and for conducting the **DIGITAL-VLSI-SOC-DESIGN-AND-PLANNING** workshop. Their clear instruction, deep expertise, and well-structured sessions greatly enhanced my understanding of physical chip design, OpenLANE workflows, and practical design methodologies. The workshop was thoughtfully organized and delivered, providing me with valuable insights into the complete physical design process. I am truly thankful to both Mr. Kunal Ghosh and Mr. Nickson Jose for their dedication to knowledge sharing and for offering such an enriching learning experience.
+
+---
 
