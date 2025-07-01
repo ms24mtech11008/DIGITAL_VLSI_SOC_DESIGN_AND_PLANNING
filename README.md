@@ -5256,6 +5256,15 @@ run_routing
 ```
 ![Screenshot 2025-06-30 162447](https://github.com/user-attachments/assets/bb5c0d5e-2f2f-4247-ace8-568bbc76369d)
 
+Screenshots of relevant results generated from run_routing
+
+![Screenshot 2025-06-30 163309](https://github.com/user-attachments/assets/df2d8124-e14b-47df-ac66-3a16d8de01b9)
+
+![Screenshot 2025-06-30 183748](https://github.com/user-attachments/assets/482d7ee3-0c2e-4ab7-ba97-7f86c1f34669)
+
+![Screenshot 2025-06-30 183804](https://github.com/user-attachments/assets/11806d17-8bc2-4782-9d3a-e8d5e6ec7c13)
+
+![Screenshot 2025-06-30 183828](https://github.com/user-attachments/assets/d0a28e89-1e07-421a-bd14-2c689d4ca3f9)
 
 ### **Commands to Load Routed DEF in Magic (from another terminal):**
 
@@ -5268,4 +5277,84 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 lef read ../../tmp/merged.lef \
 def read picorv32a.def &
 ```
+
+![Screenshot 2025-07-01 100047](https://github.com/user-attachments/assets/5c3d4eec-e016-4906-a173-eaaaad775979)
+
+![Screenshot 2025-07-01 100107](https://github.com/user-attachments/assets/da82d485-4592-4b7e-ae25-80e66f9de3a0)
+
+![Screenshot 2025-07-01 100209](https://github.com/user-attachments/assets/01525f19-20cd-4033-b438-73e271bb042f)
+
+![Screenshot 2025-07-01 100246](https://github.com/user-attachments/assets/48066240-3b65-4b74-be67-80c73c87d239)
+
+![Screenshot 2025-07-01 100330](https://github.com/user-attachments/assets/981a7e96-def7-4ef9-a8af-e58679c50b8a)
+
+### **Post-Route Parasitic Extraction Using SPEF Extractor**
+
+### **Commands for SPEF Extraction Using External Tool:**
+
+```bash
+# Navigate to the SPEF extractor directory
+cd Desktop/work/tools/SPEF_EXTRACTOR
+
+# Run the SPEF extraction command
+python3 main.py /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/30-06_07-09/tmp/merged.lef /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/30-06_07-09/results/routing/picorv32a.def
+```
+
+### **Post-Route OpenSTA Timing Analysis with Extracted Parasitics (SPEF) Using OpenROAD**
+
+### **Commands to Run in OpenLANE Flow:**
+
+```tcl
+# Launch OpenROAD tool
+openroad
+
+# Read LEF file
+read_lef /openLANE_flow/designs/picorv32a/runs/30-06_07-09/tmp/merged.lef
+
+# Read routed DEF file
+read_def /openLANE_flow/designs/picorv32a/runs/30-06_07-09/results/routing/picorv32a.def
+
+# Create OpenROAD database
+write_db pico_route.db
+
+# Load the created database
+read_db pico_route.db
+
+# Read post-CTS netlist
+read_verilog /openLANE_flow/designs/picorv32a/runs/30-06_07-09/results/synthesis/picorv32a.synthesis_preroute.v
+
+# Read liberty file for the design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# Link the design and library
+link_design picorv32a
+
+# Read the custom SDC file
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+# Set all clocks as propagated clocks
+set_propagated_clock [all_clocks]
+
+# Read the extracted SPEF file
+read_spef /openLANE_flow/designs/picorv32a/runs/30-06_07-09/results/routing/picorv32a.spef
+
+# Generate timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+# Exit OpenROAD
+exit
+```
+
+![Screenshot 2025-07-01 101721](https://github.com/user-attachments/assets/9366d2c2-a02e-44e0-84e0-9cf57c6d78be)
+
+![Screenshot 2025-07-01 102145](https://github.com/user-attachments/assets/3aa3eb70-93fd-4e05-b438-5a277b06836e)
+
+![Screenshot 2025-07-01 102407](https://github.com/user-attachments/assets/f6a7d935-fb24-402a-ae13-4504c6c1bcc2)
+
+![Screenshot 2025-07-01 102550](https://github.com/user-attachments/assets/247caafb-96d8-4b0e-9289-01e181b39b52)
+
+![Screenshot 2025-07-01 102618](https://github.com/user-attachments/assets/ca000fb6-6b52-473a-bb3b-3ad8ab609dea)
+
+---
+
 
